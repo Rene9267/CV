@@ -66,4 +66,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     console.log("Terminal Audio System and Interaction Grids Successfully Initialized.");
-});
+
+// --- Certificate Modal Logic ---
+   const certThumbnails = document.querySelectorAll('.cert-thumbnail');
+    const modal = document.getElementById('cert-modal');
+    const modalImg = document.getElementById('modal-image');
+    
+    // Usiamo document.querySelector con attenzione nel caso in cui non fossimo in about.html
+    const closeModal = document.querySelector('.close-modal');
+
+    // We check if the modal exists, so this script doesn't throw errors on the home page
+ if (modal) { 
+        certThumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                // Play a high-pitched 'open file' sound
+                playRetroBeep(600, 'square', 0.1, 0.1); 
+                
+                // Get the image path from the data-src attribute and apply it to the big image
+                const imgSrc = thumb.getAttribute('data-src');
+                modalImg.src = imgSrc;
+                
+                // Show the modal by removing the 'hidden' class
+                modal.classList.remove('hidden');
+            });
+        });
+
+       const closeOverlay = () => {
+            playRetroBeep(300, 'square', 0.15, 0.1); // Lower pitched 'close' sound
+            modal.classList.add('hidden');
+            modalImg.src = ""; // Clear memory
+        };
+
+        // Close when clicking the [X] button
+        if (closeModal) {
+            closeModal.addEventListener('click', closeOverlay);
+        }
+
+        // Close when clicking outside the image (on the dark background)
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeOverlay();
+            }
+        });
+    }
+    });
