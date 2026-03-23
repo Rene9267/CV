@@ -1,70 +1,69 @@
-// --- 1. SETUP SINTETIZZATORE AUDIO RETRO (Web Audio API) ---
-// Inizializziamo il contesto audio (simile a inizializzare l'AudioEngine)
+// Setup for the Retro Audio Synthesizer utilizing the Web Audio API
+// We start by initializing the audio context which serves as our main audio engine managing all sound generation and routing
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioContext();
+const audioEngine = new AudioContext();
 
-// Funzione per generare un "Beep" a 8-bit
+// This function dynamically generates an 8-bit style sound effect bypassing the need for external audio files
 function playRetroBeep(frequency, type = 'square', duration = 0.1, volume = 0.1) {
-    // Il browser blocca l'audio finché l'utente non interagisce con la pagina
-    if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
+    // Browsers automatically suspend audio contexts until the user interacts with the page so we must resume it if necessary
+    if (audioEngine.state === 'suspended') {
+        audioEngine.resume();
     }
 
-    // Creiamo un oscillatore (la nostra fonte sonora)
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain(); // Il controller del volume
+    // We create an oscillator to generate the raw waveform and a gain node to control the output volume
+    const oscillator = audioEngine.createOscillator();
+    const gainNode = audioEngine.createGain();
 
-    // Impostiamo l'onda su 'square' per il classico suono stile GameBoy/Terminale
+    // Setting the oscillator type to square provides the distinct mechanical sound typical of retro terminals
     oscillator.type = type; 
-    oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+    oscillator.frequency.setValueAtTime(frequency, audioEngine.currentTime);
 
-    // Gestione del volume per evitare "click" fastidiosi (fade out veloce)
-    gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    // We apply an exponential ramp to the volume to fade the sound out quickly and prevent harsh clicking artifacts
+    gainNode.gain.setValueAtTime(volume, audioEngine.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioEngine.currentTime + duration);
 
-    // Colleghiamo i nodi: Oscillatore -> Volume -> Casse del PC
+    // The audio nodes are connected in a chain routing the oscillator through the gain node and finally to the destination speakers
     oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
+    gainNode.connect(audioEngine.destination);
 
-    // Facciamo partire e fermare il suono
+    // We initiate the oscillator playback and schedule it to stop exactly after our specified duration has passed
     oscillator.start();
-    oscillator.stop(audioCtx.currentTime + duration);
+    oscillator.stop(audioEngine.currentTime + duration);
 }
 
-
-// --- 2. GESTIONE DEGLI EVENTI (Event Listeners) ---
-// Aspettiamo che tutta la pagina HTML (il DOM) sia caricata in memoria
+// Event Listeners and User Interaction Management
+// We wait for the entire Document Object Model to finish loading before we attempt to attach events to our HTML elements
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Selezioniamo tutti gli elementi interattivi
-    const retroButtons = document.querySelectorAll('.btn-retro, .btn-card');
-    const projectCards = document.querySelectorAll('.card-progetto');
+    // We select all the interactive UI elements present on the page storing them in variables for easy iteration
+    const retroButtons = document.querySelectorAll('.retro-btn, .card-btn');
+    const projectCards = document.querySelectorAll('.project-card');
 
-    // Suoni per i bottoni classici
+    // We iterate over standard buttons assigning distinct audio feedback for hovering and clicking actions
     retroButtons.forEach(button => {
         button.addEventListener('mouseenter', () => {
-            playRetroBeep(880, 'square', 0.05, 0.05); // Suono acuto e rapido
+            // A short high-frequency square wave gives the impression of a lightweight interface element being highlighted
+            playRetroBeep(880, 'square', 0.05, 0.05);
         });
 
         button.addEventListener('mousedown', () => {
-            // Suono grave al click (mousedown è più reattivo di 'click')
+            // A lower frequency square wave on mouse down simulates the satisfying physical click of a mechanical keyboard switch
             playRetroBeep(440, 'square', 0.1, 0.1); 
         });
     });
 
-    // Suoni per i "Quadri" (Card dei Progetti)
+    // We apply heavier and more industrial sound profiles to the project cards to make them feel like physical hardware modules
     projectCards.forEach(card => {
         card.addEventListener('mouseenter', () => {
-            // Un suono "sawtooth" (dente di sega) a bassa frequenza (150Hz) 
-            // simula il ronzio di un componente elettrico che si attiva
+            // Using a low-frequency sawtooth wave creates a buzzing effect similar to an electrical component powering up
             playRetroBeep(150, 'sawtooth', 0.08, 0.03); 
         });
 
         card.addEventListener('mousedown', () => {
-            // Un suono "meccanico" come l'inserimento di una cartuccia
+            // A deep and slightly longer square wave mimics the heavy thud of inserting a data cartridge into a mainframe
             playRetroBeep(300, 'square', 0.15, 0.08);
         });
     });
 
-    console.log("Sistema Audio e Griglie Inizializzati con Successo.");
+    console.log("Terminal Audio System and Interaction Grids Successfully Initialized.");
 });

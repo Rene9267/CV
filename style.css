@@ -1,13 +1,13 @@
-/* --- VARIABILI GLOBALI --- */
+/* Global variables define the core color palette and border styling for the retro brutalist theme */
 :root {
-    --bg-grigio: #D4D4D2;
-    --bg-grigio-scuro: #c2c2c0;
-    --nero-brutale: #1A1A1A;
-    --arancione-cmd: #FF5722;
-    --bordo-retro: 4px solid var(--nero-brutale);
+    --bg-gray: #D4D4D2;
+    --bg-dark-gray: #c2c2c0;
+    --brutal-black: #1A1A1A;
+    --cmd-orange: #FF5722;
+    --retro-border: 4px solid var(--brutal-black);
 }
 
-/* --- RESET DI BASE --- */
+/* Basic reset ensures that margins and paddings do not interfere with our custom box sizing across different browsers */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -16,53 +16,56 @@
 
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: var(--bg-grigio);
-    color: var(--nero-brutale);
+    background-color: var(--bg-gray);
+    color: var(--brutal-black);
     overflow-x: hidden;
 }
 
-/* --- LOGICA DEI LAYER (Sticky) --- */
+/* The layer class creates the sticky scrolling effect by fixing the height to the viewport and aligning content to the top */
 .layer {
     position: sticky;
     top: 0;
-    height: 100vh; /* Fissiamo l'altezza esatta allo schermo */
+    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Allineiamo in alto invece che al centro */
-    background-color: var(--bg-grigio);
-    border-bottom: var(--bordo-retro);
-    padding: 60px 20px 20px 20px; /* Più spazio in alto */
+    align-items: flex-start;
+    background-color: var(--bg-gray);
+    border-bottom: var(--retro-border);
+    padding: 60px 20px 20px 20px;
 }
 
+/* Alternating the background color of even layers creates a clear visual separation when they stack over each other */
+.layer:nth-child(even) {
+    background-color: var(--bg-dark-gray);
+}
+
+/* The scrollable content container allows internal scrolling for layers that hold more projects than the screen can fit */
 .scrollable-content {
     width: 100%;
     max-width: 1000px;
-    height: 100%; /* Prende tutta l'altezza del layer */
-    overflow-y: auto; /* LA MAGIA: fa comparire la scrollbar se ci sono troppi progetti */
-    padding-right: 15px; /* Spazio per non far sbattere il testo sulla scrollbar */
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 15px;
 }
 
+/* Custom retro scrollbar styling applied specifically for Webkit browsers to match the heavy industrial aesthetic */
 .scrollable-content::-webkit-scrollbar {
-    width: 16px; /* Larga e "pesante" */
+    width: 16px;
 }
 
 .scrollable-content::-webkit-scrollbar-track {
-    background: var(--bg-grigio-scuro);
-    border-left: 2px solid var(--nero-brutale);
+    background: var(--bg-dark-gray);
+    border-left: 2px solid var(--brutal-black);
 }
 
 .scrollable-content::-webkit-scrollbar-thumb {
-    background: var(--arancione-cmd);
-    border: 2px solid var(--nero-brutale);
-    box-shadow: inset 2px 2px 0px rgba(255,255,255,0.3); /* Leggero riflesso per renderla 3D */
+    background: var(--cmd-orange);
+    border: 2px solid var(--brutal-black);
+    box-shadow: inset 2px 2px 0px rgba(255, 255, 255, 0.3);
 }
 
 .scrollable-content::-webkit-scrollbar-thumb:hover {
-    background: #ff7043; /* Si schiarisce al passaggio del mouse */
-}
-
-.layer:nth-child(even) {
-    background-color: var(--bg-grigio-scuro);
+    background: #ff7043;
 }
 
 .content {
@@ -70,9 +73,9 @@ body {
     max-width: 800px;
 }
 
-/* --- TIPOGRAFIA RETRO --- */
+/* Typography styles adapt dynamically to the screen size to ensure headers remain impactful but readable */
 h1 {
-    font-size: clamp(2rem, 8vw, 4.5rem); /* Si adatta alla grandezza schermo */
+    font-size: clamp(2rem, 8vw, 4.5rem);
     text-transform: uppercase;
     margin-bottom: 1rem;
     line-height: 0.9;
@@ -80,8 +83,8 @@ h1 {
 
 h2 {
     font-size: 2rem;
-    background-color: var(--nero-brutale);
-    color: var(--bg-grigio);
+    background-color: var(--brutal-black);
+    color: var(--bg-gray);
     padding: 8px 20px;
     display: inline-block;
     margin-bottom: 1.5rem;
@@ -93,59 +96,58 @@ p {
     margin-bottom: 2rem;
 }
 
-/* --- UI COMPONENTS --- */
-.btn-retro {
+/* UI Components feature hard shadows and translation effects to simulate the tactile feedback of physical mechanical buttons */
+.retro-btn {
     display: inline-block;
-    background-color: var(--bg-grigio);
-    color: var(--nero-brutale);
-    border: var(--bordo-retro);
+    background-color: var(--bg-gray);
+    color: var(--brutal-black);
+    border: var(--retro-border);
     padding: 15px 35px;
     font-size: 1.1rem;
     font-weight: bold;
     text-decoration: none;
     text-transform: uppercase;
-    box-shadow: 8px 8px 0px var(--nero-brutale);
+    box-shadow: 8px 8px 0px var(--brutal-black);
     transition: 0.1s;
 }
 
-.btn-retro:hover {
-    background-color: var(--arancione-cmd);
+.retro-btn:hover {
+    background-color: var(--cmd-orange);
     color: white;
     transform: translate(4px, 4px);
-    box-shadow: 4px 4px 0px var(--nero-brutale);
+    box-shadow: 4px 4px 0px var(--brutal-black);
 }
 
-/* --- GRIGLIA PROGETTI --- */
-.grid-progetti {
+/* The projects grid uses CSS Grid with auto-fit to automatically stack cards on mobile and place them side by side on desktop */
+.projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsivo: si adatta alla larghezza */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 2rem;
     width: 100%;
 }
 
-/* --- STILE CARD RETRO --- */
-.card-progetto {
-    background-color: var(--bg-grigio);
-    border: var(--bordo-retro);
+/* Project cards represent individual hardware modules and react by lifting upwards when the user hovers over them */
+.project-card {
+    background-color: var(--bg-gray);
+    border: var(--retro-border);
     display: flex;
     flex-direction: column;
     text-align: left;
     transition: transform 0.2s;
-    box-shadow: 6px 6px 0px var(--nero-brutale);
+    box-shadow: 6px 6px 0px var(--brutal-black);
 }
 
-.card-progetto:hover {
+.project-card:hover {
     transform: translate(-4px, -4px);
-    box-shadow: 10px 10px 0px var(--nero-brutale);
+    box-shadow: 10px 10px 0px var(--brutal-black);
 }
 
-/* Area Visiva (Immagine/Video) */
 .card-visual {
     width: 100%;
     height: 180px;
-    border-bottom: var(--bordo-retro);
-    background-color: #000; /* Nero per simulare schermo spento */
+    border-bottom: var(--retro-border);
+    background-color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,12 +155,11 @@ p {
 }
 
 .placeholder-img {
-    color: var(--arancione-cmd);
+    color: var(--cmd-orange);
     font-size: 0.8rem;
     font-weight: bold;
 }
 
-/* Info all'interno della Card */
 .card-info {
     padding: 20px;
 }
@@ -173,34 +174,32 @@ p {
     font-size: 0.95rem;
     text-align: left;
     margin-bottom: 1.5rem;
-    min-height: 50px; /* Allinea i bottoni */
+    min-height: 50px;
 }
 
-/* Tags Tecnologici */
 .tag {
     font-size: 0.7rem;
-    background-color: var(--nero-brutale);
-    color: var(--bg-grigio);
+    background-color: var(--brutal-black);
+    color: var(--bg-gray);
     padding: 2px 8px;
     margin-right: 5px;
     font-weight: bold;
 }
 
-/* Bottone interno alla Card */
-.btn-card {
+.card-btn {
     display: inline-block;
-    color: var(--arancione-cmd);
+    color: var(--cmd-orange);
     text-decoration: none;
     font-weight: bold;
     font-size: 0.9rem;
     text-transform: uppercase;
 }
 
-.btn-card:hover {
+.card-btn:hover {
     text-decoration: underline;
 }
 
-/* --- PAGINA ABOUT --- */
+/* The about page container restricts the maximum width to maintain text readability and centers the entire block on the screen */
 .container-about {
     max-width: 1000px;
     margin: 0 auto;
@@ -215,13 +214,13 @@ p {
 }
 
 .about-header {
-    border-bottom: 2px dashed var(--nero-brutale);
+    border-bottom: 2px dashed var(--brutal-black);
     margin-bottom: 40px;
     padding-bottom: 20px;
 }
 
 .status {
-    color: var(--arancione-cmd);
+    color: var(--cmd-orange);
     font-weight: bold;
     font-size: 0.9rem;
 }
@@ -230,7 +229,6 @@ p {
     margin-bottom: 60px;
 }
 
-/* Griglia Skill */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -239,14 +237,14 @@ p {
 }
 
 .skill-box {
-    border: 2px solid var(--nero-brutale);
+    border: 2px solid var(--brutal-black);
     padding: 20px;
-    background: #fff; /* Bianco per contrasto "carta" */
+    background: #fff;
 }
 
 .skill-box h3 {
     font-size: 1.1rem;
-    color: var(--arancione-cmd);
+    color: var(--cmd-orange);
     margin-bottom: 10px;
 }
 
@@ -259,9 +257,9 @@ p {
     font-weight: bold;
 }
 
-/* Timeline */
+/* The timeline design relies on a left border and strategically placed absolute pseudo-elements to draw the connecting nodes */
 .timeline {
-    border-left: 4px solid var(--nero-brutale);
+    border-left: 4px solid var(--brutal-black);
     padding-left: 20px;
     margin-top: 20px;
 }
@@ -278,14 +276,14 @@ p {
     top: 5px;
     width: 12px;
     height: 12px;
-    background: var(--arancione-cmd);
-    border: 2px solid var(--nero-brutale);
+    background: var(--cmd-orange);
+    border: 2px solid var(--brutal-black);
 }
 
 .date {
     font-size: 0.8rem;
     font-weight: bold;
-    background: var(--nero-brutale);
+    background: var(--brutal-black);
     color: #fff;
     padding: 2px 6px;
 }
