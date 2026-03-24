@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // We select all the interactive UI elements present on the page storing them in variables for easy iteration
     const retroButtons = document.querySelectorAll('.retro-btn, .card-btn');
     const projectCards = document.querySelectorAll('.project-card');
+    const profilePhoto = document.querySelector('.profile-pixel-art'); // Selezioniamo la foto profilo
 
     // We iterate over standard buttons assigning distinct audio feedback for hovering and clicking actions
     retroButtons.forEach(button => {
@@ -51,6 +52,18 @@ document.addEventListener("DOMContentLoaded", () => {
             playRetroBeep(440, 'square', 0.1, 0.1); 
         });
     });
+
+    // --- AGGIUNTA: Suoni per la Foto Profilo ---
+    // Applichiamo gli stessi suoni dei bottoni alla foto 8-bit
+    if (profilePhoto) {
+        profilePhoto.addEventListener('mouseenter', () => {
+            playRetroBeep(150, 'sawtooth', 0.08, 0.03); 
+        });
+
+        // profilePhoto.addEventListener('mousedown', () => {
+        //     playRetroBeep(440, 'square', 0.1, 0.1);
+        // });
+    }
 
     // We apply heavier and more industrial sound profiles to the project cards to make them feel like physical hardware modules
     projectCards.forEach(card => {
@@ -67,46 +80,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Terminal Audio System and Interaction Grids Successfully Initialized.");
 
-// --- Certificate Modal Logic ---
-   const certThumbnails = document.querySelectorAll('.cert-thumbnail');
+    // --- Certificate Modal Logic ---
+    const certThumbnails = document.querySelectorAll('.cert-thumbnail');
     const modal = document.getElementById('cert-modal');
     const modalImg = document.getElementById('modal-image');
-    
-    // Usiamo document.querySelector con attenzione nel caso in cui non fossimo in about.html
     const closeModal = document.querySelector('.close-modal');
 
-    // We check if the modal exists, so this script doesn't throw errors on the home page
- if (modal) { 
+    if (modal) { 
         certThumbnails.forEach(thumb => {
             thumb.addEventListener('click', () => {
-                // Play a high-pitched 'open file' sound
                 playRetroBeep(600, 'square', 0.1, 0.1); 
-                
-                // Get the image path from the data-src attribute and apply it to the big image
                 const imgSrc = thumb.getAttribute('data-src');
                 modalImg.src = imgSrc;
-                
-                // Show the modal by removing the 'hidden' class
                 modal.classList.remove('hidden');
             });
         });
 
-       const closeOverlay = () => {
-            playRetroBeep(300, 'square', 0.15, 0.1); // Lower pitched 'close' sound
+        const closeOverlay = () => {
+            playRetroBeep(300, 'square', 0.15, 0.1); 
             modal.classList.add('hidden');
-            modalImg.src = ""; // Clear memory
+            modalImg.src = ""; 
         };
 
-        // Close when clicking the [X] button
         if (closeModal) {
             closeModal.addEventListener('click', closeOverlay);
         }
 
-        // Close when clicking outside the image (on the dark background)
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeOverlay();
             }
         });
     }
-    });
+});
