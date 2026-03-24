@@ -357,6 +357,14 @@ p {
     align-items: center;
     margin-bottom: 12px;
     letter-spacing: 0.5px;
+    text-decoration: none; 
+    transition: color 0.2s ease, transform 0.2s ease; 
+}
+
+/* Effetto hover per le aziende che sono cliccabili (link) */
+.timeline-item a.company:hover {
+    color: var(--cmd-orange);
+    transform: translateX(5px);
 }
 
 .timeline-item .company::before {
@@ -377,46 +385,6 @@ p {
     padding-left: 15px;
     margin-left: 5px;
     margin-bottom: 0;
-}
-
-/* --- PERSONAL INTERESTS STYLING --- */
-.interests-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.interest-card {
-    border: 2px dashed var(--brutal-black);
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
-    position: relative;
-}
-
-.interest-icon {
-    font-size: 0.7rem;
-    background: var(--cmd-orange);
-    color: var(--brutal-black);
-    padding: 2px 5px;
-    font-weight: bold;
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    border: 1px solid var(--brutal-black);
-}
-
-.interest-card h3 {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: var(--brutal-black);
-}
-
-.interest-card p {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 0;
-    color: #555;
 }
 
 /* --- CERTIFICATE SCROLL RECT SYSTEM --- */
@@ -594,11 +562,80 @@ p {
     align-items: center; 
 }
 
-/* Nuova regola per rimuovere il margine basso dal paragrafo nell'intro */
 #intro p {
     margin-bottom: 15px;
 }
 
 .btn-intro {
-    margin-top: 0px; /* Margine rimosso completamente */
+    margin-top: 0px;
+}
+
+/* ========================================== */
+/* --- MY HOBBIES INFINITE MARQUEE STYLING -- */
+/* ========================================== */
+
+#hobbies-section {
+    margin-top: 100px; /* Aumentato leggermente lo stacco */
+    text-align: center;
+    padding-bottom: 60px; /* Spazio extra in fondo alla pagina */
+}
+
+.hobbies-marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg-dark-gray);
+    border-top: 4px solid var(--brutal-black); /* Bordo più spesso in linea con il resto */
+    border-bottom: 4px solid var(--brutal-black);
+    padding: 40px 0; /* Più respiro verticale per le icone grandi */
+    margin-top: 30px;
+    box-shadow: inset 0px 8px 15px rgba(0,0,0,0.15);
+    display: flex;
+}
+
+.hobbies-marquee-track {
+    display: flex;
+    gap: 80px; /* Più spazio tra le icone grandi */
+    padding-right: 80px; /* Deve corrispondere al gap per il loop perfetto */
+    width: max-content;
+    animation: scrollMarquee 30s linear infinite; /* Rallentato un filo per compensare la grandezza */
+}
+
+.hobbies-marquee-container:hover .hobbies-marquee-track {
+    animation-play-state: paused;
+}
+
+.hobby-item {
+    flex-shrink: 0;
+    width: 120px; /* RADDOPPIATA LA GRANDEZZA */
+    height: 120px;
+    background-color: var(--brutal-black); 
+    border: 4px solid var(--brutal-black); /* Bordo più spesso per bilanciare */
+    cursor: crosshair; 
+    position: relative;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                border-color 0.2s, 
+                box-shadow 0.2s;
+}
+
+.hobby-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated; 
+    image-rendering: crisp-edges;
+    background-color: var(--bg-gray);
+    display: block;
+}
+
+.hobby-item:hover {
+    transform: scale(1.2); /* Zoom leggermente ridotto (visto che partiamo da più grandi) */
+    border-color: var(--cmd-orange);
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.5); /* Ombra più definita */
+    z-index: 10;
+}
+
+/* Animazione fluida millimetrica */
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
 }

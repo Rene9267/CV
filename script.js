@@ -38,7 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // We select all the interactive UI elements present on the page storing them in variables for easy iteration
     const retroButtons = document.querySelectorAll('.retro-btn, .card-btn');
     const projectCards = document.querySelectorAll('.project-card');
-    const profilePhoto = document.querySelector('.profile-pixel-art'); // Selezioniamo la foto profilo
+    const profilePhoto = document.querySelector('.profile-pixel-art'); 
+    const certThumbnails = document.querySelectorAll('.cert-thumbnail');
+    const companyLinks = document.querySelectorAll('.timeline-item a.company'); 
+    const hobbyItems = document.querySelectorAll('.hobby-item'); // Selezione elementi hobbies
 
     // We iterate over standard buttons assigning distinct audio feedback for hovering and clicking actions
     retroButtons.forEach(button => {
@@ -53,16 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- AGGIUNTA: Suoni per la Foto Profilo ---
-    // Applichiamo gli stessi suoni dei bottoni alla foto 8-bit
+    // --- Suoni per la Foto Profilo ---
     if (profilePhoto) {
         profilePhoto.addEventListener('mouseenter', () => {
             playRetroBeep(150, 'sawtooth', 0.08, 0.03); 
         });
-
-        // profilePhoto.addEventListener('mousedown', () => {
-        //     playRetroBeep(440, 'square', 0.1, 0.1);
-        // });
     }
 
     // We apply heavier and more industrial sound profiles to the project cards to make them feel like physical hardware modules
@@ -78,10 +76,38 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // --- Suono Hover per i Certificati ---
+    certThumbnails.forEach(thumb => {
+        thumb.addEventListener('mouseenter', () => {
+            // Un suono leggermente più acuto e rapido rispetto alle card dei progetti grandi
+            playRetroBeep(220, 'sawtooth', 0.06, 0.03); 
+        });
+    });
+
+    // --- Suoni per i Link Aziendali / Accademici ---
+    companyLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            // Blip testuale molto rapido e acuto
+            playRetroBeep(1200, 'square', 0.03, 0.02); 
+        });
+
+        link.addEventListener('mousedown', () => {
+            // Beep di conferma netto
+            playRetroBeep(800, 'square', 0.08, 0.05); 
+        });
+    });
+
+    // --- Suoni per gli Hobbies Pixelati ---
+    hobbyItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            // Un "tink" morbido e acuto stile moneta 8-bit
+            playRetroBeep(1500, 'triangle', 0.04, 0.02); 
+        });
+    });
+
     console.log("Terminal Audio System and Interaction Grids Successfully Initialized.");
 
     // --- Certificate Modal Logic ---
-    const certThumbnails = document.querySelectorAll('.cert-thumbnail');
     const modal = document.getElementById('cert-modal');
     const modalImg = document.getElementById('modal-image');
     const closeModal = document.querySelector('.close-modal');
@@ -89,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modal) { 
         certThumbnails.forEach(thumb => {
             thumb.addEventListener('click', () => {
+                // Suono di apertura modale (Apertura file)
                 playRetroBeep(600, 'square', 0.1, 0.1); 
                 const imgSrc = thumb.getAttribute('data-src');
                 modalImg.src = imgSrc;
@@ -97,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const closeOverlay = () => {
+            // Suono di chiusura modale (Chiusura file)
             playRetroBeep(300, 'square', 0.15, 0.1); 
             modal.classList.add('hidden');
             modalImg.src = ""; 
