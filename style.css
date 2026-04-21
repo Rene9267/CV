@@ -522,3 +522,59 @@ p {
         /* Slightly taller on mobile to compensate for 2 columns */
     }
 }
+
+a.project-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    /* Ripristina il layout originale della card */
+}
+
+/* Stile per il bottone Itch.io persistente (Floating Action Button) */
+.floating-itch-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1001;
+    background-color: var(--cmd-orange);
+    color: white;
+    border: var(--retro-border);
+    padding: 15px 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 6px 6px 0px var(--brutal-black);
+    transition: 0.1s;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.floating-itch-btn:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0px var(--brutal-black);
+    background-color: #ff7043;
+}
+
+/* Nascondi il bottone flottante su schermi molto piccoli se copre troppo testo */
+@media (max-width: 480px) {
+    .floating-itch-btn {
+        bottom: 15px;
+        right: 15px;
+        font-size: 0.8rem;
+        padding: 10px 15px;
+    }
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Riempie lo spazio ritagliando l'eccesso senza deformare */
+    filter: grayscale(20%) contrast(110%);
+    /* Opzionale: un leggero tocco retro */
+    transition: filter 0.3s ease;
+}
+
+.project-card:hover .project-img {
+    filter: grayscale(0%) contrast(100%);
+    /* L'immagine torna a colori pieni al passaggio del mouse */
+}

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project: Undergroove | XR Dev Portfolio</title>
+    <title>Project: Undergroove | Antonio Troiano XR Dev</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,70 +15,83 @@
             << RETURN_TO_HOME</a>
     </nav>
 
+    <a href="https://itch.io/tuo-link-specifico" target="_blank" class="floating-itch-btn">
+        PLAY_UNDERGROOVE.EXE >>
+    </a>
+
     <main class="container-about">
         <header class="about-header">
             <h1>PROJECT_REPORT: UNDERGROOVE</h1>
-            <p class="status">TYPE: GLOBAL GAME JAM 2023 / THEME: ROOTS</p>
+            <p class="status">GENRE: ACTION-ADVENTURE / PUZZLE-PLATFORMER (2.5D)</p>
         </header>
-
-        <div style="margin-bottom: 40px;">
-            <a href="https://itch.io/tuo-link" target="_blank" class="retro-btn">Esegui Undergroove su Itch.io</a>
-        </div>
 
         <section class="about-section">
             <h2>/Il_Concetto</h2>
-            <p>Descrivi qui brevemente il core loop del gioco. Perché le radici? Come si collega al ritmo? (Es: "In
-                Undergroove, le radici degli alberi pulsano a tempo di musica...")</p>
+            <p>
+                Undergroove è un viaggio allucinogeno visivo e sonoro. Nei panni di uno spiritello della foresta, il
+                giocatore deve risolvere enigmi ambientali immerso in un'estetica "overstimolante".
+                Il cuore dell'esperienza è scandito da una colonna sonora **Root Groove** dominata dai bonghi, che
+                trasforma il platforming in una danza tribale sotterranea.
+            </p>
         </section>
 
         <section class="about-section">
             <h2>/Specifiche_Tecniche</h2>
             <div class="skills-grid">
                 <div class="skill-box">
-                    <h3>ENGINE & TOOLS</h3>
+                    <h3>GAMEPLAY PROGRAMMING</h3>
                     <ul>
-                        <li>Unity 2022.3</li>
-                        <li>C#</li>
-                        <li>FMOD (opzionale)</li>
+                        <li>Player Movement (2.5D Physics)</li>
+                        <li>Input System & Controls</li>
+                        <li>Animation State Machine</li>
                     </ul>
                 </div>
                 <div class="skill-box">
-                    <h3>MECCANICHE IMPLEMENTATE</h3>
+                    <h3>SISTEMI CORE</h3>
                     <ul>
-                        <li>Sistema di input ritmico</li>
-                        <li>Generazione procedurale ostacoli</li>
-                        <li>Shader per pulsazione visiva</li>
+                        <li><strong>Lock Mechanic:</strong> Sistema di aggancio agli oggetti per la risoluzione di
+                            puzzle.</li>
+                        <li>Gestione sincronizzazione Animazioni/Logic.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <section class="about-section">
-            <h2>/Deep_Dive_Codice</h2>
-            <p>Qui puoi spiegare uno script di cui vai fiero.
-                <br><em>Esempio: "Ho sviluppato un sistema di 'Beat Manager' che sincronizza il trigger delle animazioni
-                    con i BPM della traccia audio tramite gli eventi di Unity."</em>
+            <h2>/Logica_di_Sviluppo</h2>
+            <p>
+                Il mio focus principale è stato rendere il movimento dello spiritello fluido e reattivo. Ho implementato
+                una <strong>State Machine</strong> per gestire il passaggio tra le fasi di esplorazione e la
+                meccanica di <strong>Lock</strong>.
+                Quest'ultima permette al personaggio di agganciarsi dinamicamente ad elementi dell'environment
+                tridimensionale, creando un ponte tra la visuale 2D e la profondità dei modelli 3D.
             </p>
         </section>
 
         <section class="about-section">
-            <h2>/Sfide_e_Soluzioni</h2>
+            <h2>/Post_Mortem_&_Management</h2>
             <div class="timeline">
                 <div class="timeline-item">
-                    <span class="date">PROBLEMA</span>
-                    <h3>Sincronizzazione Audio</h3>
-                    <p>La latenza audio impediva una risposta precisa ai comandi. Ho risolto implementando un offset
-                        calibrabile basato sul tempo di sistema invece che sui frame.</p>
+                    <span class="date">LA SFIDA</span>
+                    <h3>Coordinamento in Large-Scale Team</h3>
+                    <p>
+                        Lavorare in un team di 14 persone durante una Game Jam è stata un'esperienza estrema.
+                        La dispersione delle informazioni era il rischio maggiore. Ho imparato che in questi contesti la
+                        comunicazione non è solo importante, è l'unico modo per non far fallire il progetto.
+                    </p>
                 </div>
                 <div class="timeline-item">
-                    <span class="date">LESSON LEARNED</span>
-                    <h3>Scope Management</h3>
-                    <p>Durante la jam ho imparato l'importanza di tagliare le feature non essenziali per consegnare un
-                        prototipo solido in 48 ore.</p>
+                    <span class="date">GUADAGNO PROFESSIONALE</span>
+                    <h3>Bilanciamento e Task Delegation</h3>
+                    <p>
+                        Ho appreso l'arte di dividere le task in base alle competenze individuali, assicurandomi che
+                        ogni membro del team potesse contribuire efficacemente. Coordinarsi con 13 altre persone mi ha
+                        insegnato a gestire il "rumore di fondo" e a mantenere il focus sugli obiettivi tecnici
+                        prioritari.
+                    </p>
                 </div>
             </div>
         </section>
-
     </main>
 
     <script src="script.js"></script>
