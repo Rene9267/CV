@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shit! Shit! Shit! | RainGoat</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --theater-dark: #1a1210;
+            --candle-gold: #d4a04a;
+            --velvet-red: #8b1a1a;
+            --faded-amber: #b8863a;
+            --smoke-gray: #c4b8a8;
+            --parchment: #e8dcc8;
+        }
+
+        body.about-page {
+            background-color: var(--theater-dark);
+            color: var(--smoke-gray);
+        }
+
+        .container-about {
+            max-width: 900px;
+        }
+
+        .top-nav .retro-btn {
+            background-color: var(--theater-dark);
+            color: var(--candle-gold);
+            border-color: var(--candle-gold);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .top-nav .retro-btn:hover {
+            background-color: var(--velvet-red);
+            color: var(--parchment);
+            border-color: var(--parchment);
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 2px dashed var(--faded-amber);
+            margin: 50px 0;
+            opacity: 0.4;
+        }
+
+        .project-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 50px 0 40px;
+            border-bottom: 3px solid var(--faded-amber);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .project-hero::after {
+            content: "▼";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--faded-amber);
+            font-size: 1.2rem;
+            background-color: var(--theater-dark);
+            padding: 0 10px;
+        }
+
+        .project-hero h1 {
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            margin-bottom: 0.5rem;
+            color: var(--candle-gold);
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+        }
+
+        .project-hero .subtitle {
+            font-size: 0.9rem;
+            color: var(--velvet-red);
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags .tag {
+            background-color: var(--theater-dark);
+            color: var(--candle-gold);
+            border: 1px solid var(--faded-amber);
+            font-size: 0.7rem;
+        }
+
+        .project-hero .byline {
+            color: var(--smoke-gray);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--candle-gold);
+            border-left: 5px solid var(--velvet-red);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title-code {
+            font-size: 1.6rem;
+            color: var(--candle-gold);
+            border-left: 5px solid var(--faded-amber);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-description {
+            max-width: 100%;
+            text-align: left;
+        }
+
+        .project-description p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--smoke-gray);
+        }
+
+        .highlight-box {
+            background-color: rgba(139, 26, 26, 0.15);
+            border-left: 6px solid var(--velvet-red);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-top: 1px solid rgba(212, 160, 74, 0.2);
+            border-bottom: 1px solid rgba(212, 160, 74, 0.2);
+        }
+
+        .highlight-box p {
+            color: var(--parchment);
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tech-card {
+            border: 1px solid var(--faded-amber);
+            background-color: rgba(26, 18, 16, 0.8);
+            padding: 18px;
+            text-align: center;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+            transition: transform 0.2s;
+        }
+
+        .tech-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .tech-card h3 {
+            font-size: 0.85rem;
+            color: var(--candle-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .tech-card p {
+            font-size: 0.9rem;
+            color: var(--smoke-gray);
+            margin-bottom: 0;
+        }
+
+        .code-block {
+            background-color: #0d0a09;
+            border: 1px solid var(--faded-amber);
+            padding: 20px;
+            margin: 15px 0 25px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #d4c5a0;
+        }
+
+        .code-block .keyword { color: #e06c75; }
+        .code-block .type { color: #56b6c2; }
+        .code-block .string { color: #98c379; }
+        .code-block .comment { color: #5c6370; font-style: italic; }
+        .code-block .method { color: #61afef; }
+        .code-block .property { color: #d19a66; }
+
+        .code-caption {
+            font-size: 0.85rem;
+            color: var(--faded-amber);
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .notes-box {
+            background-color: rgba(26, 18, 16, 0.6);
+            border: 1px solid var(--faded-amber);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+        }
+
+        .notes-box p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--smoke-gray);
+            margin-bottom: 1rem;
+        }
+
+        .notes-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .notes-box .highlight {
+            color: var(--candle-gold);
+            font-weight: bold;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .screenshot-placeholder {
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #0d0a09 0%, #2a1f1a 100%);
+            border: 1px solid var(--faded-amber);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--faded-amber);
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            opacity: 0.7;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .project-actions .retro-btn {
+            background-color: var(--theater-dark);
+            color: var(--candle-gold);
+            border-color: var(--candle-gold);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .project-actions .retro-btn:hover {
+            background-color: var(--velvet-red);
+            color: var(--parchment);
+            border-color: var(--parchment);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+        }
+
+        @media (max-width: 600px) {
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+            .code-block {
+                font-size: 0.7rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page">
+
+    <nav class="top-nav">
+        <a href="index.html" class="retro-btn">[ < ] GAME_JAMS</a>
+    </nav>
+
+    <main class="container-about">
+
+        <!-- HERO -->
+        <div class="project-hero">
+            <p class="subtitle">Global Game Jam 2026 — Progetto Completato</p>
+            <h1>Shit! Shit! Shit!</h1>
+            <div class="meta-tags">
+                <span class="tag">UNITY</span>
+                <span class="tag">BLENDER</span>
+                <span class="tag">SUBSTANCE PAINTER</span>
+                <span class="tag">STEALTH</span>
+                <span class="tag">TOP-DOWN</span>
+                <span class="tag">STORICO</span>
+            </div>
+            <p class="byline">by <strong>RainGoat</strong> — Antonio Troiano, Lead Programmer</p>
+        </div>
+
+        <!-- 1. INTRODUZIONE AL GIOCO -->
+        <h2 class="section-title">/Introduzione_Al_Gioco</h2>
+        <div class="project-description">
+            <p>
+                Napoli, 31 Gennaio 1700. Tra le mura dorate del <em>Real Teatro S.C.</em>, l'opera è solo un diversivo.
+                Il vero spettacolo si svolge nei corridoi, dietro le tende di velluto, al bagliore fioco di braci morenti.
+            </p>
+            <p>
+                Tu sei <strong>La Maschera</strong>. Sei il fantasma nella macchina del teatro più prestigioso del mondo. 
+                Sei colui che garantisce che le luci restino accese e i segreti rimangano al buio.
+            </p>
+            <div class="highlight-box">
+                <p>
+                    "Nella grande gerarchia di Napoli, tu non esisti. Sei un servitore senza volto, 
+                    un testimone silenzioso dei peccati dell'élite. Una vita solitaria, ma necessaria. 
+                    Dopo tutto, se sapessero quanto hai sentito... ti ritroveresti in fondo a un canale prima dell'alba."
+                </p>
+            </div>
+            <p>
+                <strong>Le regole del mestiere:</strong> Tieni accese le candele &mdash; la cera è spietata, 
+                e l'oscurità ancora di più. Guida i nobili alle loro sale private, chiudi le tende e—soprattutto— 
+                dimentica i loro volti prima ancora che il chiavistello scatti. 
+                Consegna messaggi tra amanti proibiti e politici disperati. Sii rapido, sii preciso: 
+                un piano di guerra consegnato a una contessa innamorata è una condanna a morte scritta col tuo stesso sangue.
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 2. TECNOLOGIE USATE -->
+        <h2 class="section-title">/Tecnologie_Usate</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3>Unity</h3>
+                <p>Game engine principale. Sviluppo del gameplay, sistema di interazione, animazioni e fisica.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Blender</h3>
+                <p>Modellazione 3D di tutti gli asset ambientali e dei personaggi.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Substance Painter</h3>
+                <p>Texturing PBR per ambienti e personaggi in stile storico.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Photoshop</h3>
+                <p>Creazione UI, texture 2D e concept art.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Illustrator</h3>
+                <p>Grafica vettoriale per icone e segnaletica di gioco.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Timeline & Cinemachine</h3>
+                <p>Cutscene introduttive e finali, transizioni camera dinamiche.</p>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 3. COMPARTO TECNICO -->
+        <h2 class="section-title-code">/Comparto_Tecnico</h2>
+
+        <p style="margin-bottom:20px; color:var(--smoke-gray);">
+            Il cuore del progetto risiede in un sistema modulare basato su interfacce e componenti disaccoppiati. 
+            Ecco una panoramica delle architetture più significative.
+        </p>
+
+        <h3 style="color:var(--candle-gold); margin-bottom:10px;">Sistema di Interazione (IInteractable)</h3>
+        <div class="code-block">
+            <span class="keyword">public enum</span> <span class="type">InteractType</span> {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">MessageSender</span>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">MessageReciver</span>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">Candle</span>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">TakeGuest</span>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">DrobGuest</span>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">None</span><br>
+            }<br><br>
+            <span class="keyword">public interface</span> <span class="type">IInteractable</span> {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">InteractType</span> <span class="property">InteactableType</span> { <span class="keyword">get</span>; }<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Color</span> <span class="property">MyInteractionColor</span> { <span class="keyword">get</span>; }<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">void</span> <span class="method">Interact</span>();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">void</span> <span class="method">CompleteInteraction</span>();<br>
+            }
+        </div>
+        <p class="code-caption">// IInteractable.cs — Interfaccia base per tutti gli oggetti interagibili.</p>
+        <p style="color:var(--smoke-gray); margin-bottom:25px;">
+            Ogni elemento di gioco (candele, ospiti, messaggi) implementa <strong>IInteractable</strong>. 
+            Il <strong>PlayerController</strong> rileva l'oggetto tramite trigger collider, 
+            ne identifica il tipo tramite l'enum e attiva l'animazione corrispondente con un delay configurabile 
+            via <strong>ScriptableObject</strong>.
+        </p>
+
+        <h3 style="color:var(--candle-gold); margin-bottom:10px;">Game Loop a Tre Atti</h3>
+        <div class="code-block">
+            <span class="keyword">void</span> <span class="method">Update</span>() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (!_isOperaRunning) <span class="keyword">return</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;_elapsedTime += <span class="type">Time</span>.deltaTime;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">float</span> progress = <span class="type">Mathf</span>.<span class="method">Clamp01</span>(_elapsedTime / _settings.OperaDurationSeconds);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="method">HandleSpawning</span>(progress);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (progress &gt;= 1f) <span class="method">EndOpera</span>();<br>
+            }<br><br>
+            <span class="keyword">private void</span> <span class="method">HandleSpawning</span>(<span class="type">float</span> progress) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (progress &gt;= <span class="property">GuestActivationThreshold</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="method">UpdateSpawnTimer</span>(<span class="keyword">ref</span> _guestTimer, ... , <span class="method">SpawnGuest</span>);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (progress &gt;= <span class="property">MessageActivationThreshold</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="method">UpdateSpawnTimer</span>(<span class="keyword">ref</span> _messageTimer, ... , <span class="method">SpawnMessage</span>);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (progress &gt;= <span class="property">CandleActivationThreshold</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="method">UpdateSpawnTimer</span>(<span class="keyword">ref</span> _lightTimer, ... , <span class="method">SpawnLight</span>);<br>
+            }
+        </div>
+        <p class="code-caption">// GameController.cs — Progressione a soglie (atti) con curve di spawn.</p>
+        <p style="color:var(--smoke-gray); margin-bottom:25px;">
+            L'opera si divide in tre atti. Ogni atto sblocca una meccanica: prima gli ospiti (Atto I), 
+            poi i messaggi segreti (Atto II), infine lo spegnimento delle candele (Atto III). 
+            Le frequenze di spawn sono regolate da <strong>AnimationCurve</strong> per intensificare 
+            la difficoltà con l'avanzare del tempo.
+        </p>
+
+        <h3 style="color:var(--candle-gold); margin-bottom:10px;">Sistema Ospiti con Color Coding</h3>
+        <div class="code-block">
+            <span class="keyword">public void</span> <span class="method">CreateGuestDirection</span>() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> randomGuestFamilyColor = <span class="type">Random</span>.<span class="method">Range</span>(0, _availableGuestsColor.Count);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span> tmpColor = _availableGuestsColor[randomGuestFamilyColor];<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (!_activeGuests.<span class="method">ContainsKey</span>(tmpColor)) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_activeGuests.<span class="method">Add</span>(tmpColor, <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">FollowerGuest</span>&gt;());<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="method">SpawnGuests</span>(tmpColor);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_guestInteractionArea.<span class="method">SetUpInteractionArea</span>(tmpColor, ...);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_availableGuestsColor.<span class="method">RemoveAt</span>(randomGuestFamilyColor);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            }
+        </div>
+        <p class="code-caption">// GuestController.cs — Spawn colorato con area di interazione dedicata.</p>
+        <p style="color:var(--smoke-gray); margin-bottom:25px;">
+            Ogni famiglia di ospiti è identificata da un colore univoco. Il player deve abbinare 
+            l'ospite all'uscita del colore corrispondente. Il sistema gestisce pool di GameObject, 
+            pathfinding temporaneo tramite Transform targets, e timer di fuga con stato "Hurry Up" 
+            visibile tramite icona a schermo.
+        </p>
+
+        <h3 style="color:var(--candle-gold); margin-bottom:10px;">Cutscene e Animazioni</h3>
+        <div class="code-block">
+            <span class="keyword">public async</span> <span class="type">UniTask</span> <span class="method">PlayCutscene</span>(<span class="type">PlayableDirector</span> director) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;director.<span class="method">Play</span>();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">await</span> <span class="type">UniTask</span>.<span class="method">WaitUntil</span>(() =&gt; <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;director.state != <span class="type">PlayState</span>.Playing ||<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;director.time &gt;= director.duration,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cancellationToken: <span class="keyword">this</span>.<span class="method">GetCancellationTokenOnDestroy</span>());<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;director.<span class="method">RebindPlayableGraphOutputs</span>();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;director.enabled = <span class="keyword">false</span>;<br>
+            }
+        </div>
+        <p class="code-caption">// CutSceneController.cs — Gestione asincrona delle timeline.</p>
+        <p style="color:var(--smoke-gray); margin-bottom:25px;">
+            Le cutscene sono gestite con <strong>Unity Timeline</strong> e <strong>Cinemachine</strong>. 
+            L'uso di <strong>UniTask</strong> permette di attendere il completamento senza bloccare 
+            il frame, con supporto alla cancellazione tramite CancellationToken. 
+            Il sistema pulisce il grafo della timeline al termine per evitare memory leak.
+        </p>
+
+        <h3 style="color:var(--candle-gold); margin-bottom:10px;">Configurazione via ScriptableObject</h3>
+        <div class="code-block">
+            [<span class="type">CreateAssetMenu</span>(fileName = <span class="string">"PlayerSettings"</span>, menuName = <span class="string">"Scriptable Objects/PlayerSettings"</span>)]<br>
+            <span class="keyword">public class</span> <span class="type">PlayerSettings</span> : <span class="type">ScriptableObject</span> {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public float</span> <span class="property">MoveSpeed</span> = 5f;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public float</span> <span class="property">SprintMultiplier</span> = 1.5f;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public float</span> <span class="property">Interaction_GetMessageDelay</span> = 2f;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public float</span> <span class="property">Interaction_TurnOnCandle</span> = 2.5f;<br>
+            }
+        </div>
+        <p class="code-caption">// PlayerSettings.cs — Dati configurabili dall'Inspector senza toccare codice.</p>
+        <p style="color:var(--smoke-gray); margin-bottom:25px;">
+            Ogni sottosistema (Player, Candele, Messaggi, Ospiti, Livello) ha il proprio 
+            <strong>ScriptableObject</strong> per la configurazione. Questo ha permesso 
+            di bilanciare il gioco rapidamente durante la jam senza dover ricompilare, 
+            e mantiene il codice pulito separando dati e logica.
+        </p>
+
+        <hr class="section-divider">
+
+        <!-- 4. MIE NOTE SUL PROGETTO -->
+        <h2 class="section-title">/Mie_Note_Sul_Progetto</h2>
+        <div class="notes-box">
+            <p>
+                Ho partecipato alla <span class="highlight">Global Game Jam 2026</span> con un obiettivo preciso: 
+                non imparare qualcosa di nuovo, ma <span class="highlight">consolidare</span> tutto ciò che 
+                ho imparato fino a quel momento.
+            </p>
+            <p>
+                Mi sono occupato dell'intera parte di <span class="highlight">sviluppo gameplay</span>, 
+                dalle meccaniche di movimento del personaggio al sistema di interazione, 
+                dalla gestione delle candele e degli ospiti fino all'implementazione delle 
+                <span class="highlight">animazioni in Unity</span> e delle cutscene con Timeline.
+            </p>
+            <p>
+                Non è stato un tuffo nel buio alla ricerca di tecnologie sconosciute. 
+                È stata una <span class="highlight">sfida con me stesso</span>: 
+                "A che punto sono arrivato? Cosa so fare davvero quando non ho tempo di cercare 
+                tutorial o leggere documentazione?"
+            </p>
+            <p>
+                La risposta è stata chiara. In 48 ore ho messo in piedi un'architettura modulare 
+                con interfacce disaccoppiate, sistemi di spawn basati su curve di difficoltà, 
+                un sistema di messaging colorato, fisica, animazioni e cutscene. 
+                Il tutto lavorando in team, coordinandoci su meccaniche e design.
+            </p>
+            <p>
+                Ne sono uscito con la consapevolezza che le fondamenta sono solide. 
+                So cosa so fare, e so cosa voglio imparare dopo.
+            </p>
+            <p style="text-align:right; color:var(--candle-gold); margin-bottom:0;">
+                — Antonio Troiano
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 5. SCREENSHOT E LINK -->
+        <h2 class="section-title">/Screenshot</h2>
+        <div class="screenshot-grid">
+            <div class="screenshot-placeholder">SCHERMATA_01.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
+            <div class="screenshot-placeholder">SCHERMATA_02.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
+            <div class="screenshot-placeholder">SCHERMATA_03.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
+        </div>
+
+        <div class="project-actions">
+            <a href="https://raingoat.itch.io/shit-shit-shit" target="_blank" class="retro-btn">SCARICA SU ITCH.IO >></a>
+            <a href="index.html" class="retro-btn">[ < ] TORNA AI PROGETTI</a>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
