@@ -1,0 +1,5 @@
+=== CURRENT STATUS ===
+Last completed: M1 (server running, all pages verified 200); M2.T1-T4 (chevrons, typewriter, Vibe Coding in intro + about)
+Current task: M2.T5 - review changes in browser
+Next task: M3 - user feedback / additional polish
+Blockers: none

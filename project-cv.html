@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questo CV | Portfolio XR</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --term-black: #161616;
+            --term-panel: #0f0f0f;
+            --term-orange: #FF5722;
+            --term-green: #4ade80;
+            --term-gray: #b6b6b3;
+            --term-muted: #7a7a76;
+            --term-line: #2e2e2c;
+        }
+
+        body.about-page {
+            background-color: var(--term-black);
+            color: var(--term-gray);
+        }
+
+        .container-about {
+            max-width: 900px;
+        }
+
+        .top-nav .retro-btn {
+            background-color: var(--term-black);
+            color: var(--term-orange);
+            border-color: var(--term-orange);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .top-nav .retro-btn:hover {
+            background-color: var(--term-orange);
+            color: var(--term-black);
+            border-color: var(--term-black);
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 2px dashed var(--term-line);
+            margin: 50px 0;
+            opacity: 0.8;
+        }
+
+        .project-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 50px 0 40px;
+            border-bottom: 3px solid var(--term-line);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .project-hero::after {
+            content: "▼";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--term-orange);
+            font-size: 1.2rem;
+            background-color: var(--term-black);
+            padding: 0 10px;
+        }
+
+        .project-hero h1 {
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            margin-bottom: 0.5rem;
+            color: var(--term-gray);
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+        }
+
+        .project-hero .subtitle {
+            font-size: 0.9rem;
+            color: var(--term-orange);
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags .tag {
+            background-color: var(--term-black);
+            color: var(--term-green);
+            border: 1px solid var(--term-line);
+            font-size: 0.7rem;
+        }
+
+        .project-hero .byline {
+            color: var(--term-muted);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--term-orange);
+            border-left: 5px solid var(--term-green);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-description {
+            max-width: 100%;
+            text-align: left;
+        }
+
+        .project-description p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--term-gray);
+        }
+
+        .highlight-box {
+            background-color: rgba(255, 87, 34, 0.08);
+            border-left: 6px solid var(--term-orange);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-top: 1px solid var(--term-line);
+            border-bottom: 1px solid var(--term-line);
+        }
+
+        .highlight-box p {
+            color: var(--term-green);
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tech-card {
+            border: 1px solid var(--term-line);
+            background-color: rgba(15, 15, 15, 0.8);
+            padding: 18px;
+            text-align: center;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+            transition: transform 0.2s;
+        }
+
+        .tech-card:hover {
+            transform: translate(-2px, -2px);
+            border-color: var(--term-orange);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .tech-card h3 {
+            font-size: 0.85rem;
+            color: var(--term-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .tech-card p {
+            font-size: 0.9rem;
+            color: var(--term-gray);
+            margin-bottom: 0;
+        }
+
+        .terminal-window {
+            background-color: var(--term-panel);
+            border: 1px solid var(--term-line);
+            margin: 15px 0 25px;
+            overflow-x: auto;
+        }
+
+        .terminal-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background-color: var(--term-line);
+            border-bottom: 1px solid var(--term-panel);
+        }
+
+        .t-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--term-orange);
+        }
+
+        .t-dot:nth-child(2) { background-color: var(--term-muted); }
+        .t-dot:nth-child(3) { background-color: var(--term-green); }
+
+        .t-title {
+            margin-left: 8px;
+            font-size: 0.75rem;
+            color: var(--term-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            line-height: 1.9;
+        }
+
+        .terminal-body .t-line {
+            margin: 0;
+            color: var(--term-gray);
+        }
+
+        .t-prompt { color: var(--term-green); font-weight: bold; }
+        .t-cmd { color: var(--term-orange); }
+        .t-out { color: var(--term-muted); }
+
+        .code-caption {
+            font-size: 0.85rem;
+            color: var(--term-muted);
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .notes-box {
+            background-color: rgba(15, 15, 15, 0.6);
+            border: 1px solid var(--term-line);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+        }
+
+        .notes-box p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--term-gray);
+            margin-bottom: 1rem;
+        }
+
+        .notes-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .notes-box .highlight {
+            color: var(--term-orange);
+            font-weight: bold;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .screenshot-placeholder {
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #0f0f0f 0%, #222222 100%);
+            border: 1px solid var(--term-line);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--term-muted);
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            opacity: 0.7;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .project-actions .retro-btn {
+            background-color: var(--term-black);
+            color: var(--term-orange);
+            border-color: var(--term-orange);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .project-actions .retro-btn:hover {
+            background-color: var(--term-orange);
+            color: var(--term-black);
+            border-color: var(--term-black);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+        }
+
+        @media (max-width: 600px) {
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+            .terminal-body {
+                font-size: 0.75rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page">
+
+    <nav class="top-nav">
+        <a href="index.html" class="retro-btn">[ < ] ESPERIMENTI_LOCALI</a>
+    </nav>
+
+    <main class="container-about">
+
+        <!-- HERO -->
+        <div class="project-hero">
+            <p class="subtitle">Esperimenti Locali — Progetto In Corso</p>
+            <h1>Questo CV</h1>
+            <div class="meta-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">VANILLA JS</span>
+                <span class="tag">OPENCODE</span>
+                <span class="tag">AI ASSISTITO</span>
+                <span class="tag">FRONTEND</span>
+            </div>
+            <p class="byline">by <strong>RainGoat</strong> — Antonio Troiano, Autore & Code</p>
+        </div>
+
+        <!-- 1. INTRODUZIONE -->
+        <h2 class="section-title">/Introduzione</h2>
+        <div class="project-description">
+            <p>
+                Questo progetto è nato come un piccolo sogno nel cassetto: creare un portfolio diverso dal solito.
+                Qualcosa di più veloce e piacevole da leggere rispetto al classico pezzo di carta — un CV che 
+                si consulta come si esplora un terminale, con riferimenti chiari e rapidi ai lavori 
+                e all'esperienza accumulata.
+            </p>
+            <p>
+                D'altra parte il frontend non è il mio settore: viene da un mondo fatto di C++, C#, Unity e Unreal.
+                Ed è proprio qui che entra in gioco il bello di questo progetto. Questo sito è stato il 
+                <strong>banco di partenza</strong> per lo sviluppo con il supporto di strutture AI agentiche 
+                (opencode), e insieme il primo passo per affacciarsi finalmente al linguaggio web frontend.
+            </p>
+            <div class="highlight-box">
+                <p>
+                    "Un CV che si legge come un terminale: pochi scroll, zero riempitivi, riferimenti netti. 
+                    E il look giusto per chi passa la vita davanti a uno schermo."
+                </p>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 2. TECNOLOGIE USATE -->
+        <h2 class="section-title">/Tecnologie_Usate</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3>HTML</h3>
+                <p>Struttura semantica. Una sezione per ogni "livello" del CV, navigabile a scorrimento.</p>
+            </div>
+            <div class="tech-card">
+                <h3>CSS</h3>
+                <p>Design tokens, layout a layer sticky, bordo retrò brutalista e animazioni leggere.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Vanilla JS</h3>
+                <p>Audio 8-bit sintetizzato via Web Audio API, micro-interazioni, hover sounds e typewriter.</p>
+            </div>
+            <div class="tech-card">
+                <h3>opencode</h3>
+                <p>Struttura AI agentica che orchestri il flusso: pianifica, implementa, verifica.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Strumenti di progetto</h3>
+                <p>progetto_generale.md, stato_attuale.txt e registro_decisionale.md come memoria del progetto.</p>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 3. FLOW OPERATIVO -->
+        <h2 class="section-title">/Flow_Operativo</h2>
+        <p style="margin-bottom:20px; color:var(--term-gray);">
+            Non ci sono pezzi di codice da esibire: la parte interessante sta nel <strong>modo</strong> 
+            in cui il progetto viene costruito. Ogni richiesta passa per un flusso guidato da un agente AI,
+            che legge prima, modifica dopo, e verifica sempre.
+        </p>
+
+        <div class="terminal-window">
+            <div class="terminal-bar">
+                <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+                <span class="t-title">opencode — flow_di_sviluppo</span>
+            </div>
+            <div class="terminal-body">
+                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">obiettivo</span>: "un CV diverso dal solito, fatto con un agente AI"</p>
+                <p class="t-line"><span class="t-out"># la richiesta entra in opencode, l'agente parte dalla memoria del progetto</span></p>
+                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">read</span> progetto_generale.md &gt; stato_attuale.txt &gt; registro_decisionale.md</p>
+                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">analizza</span> la struttura esistente: index.html / style.css / script.js</p>
+                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">implementa</span> → modifica proposta → applicata al codice sorgente</p>
+                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">verifica</span> → reload nel browser, controlli incrociati su stile e interazioni</p>
+                <p class="t-line"><span class="t-out"># ogni passo aggiorna lo stato: il registro tiene traccia delle decisioni prese</span></p>
+                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">commit</span> "feat: scroll hint sotto la CTA" — un pezzetto alla volta</p>
+            </div>
+        </div>
+        <p class="code-caption">// nessuna libreria, nessun build step: html statico pronto per qualsiasi hosting.</p>
+
+        <p style="color:var(--term-gray); margin-bottom:25px;">
+            Di fatto io e l'agente lavoriamo a coppia: io esprimo l'intenzione e le coordinate stilistiche,
+            l'agente legge la struttura, scompone il lavoro in step, implementa e riporta il risultato.
+            Il progetto resta piccolo, leggibile e modificabile in ogni sua parte, e la memoria su disco
+            (obiettivi, stato, decisioni) fa da collante tra una sessione di lavoro e la successiva.
+        </p>
+
+        <hr class="section-divider">
+
+        <!-- 4. NOTE SUL PROGETTO -->
+        <h2 class="section-title">/Note</h2>
+        <div class="notes-box">
+            <p>
+                Sul fronte dello stile la scelta è ricaduta su un <span class="highlight">look retrò ma piacevole agli occhi</span>.
+                Un bianco candido, per chi passa ore davanti a un editor, è un'eresia. Via la carta: posto a grigi caldi,
+                nero quasi assoluto e un arancio da CRT acceso.
+            </p>
+            <p>
+                Il risultato è una palette che riprende l'estetica dei terminali senza sacrificare la leggibilità,
+                con suffusioni di colore usate con parsimonia per guidare l'occhio tra le sezioni.
+            </p>
+            <p>
+                Questo progetto rappresenta anche il mio <span class="highlight">primo contatto reale con il web</span>:
+                il primo portfolio, le prime righe di HTML e CSS scritte in modalità zen, la prima volta che ho guidato
+                un'agente AI nella costruzione di qualcosa fatto da zero. Un esperimento locale che, ogni sessione,
+                diventa un po' più portfolio.
+            </p>
+            <p style="text-align:right; color:var(--term-orange); margin-bottom:0;">
+                — Antonio Troiano
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 5. SCREENSHOT -->
+        <h2 class="section-title">/Screenshot</h2>
+        <div class="screenshot-grid">
+            <div class="screenshot-placeholder">SCHERMATA_01.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
+            <div class="screenshot-placeholder">SCHERMATA_02.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
+            <div class="screenshot-placeholder">SCHERMATA_03.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
+        </div>
+
+        <div class="project-actions">
+            <a href="index.html" class="retro-btn">[ < ] TORNA AI PROGETTI</a>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

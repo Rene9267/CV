@@ -136,6 +136,7 @@ p {
     text-align: left;
     transition: transform 0.2s;
     box-shadow: 6px 6px 0px var(--brutal-black);
+    cursor: pointer;
 }
 
 .project-card:hover {
@@ -289,6 +290,33 @@ p {
 .skill-box li::before {
     content: "> ";
     font-weight: bold;
+}
+
+/* Typewriter terminal block replacing the skill list */
+.about-typed {
+    border: 2px solid var(--brutal-black);
+    padding: 14px 16px;
+    background: var(--bg-gray);
+    min-height: 60px;
+    margin-top: 10px;
+}
+
+.about-typed .typed-line {
+    display: block;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--brutal-black);
+}
+
+.about-typed .cursor {
+    display: inline-block;
+    color: var(--cmd-orange);
+    animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 /* --- DUAL TIMELINE LAYOUT --- */
@@ -569,49 +597,64 @@ p {
     position: relative;
 }
 
-/* Scroll indicator: retro-style prompt that tells the user to scroll down */
-.scroll-indicator {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+/* Scroll hint: animated chevrons flanking the CTA button */
+.btn-scroll-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.scroll-hint {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    animation: floatDown 2s ease-in-out infinite;
     pointer-events: none;
     user-select: none;
 }
 
-.scroll-arrow {
-    font-size: 1rem;
-    color: var(--cmd-orange);
-    animation: blinkArrow 1.2s step-end infinite;
+/* Scroll hint wrapping the "Scroll for projects" label below the CTA */
+.projects-hint {
+    flex-direction: row;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 48px;
+}
+
+.projects-hint .chevron-group {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    align-items: center;
 }
 
 .scroll-label {
-    font-size: 0.65rem;
-    font-weight: bold;
+    font-size: 0.8rem;
     color: var(--brutal-black);
-    letter-spacing: 3px;
-    border: 2px solid var(--brutal-black);
-    padding: 2px 8px;
-    background-color: var(--bg-gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-@keyframes floatDown {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(8px); }
+.scroll-hint .chevron {
+    font-size: 0.9rem;
+    line-height: 0.75;
+    color: var(--cmd-orange);
+    opacity: 0;
+    animation: chevronDrop 1.8s ease-in-out infinite;
 }
 
-@keyframes blinkArrow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.scroll-hint .chevron:nth-child(1) { animation-delay: 0s; }
+.scroll-hint .chevron:nth-child(2) { animation-delay: 0.25s; }
+
+@keyframes chevronDrop {
+    0% { opacity: 0; transform: translateY(-6px); }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(6px); }
 }
 
 #intro p {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .btn-intro {
@@ -648,9 +691,6 @@ p {
     animation: scrollMarquee 30s linear infinite; /* Rallentato un filo per compensare la grandezza */
 }
 
-.hobbies-marquee-container:hover .hobbies-marquee-track {
-    animation-play-state: paused;
-}
 
 .hobby-item {
     flex-shrink: 0;
