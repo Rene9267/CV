@@ -23,6 +23,13 @@
 
         .container-about {
             max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2.section-title,
+        h2.section-title-code {
+            scroll-margin-top: 110px;
         }
 
         .top-nav .retro-btn {
@@ -261,6 +268,26 @@
             opacity: 0.7;
         }
 
+        .screenshot-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border: 1px solid var(--faded-amber);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+            transition: box-shadow 0.2s, border-color 0.2s;
+            transform-origin: 50% 50%;
+            will-change: transform;
+            position: relative;
+            cursor: zoom-in;
+        }
+
+        .screenshot-img:hover {
+            border-color: var(--candle-gold);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+            z-index: 5;
+        }
+
         .project-actions {
             display: flex;
             gap: 20px;
@@ -283,6 +310,190 @@
             box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
         }
 
+        /* ===== SFONDO TEATRALE ===== */
+        .theater-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .theater-vignette {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 18%, rgba(212,160,74,0.10), rgba(0,0,0,0) 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%);
+        }
+
+        .theater-curtain {
+            position: absolute;
+            top: 0;
+            height: 22vh;
+            width: 15vw;
+            min-width: 130px;
+            opacity: 0.35;
+        }
+
+        .theater-curtain--left {
+            left: 0;
+            border-radius: 0 0 100% 0 / 0 0 60px 0;
+            box-shadow: 12px 0 30px rgba(0,0,0,0.5);
+            background:
+                linear-gradient(90deg, rgba(0,0,0,0.4), rgba(0,0,0,0) 45%),
+                repeating-linear-gradient(90deg,
+                    #5c0e0e 0 22px,
+                    #7a1616 22px 44px,
+                    #4a0c0c 44px 66px);
+        }
+
+        .theater-curtain--right {
+            right: 0;
+            border-radius: 0 0 0 100% / 0 0 0 60px;
+            box-shadow: -12px 0 30px rgba(0,0,0,0.5);
+            background:
+                linear-gradient(270deg, rgba(0,0,0,0.4), rgba(0,0,0,0) 45%),
+                repeating-linear-gradient(90deg,
+                    #4a0c0c 0 22px,
+                    #7a1616 22px 44px,
+                    #5c0e0e 44px 66px);
+        }
+
+        .theater-smoke {
+            position: absolute;
+            width: 45vmax;
+            height: 45vmax;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                rgba(196,184,168,0.12) 0%,
+                rgba(196,184,168,0.05) 45%,
+                rgba(26,18,16,0) 70%);
+            filter: blur(30px);
+            animation: smokeDrift 40s ease-in-out infinite alternate;
+        }
+
+        .theater-smoke--1 {
+            top: -12vmax;
+            left: -8vmax;
+        }
+
+        .theater-smoke--2 {
+            bottom: -14vmax;
+            right: -8vmax;
+            animation-delay: -20s;
+            animation-duration: 52s;
+        }
+
+        @keyframes smokeDrift {
+            0%   { transform: translate(0, 0) scale(1);    opacity: 0.6; }
+            50%  { transform: translate(6vmax, 4vmax) scale(1.15); opacity: 0.9; }
+            100% { transform: translate(-4vmax, 6vmax) scale(0.95); opacity: 0.6; }
+        }
+
+        .ember-field {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .ember-field .ember {
+            position: absolute;
+            bottom: -8px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                #ffd98a 0%,
+                #d4a04a 40%,
+                rgba(212,160,74,0) 70%);
+            box-shadow: 0 0 8px 2px rgba(212,160,74,0.45);
+            opacity: 0;
+            animation-name: emberRise;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes emberRise {
+            0%   { transform: translate(0, 0) translateY(0); opacity: 0; }
+            10%  { opacity: 0.9; }
+            55%  { opacity: 0.5; }
+            100% { transform: translate(var(--drift), calc(-1 * var(--rise))); opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .theater-smoke,
+            .ember-field .ember {
+                animation: none;
+                opacity: 0;
+            }
+        }
+
+        /* ===== INDICE LATERALE ===== */
+        .index-nav {
+            position: fixed;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            width: 240px;
+            background-color: rgba(13, 10, 9, 0.88);
+            border: 1px solid var(--faded-amber);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
+            backdrop-filter: blur(3px);
+            padding: 14px 12px;
+        }
+
+        .index-nav h3 {
+            font-size: 0.62rem;
+            color: var(--velvet-red);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--faded-amber);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .index-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .index-nav li {
+            margin-bottom: 7px;
+        }
+
+        .index-nav a {
+            display: block;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: var(--smoke-gray);
+            text-decoration: none;
+            padding: 9px 10px;
+            border-left: 2px solid transparent;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s, padding-left 0.15s;
+        }
+
+        .index-nav a:hover {
+            color: var(--candle-gold);
+            background-color: rgba(212,160,74,0.08);
+            border-left-color: var(--faded-amber);
+            padding-left: 10px;
+        }
+
+        .index-nav a.active {
+            color: var(--candle-gold);
+            background-color: rgba(139,26,26,0.2);
+            border-left-color: var(--velvet-red);
+        }
+
+        @media (max-width: 1399px) {
+            .index-nav {
+                display: none;
+            }
+        }
+
         @media (max-width: 600px) {
             .tech-grid {
                 grid-template-columns: 1fr 1fr;
@@ -300,8 +511,21 @@
 
 <body class="about-page">
 
+    <div class="theater-bg" aria-hidden="true">
+        <div class="theater-vignette"></div>
+        <div class="theater-curtain theater-curtain--left"></div>
+        <div class="theater-curtain theater-curtain--right"></div>
+        <div class="theater-smoke theater-smoke--1"></div>
+        <div class="theater-smoke theater-smoke--2"></div>
+        <div class="ember-field"></div>
+    </div>
+
+    <aside class="index-nav" aria-label="Indice della pagina">
+        <h3>[ // Indice ]</h3>
+    </aside>
+
     <nav class="top-nav">
-        <a href="index.html" class="retro-btn">[ < ] GAME_JAMS</a>
+        <a href="index.html" class="retro-btn">[ < ] HOME</a>
     </nav>
 
     <main class="container-about">
@@ -312,9 +536,9 @@
             <h1>Shit! Shit! Shit!</h1>
             <div class="meta-tags">
                 <span class="tag">UNITY</span>
-                <span class="tag">BLENDER</span>
-                <span class="tag">SUBSTANCE PAINTER</span>
-                <span class="tag">STEALTH</span>
+                <span class="tag">C#</span>
+                <span class="tag">TIMELINE & CINEMACHINE</span>
+                <span class="tag">ANIMAZIONI</span>
                 <span class="tag">TOP-DOWN</span>
                 <span class="tag">STORICO</span>
             </div>
@@ -355,27 +579,15 @@
         <div class="tech-grid">
             <div class="tech-card">
                 <h3>Unity</h3>
-                <p>Game engine principale. Sviluppo del gameplay, sistema di interazione, animazioni e fisica.</p>
+                <p>Game engine principale. Sviluppo del gameplay, sistema di interazione, fisica e logica di gioco.</p>
             </div>
             <div class="tech-card">
-                <h3>Blender</h3>
-                <p>Modellazione 3D di tutti gli asset ambientali e dei personaggi.</p>
+                <h3>C#</h3>
+                <p>Linguaggio di programmazione. Tutto il codice del progetto: sistemi di spawn, messaggi, gestione di luci e ospiti.</p>
             </div>
             <div class="tech-card">
-                <h3>Substance Painter</h3>
-                <p>Texturing PBR per ambienti e personaggi in stile storico.</p>
-            </div>
-            <div class="tech-card">
-                <h3>Photoshop</h3>
-                <p>Creazione UI, texture 2D e concept art.</p>
-            </div>
-            <div class="tech-card">
-                <h3>Illustrator</h3>
-                <p>Grafica vettoriale per icone e segnaletica di gioco.</p>
-            </div>
-            <div class="tech-card">
-                <h3>Timeline & Cinemachine</h3>
-                <p>Cutscene introduttive e finali, transizioni camera dinamiche.</p>
+                <h3>Timeline, Cinemachine & Animazioni</h3>
+                <p>Cutscene introduttive e finali, transizioni camera dinamiche e animazioni realizzate interamente in Unity.</p>
             </div>
         </div>
 
@@ -541,14 +753,19 @@
         <!-- 5. SCREENSHOT E LINK -->
         <h2 class="section-title">/Screenshot</h2>
         <div class="screenshot-grid">
-            <div class="screenshot-placeholder">SCHERMATA_01.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
-            <div class="screenshot-placeholder">SCHERMATA_02.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
-            <div class="screenshot-placeholder">SCHERMATA_03.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
+            <img src="assets/shit-1.jpg" alt="Screenshot 1" class="screenshot-img">
+            <img src="assets/shit-2.jpg" alt="Screenshot 2" class="screenshot-img">
+            <img src="assets/shit-3.jpg" alt="Screenshot 3" class="screenshot-img">
+            <img src="assets/shit-4.jpg" alt="Screenshot 4" class="screenshot-img">
+            <img src="assets/shit-5.jpg" alt="Screenshot 5" class="screenshot-img">
+            <img src="assets/shit-6.jpg" alt="Screenshot 6" class="screenshot-img">
+            <img src="assets/shit-7.jpg" alt="Screenshot 7" class="screenshot-img">
+            <img src="assets/shit-8.jpg" alt="Screenshot 8" class="screenshot-img">
         </div>
 
         <div class="project-actions">
             <a href="https://raingoat.itch.io/shit-shit-shit" target="_blank" class="retro-btn">SCARICA SU ITCH.IO >></a>
-            <a href="index.html" class="retro-btn">[ < ] TORNA AI PROGETTI</a>
+            <a href="index.html" class="retro-btn">[ < ] HOME</a>
         </div>
 
     </main>

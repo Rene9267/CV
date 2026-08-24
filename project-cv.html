@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questo CV | Portfolio XR</title>
+    <title>Portfolio Showcase | Portfolio XR</title>
     <link rel="stylesheet" href="style.css">
     <style>
         :root {
@@ -24,6 +24,13 @@
 
         .container-about {
             max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2.section-title,
+        h2.section-title-code {
+            scroll-margin-top: 110px;
         }
 
         .top-nav .retro-btn {
@@ -306,6 +313,148 @@
             box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
         }
 
+        /* ===== SFONDO TERMINALE ===== */
+        .term-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .term-scanlines {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(0,0,0,0) 0px,
+                rgba(0,0,0,0) 3px,
+                rgba(46,46,44,0.1) 3px,
+                rgba(46,46,44,0.1) 4px
+            );
+            opacity: 0.6;
+        }
+
+        .term-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,87,34,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,87,34,0.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+            -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 75%);
+        }
+
+        .term-vignette {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 15%, rgba(74,222,128,0.05), rgba(0,0,0,0) 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .term-code-field {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .term-code-field .term-glyph {
+            position: absolute;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: var(--term-orange);
+            opacity: 0;
+            animation-name: glyphFloat;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .term-code-field .term-glyph.t-green { color: var(--term-green); }
+        .term-code-field .term-glyph.t-muted { color: var(--term-muted); }
+
+        @keyframes glyphFloat {
+            0%   { transform: translate(0, 0) rotate(-4deg); opacity: 0; }
+            15%  { opacity: 0.35; }
+            50%  { opacity: 0.12; }
+            85%  { opacity: 0.35; }
+            100% { transform: translate(var(--drift-x), var(--drift-y)) rotate(4deg); opacity: 0; }
+        }
+
+        /* ===== INDICE LATERALE ===== */
+        .index-nav {
+            position: fixed;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            width: 240px;
+            background-color: rgba(15, 15, 15, 0.88);
+            border: 1px solid var(--term-line);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
+            backdrop-filter: blur(3px);
+            padding: 14px 12px;
+        }
+
+        .index-nav h3 {
+            font-size: 0.62rem;
+            color: var(--term-orange);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--term-line);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .index-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .index-nav li {
+            margin-bottom: 7px;
+        }
+
+        .index-nav a {
+            display: block;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: var(--term-gray);
+            text-decoration: none;
+            padding: 9px 10px;
+            border-left: 2px solid transparent;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s, padding-left 0.15s;
+        }
+
+        .index-nav a:hover {
+            color: var(--term-orange);
+            background-color: rgba(255,87,34,0.08);
+            border-left-color: var(--term-orange);
+            padding-left: 10px;
+        }
+
+        .index-nav a.active {
+            color: var(--term-orange);
+            background-color: rgba(74,222,128,0.1);
+            border-left-color: var(--term-green);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .term-code-field .term-glyph {
+                animation: none;
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1399px) {
+            .index-nav {
+                display: none;
+            }
+        }
+
         @media (max-width: 600px) {
             .tech-grid {
                 grid-template-columns: 1fr 1fr;
@@ -323,8 +472,19 @@
 
 <body class="about-page">
 
+    <div class="term-bg" aria-hidden="true">
+        <div class="term-scanlines"></div>
+        <div class="term-grid"></div>
+        <div class="term-vignette"></div>
+        <div class="term-code-field"></div>
+    </div>
+
+    <aside class="index-nav" aria-label="Indice della pagina">
+        <h3>[ // Indice ]</h3>
+    </aside>
+
     <nav class="top-nav">
-        <a href="index.html" class="retro-btn">[ < ] ESPERIMENTI_LOCALI</a>
+        <a href="index.html" class="retro-btn">[ < ] HOME</a>
     </nav>
 
     <main class="container-about">
@@ -332,7 +492,7 @@
         <!-- HERO -->
         <div class="project-hero">
             <p class="subtitle">Esperimenti Locali — Progetto In Corso</p>
-            <h1>Questo CV</h1>
+            <h1>Portfolio Showcase</h1>
             <div class="meta-tags">
                 <span class="tag">HTML</span>
                 <span class="tag">CSS</span>
@@ -341,30 +501,27 @@
                 <span class="tag">AI ASSISTITO</span>
                 <span class="tag">FRONTEND</span>
             </div>
-            <p class="byline">by <strong>RainGoat</strong> — Antonio Troiano, Autore & Code</p>
+            <p class="byline">by <strong>Antonio Troiano</strong> — Autore & Code</p>
         </div>
 
         <!-- 1. INTRODUZIONE -->
         <h2 class="section-title">/Introduzione</h2>
         <div class="project-description">
             <p>
-                Questo progetto è nato come un piccolo sogno nel cassetto: creare un portfolio diverso dal solito.
-                Qualcosa di più veloce e piacevole da leggere rispetto al classico pezzo di carta — un CV che 
-                si consulta come si esplora un terminale, con riferimenti chiari e rapidi ai lavori 
-                e all'esperienza accumulata.
+                Questo progetto nasce da un piccolo sogno che coltivavo dai tempi degli studi: creare un portfolio
+                digitale che potesse essere visitato come una pagina web, qualcosa che raccontasse di me e del mio
+                percorso attraverso tocchi interattivi e stimolanti, invece che un triste foglio digitale bianco
+                con sopra buttate tante scritte confuse.
             </p>
             <p>
-                D'altra parte il frontend non è il mio settore: viene da un mondo fatto di C++, C#, Unity e Unreal.
-                Ed è proprio qui che entra in gioco il bello di questo progetto. Questo sito è stato il 
-                <strong>banco di partenza</strong> per lo sviluppo con il supporto di strutture AI agentiche 
-                (opencode), e insieme il primo passo per affacciarsi finalmente al linguaggio web frontend.
+                Oggi questo sogno sta diventando una piccola realtà che mi riempie di gioia e rafforza la mia
+                curiosità. Venendo da un background fatto di C++, C#, Unity e Unreal, la sfida di approcciarmi
+                al web sembrava complessa; ma grazie alle nuove conoscenze acquisite tramite l'utilizzo dell'AI
+                e ai lavori realizzati fino a oggi, ho trovato il coraggio di iniziare questo progetto, anche come
+                <strong>banco di partenza</strong> per lo sviluppo con il supporto di strutture AI agentiche.
+                Spero che questo primo passo nel mondo del web possa lasciare un sorriso negli occhi di chi guarda,
+                così come sta lasciando un sorriso sul mio volto mentre prende forma.
             </p>
-            <div class="highlight-box">
-                <p>
-                    "Un CV che si legge come un terminale: pochi scroll, zero riempitivi, riferimenti netti. 
-                    E il look giusto per chi passa la vita davanti a uno schermo."
-                </p>
-            </div>
         </div>
 
         <hr class="section-divider">
@@ -388,10 +545,6 @@
                 <h3>opencode</h3>
                 <p>Struttura AI agentica che orchestri il flusso: pianifica, implementa, verifica.</p>
             </div>
-            <div class="tech-card">
-                <h3>Strumenti di progetto</h3>
-                <p>progetto_generale.md, stato_attuale.txt e registro_decisionale.md come memoria del progetto.</p>
-            </div>
         </div>
 
         <hr class="section-divider">
@@ -399,34 +552,44 @@
         <!-- 3. FLOW OPERATIVO -->
         <h2 class="section-title">/Flow_Operativo</h2>
         <p style="margin-bottom:20px; color:var(--term-gray);">
-            Non ci sono pezzi di codice da esibire: la parte interessante sta nel <strong>modo</strong> 
-            in cui il progetto viene costruito. Ogni richiesta passa per un flusso guidato da un agente AI,
-            che legge prima, modifica dopo, e verifica sempre.
+            Questo progetto non ha pezzi di codice estremamente complessi o rivoluzionari — non è a questo che serve.
+            La parte interessante sta nell'utilizzo e nell'ottimizzazione dell'AI durante lo sviluppo. Ogni richiesta passa
+            per un flusso specifico: si valuta prima di tutto la difficoltà della task, si sceglie la tipologia di LLM da
+            interrogare e poi avviene la scrittura del codice da parte dell'AI, con una revisione finale.
+        </p>
+        <p style="margin-bottom:20px; color:var(--term-gray);">
+            Mi è servito a comprendere come lavorare al meglio con l'agente: ho imparato a esprimere correttamente
+            intenzioni e finalità, e a capire quando usare modelli più complessi e quando quelli più leggeri; dall'altra
+            parte, l'agente legge la struttura, scompone il lavoro in step, implementa e riporta il risultato.
+        </p>
+        <p style="margin-bottom:20px; color:var(--term-gray);">
+            Il progetto resta piccolo, leggibile e modificabile per scelta, in modo che sia facilmente interrogabile e
+            comprensibile anche da me, che di web non ho mai toccato niente.
         </p>
 
         <div class="terminal-window">
             <div class="terminal-bar">
                 <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
-                <span class="t-title">opencode — flow_di_sviluppo</span>
+                <span class="t-title">PowerShell — opencode: flow_di_sviluppo</span>
             </div>
             <div class="terminal-body">
-                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">obiettivo</span>: "un CV diverso dal solito, fatto con un agente AI"</p>
-                <p class="t-line"><span class="t-out"># la richiesta entra in opencode, l'agente parte dalla memoria del progetto</span></p>
-                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">read</span> progetto_generale.md &gt; stato_attuale.txt &gt; registro_decisionale.md</p>
-                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">analizza</span> la struttura esistente: index.html / style.css / script.js</p>
-                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">implementa</span> → modifica proposta → applicata al codice sorgente</p>
-                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">verifica</span> → reload nel browser, controlli incrociati su stile e interazioni</p>
+                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">opencode</span></p>
+                <p class="t-line"><span class="t-out"># l'agente parte dalla memoria del progetto e valuta la task</span></p>
+                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">read</span> progetto_generale.md, stato_attuale.txt, registro_decisionale.md</p>
+                <p class="t-line"><span class="t-out"># struttura mappata: index.html / style.css / script.js</span></p>
+                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">analizza</span> le sezioni della pagina progetto</p>
+                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">implementa</span> modifica proposta → applicata al codice sorgente</p>
+                <p class="t-line"><span class="t-out"># verifica: reload nel browser, controlli incrociati su stile e interazioni</span></p>
+                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">verifica</span> → stato: tutto ok</p>
                 <p class="t-line"><span class="t-out"># ogni passo aggiorna lo stato: il registro tiene traccia delle decisioni prese</span></p>
-                <p class="t-line"><span class="t-prompt">➤</span> <span class="t-cmd">commit</span> "feat: scroll hint sotto la CTA" — un pezzetto alla volta</p>
+                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">commit</span> "feat: scroll hint sotto la CTA"</p>
+                <p class="t-line"><span class="t-out"># un pezzetto alla volta</span></p>
             </div>
         </div>
         <p class="code-caption">// nessuna libreria, nessun build step: html statico pronto per qualsiasi hosting.</p>
 
         <p style="color:var(--term-gray); margin-bottom:25px;">
-            Di fatto io e l'agente lavoriamo a coppia: io esprimo l'intenzione e le coordinate stilistiche,
-            l'agente legge la struttura, scompone il lavoro in step, implementa e riporta il risultato.
-            Il progetto resta piccolo, leggibile e modificabile in ogni sua parte, e la memoria su disco
-            (obiettivi, stato, decisioni) fa da collante tra una sessione di lavoro e la successiva.
+            La memoria su disco (obiettivi, stato, decisioni) fa da collante tra una sessione di lavoro e la successiva.
         </p>
 
         <hr class="section-divider">
@@ -454,18 +617,8 @@
             </p>
         </div>
 
-        <hr class="section-divider">
-
-        <!-- 5. SCREENSHOT -->
-        <h2 class="section-title">/Screenshot</h2>
-        <div class="screenshot-grid">
-            <div class="screenshot-placeholder">SCHERMATA_01.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
-            <div class="screenshot-placeholder">SCHERMATA_02.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
-            <div class="screenshot-placeholder">SCHERMATA_03.PNG<br><span style="opacity:0.5;font-size:0.65rem;">[In attesa di asset]</span></div>
-        </div>
-
         <div class="project-actions">
-            <a href="index.html" class="retro-btn">[ < ] TORNA AI PROGETTI</a>
+            <a href="index.html" class="retro-btn">[ < ] HOME</a>
         </div>
 
     </main>

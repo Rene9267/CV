@@ -203,4 +203,172 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(type, 350);
         });
     }
+
+    // --- Sfondo teatrale: generazione braci ---
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const emberField = document.querySelector('.ember-field');
+    if (emberField && !reduceMotion) {
+        const emberCount = Math.min(28, Math.floor(window.innerWidth / 50));
+        for (let i = 0; i < emberCount; i++) {
+            const ember = document.createElement('span');
+            ember.className = 'ember';
+            const size = 2 + Math.random() * 4.5;
+            ember.style.width = `${size}px`;
+            ember.style.height = `${size}px`;
+            ember.style.left = `${Math.random() * 100}%`;
+            ember.style.setProperty('--drift', `${(Math.random() * 2 - 1) * 140}px`);
+            ember.style.setProperty('--rise', `${(Math.random() * 35 + 25)}vh`);
+            ember.style.animationDuration = `${7 + Math.random() * 9}s`;
+            ember.style.animationDelay = `${-Math.random() * 14}s`;
+            emberField.appendChild(ember);
+        }
+    }
+
+    // --- Zoom con lerp per le gallerie screenshot ---
+    const galleryImages = document.querySelectorAll('.screenshot-img');
+    if (galleryImages.length && !reduceMotion) {
+        const ZOOM_TARGET = 1.5;
+        const ZOOM_LERP = 0.12;
+
+        galleryImages.forEach(img => {
+            let scale = 1;
+            let target = 1;
+            let originX = 50;
+            let originY = 50;
+            let toX = 50;
+            let toY = 50;
+            let rafId = null;
+
+            const ease = () => {
+                scale += (target - scale) * ZOOM_LERP;
+                originX += (toX - originX) * ZOOM_LERP;
+                originY += (toY - originY) * ZOOM_LERP;
+                img.style.transformOrigin = `${originX}% ${originY}%`;
+                img.style.transform = `scale(${scale})`;
+                if (Math.abs(target - scale) > 0.0008 ||
+                    Math.abs(toX - originX) > 0.05 ||
+                    Math.abs(toY - originY) > 0.05) {
+                    rafId = requestAnimationFrame(ease);
+                } else {
+                    rafId = null;
+                }
+            };
+
+            const kick = () => {
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = requestAnimationFrame(ease);
+            };
+
+            img.addEventListener('mouseenter', () => {
+                target = ZOOM_TARGET;
+                kick();
+            });
+
+            img.addEventListener('mousemove', (e) => {
+                const rect = img.getBoundingClientRect();
+                toX = ((e.clientX - rect.left) / rect.width) * 100;
+                toY = ((e.clientY - rect.top) / rect.height) * 100;
+                kick();
+            });
+
+            img.addEventListener('mouseleave', () => {
+                target = 1;
+                toX = 50;
+                toY = 50;
+                kick();
+            });
+        });
+    }
+
+    // --- Sfondo terminale: glifi galleggianti ---
+    const codeField = document.querySelector('.term-code-field');
+    if (codeField && !reduceMotion) {
+        const glyphs = ['>', '_', '$', '#', 'PS C:\\>', 'C:\\>', 'IE:', '&', '*', '%', '~', '=>', 'echo', 'cd ..'];
+        for (let i = 0; i < 26; i++) {
+            const glyph = document.createElement('span');
+            glyph.className = 'term-glyph';
+            if (i % 4 === 0) glyph.classList.add('t-green');
+            if (i % 5 === 0) glyph.classList.add('t-muted');
+            glyph.textContent = glyphs[i % glyphs.length];
+            const size = 0.6 + Math.random() * 0.8;
+            glyph.style.fontSize = `${size}rem`;
+            glyph.style.left = `${Math.random() * 100}%`;
+            glyph.style.top = `${Math.random() * 100}%`;
+            glyph.style.setProperty('--drift-x', `${(Math.random() * 2 - 1) * 120}px`);
+            glyph.style.setProperty('--drift-y', `${(Math.random() * 2 - 1) * 90}px`);
+            glyph.style.animationDuration = `${8 + Math.random() * 10}s`;
+            glyph.style.animationDelay = `${-Math.random() * 14}s`;
+            codeField.appendChild(glyph);
+        }
+    }
+
+    // --- Indice laterale delle sezioni ---
+    const indexNav = document.querySelector('.index-nav');
+    if (indexNav) {
+        const headings = Array.from(document.querySelectorAll(
+            '.container-about h2.section-title, .container-about h2.section-title-code'
+        ));
+        if (headings.length) {
+            const ul = document.createElement('ul');
+
+            const readableLabel = (text) => text.trim()
+                .replace(/^\/+/, '')
+                .replace(/[_-]+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            headings.forEach((heading, i) => {
+                let id = heading.id;
+                if (!id) {
+                    const base = heading.textContent.trim()
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-+|-+$/g, '');
+                    id = base || 'sezione';
+                    if (document.getElementById(id)) id = `${id}-${i}`;
+                    heading.id = id;
+                }
+
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#${id}`;
+                a.textContent = readableLabel(heading.textContent);
+                a.classList.add('index-link');
+                li.appendChild(a);
+                ul.appendChild(li);
+
+                a.addEventListener('mouseenter', () => {
+                    playRetroBeep(1100, 'square', 0.03, 0.02);
+                });
+            });
+
+            indexNav.appendChild(ul);
+
+            const links = Array.from(ul.querySelectorAll('a'));
+            links.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        playRetroBeep(700, 'square', 0.08, 0.05);
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            links.forEach(l => l.classList.toggle(
+                                'active',
+                                l.getAttribute('href') === `#${entry.target.id}`
+                            ));
+                        }
+                    });
+                }, { rootMargin: '-25% 0px -65% 0px' });
+                headings.forEach(h => observer.observe(h));
+            }
+        }
+    }
 });
