@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ActionFlow Core | Portfolio XR</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --term-black: #161616;
+            --term-panel: #0f0f0f;
+            --term-orange: #FF5722;
+            --term-green: #4ade80;
+            --term-gray: #b6b6b3;
+            --term-muted: #7a7a76;
+            --term-line: #2e2e2c;
+        }
+
+        body.about-page {
+            background-color: var(--term-black);
+            color: var(--term-gray);
+        }
+
+        .container-about {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2.section-title,
+        h2.section-title-code {
+            scroll-margin-top: 110px;
+        }
+
+        .top-nav .retro-btn {
+            background-color: var(--term-black);
+            color: var(--term-orange);
+            border-color: var(--term-orange);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .top-nav .retro-btn:hover {
+            background-color: var(--term-orange);
+            color: var(--term-black);
+            border-color: var(--term-black);
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 2px dashed var(--term-line);
+            margin: 50px 0;
+            opacity: 0.8;
+        }
+
+        .project-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 50px 0 40px;
+            border-bottom: 3px solid var(--term-line);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .project-hero::after {
+            content: "▼";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--term-orange);
+            font-size: 1.2rem;
+            background-color: var(--term-black);
+            padding: 0 10px;
+        }
+
+        .project-hero h1 {
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            margin-bottom: 0.5rem;
+            color: var(--term-gray);
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+        }
+
+        .project-hero .subtitle {
+            font-size: 0.9rem;
+            color: var(--term-orange);
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags .tag {
+            background-color: var(--term-black);
+            color: var(--term-green);
+            border: 1px solid var(--term-line);
+            font-size: 0.7rem;
+        }
+
+        .project-hero .byline {
+            color: var(--term-muted);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--term-orange);
+            border-left: 5px solid var(--term-green);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-description {
+            max-width: 100%;
+            text-align: left;
+        }
+
+        .project-description p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--term-gray);
+        }
+
+        .highlight-box {
+            background-color: rgba(255, 87, 34, 0.08);
+            border-left: 6px solid var(--term-orange);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-top: 1px solid var(--term-line);
+            border-bottom: 1px solid var(--term-line);
+        }
+
+        .highlight-box p {
+            color: var(--term-green);
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tech-card {
+            border: 1px solid var(--term-line);
+            background-color: rgba(15, 15, 15, 0.8);
+            padding: 18px;
+            text-align: center;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+            transition: transform 0.2s;
+        }
+
+        .tech-card:hover {
+            transform: translate(-2px, -2px);
+            border-color: var(--term-orange);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .tech-card h3 {
+            font-size: 0.85rem;
+            color: var(--term-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .tech-card p {
+            font-size: 0.9rem;
+            color: var(--term-gray);
+            margin-bottom: 0;
+        }
+
+        .terminal-window {
+            background-color: var(--term-panel);
+            border: 1px solid var(--term-line);
+            margin: 15px 0 25px;
+            overflow-x: auto;
+        }
+
+        .terminal-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background-color: var(--term-line);
+            border-bottom: 1px solid var(--term-panel);
+        }
+
+        .t-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--term-orange);
+        }
+
+        .t-dot:nth-child(2) { background-color: var(--term-muted); }
+        .t-dot:nth-child(3) { background-color: var(--term-green); }
+
+        .t-title {
+            margin-left: 8px;
+            font-size: 0.75rem;
+            color: var(--term-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            line-height: 1.9;
+        }
+
+        .terminal-body .t-line {
+            margin: 0;
+            color: var(--term-gray);
+        }
+
+        .t-prompt { color: var(--term-green); font-weight: bold; }
+        .t-cmd { color: var(--term-orange); }
+        .t-out { color: var(--term-muted); }
+        .t-type { color: #7dd3fc; }
+        .t-str { color: var(--term-green); }
+
+        .code-caption {
+            font-size: 0.85rem;
+            color: var(--term-muted);
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .notes-box {
+            background-color: rgba(15, 15, 15, 0.6);
+            border: 1px solid var(--term-line);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+        }
+
+        .notes-box p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--term-gray);
+            margin-bottom: 1rem;
+        }
+
+        .notes-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .notes-box .highlight {
+            color: var(--term-orange);
+            font-weight: bold;
+        }
+
+        .arch-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .arch-layer {
+            border: 1px solid var(--term-line);
+            background-color: rgba(15, 15, 15, 0.8);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+            transition: border-color 0.2s;
+        }
+
+        .arch-layer:hover {
+            border-color: var(--term-orange);
+        }
+
+        .arch-layer .layer-tag {
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--term-black);
+            background: var(--term-orange);
+            padding: 4px 10px;
+            white-space: nowrap;
+        }
+
+        .arch-layer .layer-tag.green {
+            background: var(--term-green);
+        }
+
+        .arch-layer .layer-tag.gray {
+            background: var(--term-muted);
+            color: var(--term-black);
+        }
+
+        .arch-layer .layer-info h4 {
+            font-size: 0.95rem;
+            color: var(--term-gray);
+            margin-bottom: 4px;
+        }
+
+        .arch-layer .layer-info p {
+            font-size: 0.8rem;
+            color: var(--term-muted);
+            margin-bottom: 0;
+        }
+
+        .arch-arrow {
+            text-align: center;
+            color: var(--term-orange);
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        .action-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.85rem;
+        }
+
+        .action-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background-color: var(--term-line);
+            color: var(--term-orange);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--term-orange);
+        }
+
+        .action-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--term-line);
+            color: var(--term-gray);
+        }
+
+        .action-table tr:hover td {
+            background-color: rgba(255, 87, 34, 0.05);
+        }
+
+        .action-table .t-name {
+            color: var(--term-green);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .project-actions .retro-btn {
+            background-color: var(--term-black);
+            color: var(--term-orange);
+            border-color: var(--term-orange);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+        }
+
+        .project-actions .retro-btn:hover {
+            background-color: var(--term-orange);
+            color: var(--term-black);
+            border-color: var(--term-black);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+        }
+
+        /* ===== SFONDO TERMINALE ===== */
+        .term-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .term-scanlines {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(0,0,0,0) 0px,
+                rgba(0,0,0,0) 3px,
+                rgba(46,46,44,0.1) 3px,
+                rgba(46,46,44,0.1) 4px
+            );
+            opacity: 0.6;
+        }
+
+        .term-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,87,34,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,87,34,0.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+            -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 75%);
+        }
+
+        .term-vignette {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 15%, rgba(74,222,128,0.05), rgba(0,0,0,0) 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .term-code-field {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .term-code-field .term-glyph {
+            position: absolute;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: var(--term-orange);
+            opacity: 0;
+            animation-name: glyphFloat;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .term-code-field .term-glyph.t-green { color: var(--term-green); }
+        .term-code-field .term-glyph.t-muted { color: var(--term-muted); }
+
+        @keyframes glyphFloat {
+            0%   { transform: translate(0, 0) rotate(-4deg); opacity: 0; }
+            15%  { opacity: 0.35; }
+            50%  { opacity: 0.12; }
+            85%  { opacity: 0.35; }
+            100% { transform: translate(var(--drift-x), var(--drift-y)) rotate(4deg); opacity: 0; }
+        }
+
+        /* ===== INDICE LATERALE ===== */
+        .index-nav {
+            position: fixed;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            width: 240px;
+            background-color: rgba(15, 15, 15, 0.88);
+            border: 1px solid var(--term-line);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
+            backdrop-filter: blur(3px);
+            padding: 14px 12px;
+        }
+
+        .index-nav h3 {
+            font-size: 0.62rem;
+            color: var(--term-orange);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--term-line);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .index-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .index-nav li {
+            margin-bottom: 7px;
+        }
+
+        .index-nav a {
+            display: block;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: var(--term-gray);
+            text-decoration: none;
+            padding: 9px 10px;
+            border-left: 2px solid transparent;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s, padding-left 0.15s;
+        }
+
+        .index-nav a:hover {
+            color: var(--term-orange);
+            background-color: rgba(255,87,34,0.08);
+            border-left-color: var(--term-orange);
+            padding-left: 10px;
+        }
+
+        .index-nav a.active {
+            color: var(--term-orange);
+            background-color: rgba(74,222,128,0.1);
+            border-left-color: var(--term-green);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .term-code-field .term-glyph {
+                animation: none;
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1399px) {
+            .index-nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .terminal-body {
+                font-size: 0.75rem;
+                padding: 12px;
+            }
+            .action-table {
+                font-size: 0.75rem;
+            }
+            .action-table th, .action-table td {
+                padding: 6px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page">
+
+    <div class="term-bg" aria-hidden="true">
+        <div class="term-scanlines"></div>
+        <div class="term-grid"></div>
+        <div class="term-vignette"></div>
+        <div class="term-code-field"></div>
+    </div>
+
+    <aside class="index-nav" aria-label="Indice della pagina">
+        <h3>[ // Indice ]</h3>
+    </aside>
+
+    <nav class="top-nav">
+        <a href="index.html" class="retro-btn">[ < ] HOME</a>
+    </nav>
+
+    <main class="container-about">
+
+        <!-- HERO -->
+        <div class="project-hero">
+            <p class="subtitle">Esperimenti Locali — Core Package</p>
+            <h1>ActionFlow</h1>
+            <div class="meta-tags">
+                <span class="tag">UNITY</span>
+                <span class="tag">C#</span>
+                <span class="tag">UNITASK</span>
+                <span class="tag">ARCHITETTURA</span>
+                <span class="tag">SCRIPTABLEOBJECT</span>
+                <span class="tag">SERIALIZE_REFERENCE</span>
+            </div>
+            <p class="byline">by <strong>Antonio Troiano</strong> — Architecture & Code</p>
+        </div>
+
+        <!-- 1. INTRODUZIONE -->
+        <h2 class="section-title" id="introduzione">/Introduzione</h2>
+        <div class="project-description">
+            <p>
+                ActionFlow e' un framework di orchestrazione asincrona e event-driven per Unity, pensato per
+                trasformare flussi di gioco complessi in unita' atomiche e governabili. Nato per eliminare lo
+                "spaghetti code" nei progetti enterprise, trasforma la logica sequenziale in una catena di
+                <strong>Actions</strong> eseguite da <strong>Sections</strong> e gestite da un orchestratore centrale
+                (<strong>ActionFlowMGR</strong>).
+            </p>
+            <p>
+                Costruito su <strong>UniTask</strong> per un'async management ad alte prestazioni e zero-allocation,
+                il framework offre un modello di try-catch-BREAK per la crash isolation, un sistema di
+                <strong>Blackboard</strong> per la comunicazione tra componenti, e <strong>DynamicValue&lt;T&gt;</strong>
+                per parametri risolvibili a runtime da sorgente locale o blackboard.
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <p>"Eliminare il caos nei flussi di gioco complessi, un'Action alla volta."</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 2. ARCHITETTURA -->
+        <h2 class="section-title" id="architettura">/Architettura</h2>
+        <p style="margin-bottom:20px; color:var(--term-gray);">
+            Il sistema si basa su tre pilastri che formano la "Trinita' del Flusso": un contenitore che gestisce
+            il ciclo di vita, un esecutore che orchestra le azioni, e un'unita' atomica che incarna la singola
+            responsabilita'.
+        </p>
+
+        <div class="arch-diagram">
+            <div class="arch-layer">
+                <span class="layer-tag">Container</span>
+                <div class="layer-info">
+                    <h4>ActionFlowMGR</h4>
+                    <p>MonoBehaviour — gestisce Section lifecycle, avanzamento sequenziale e jump overrides</p>
+                </div>
+            </div>
+            <div class="arch-arrow">▼</div>
+            <div class="arch-layer">
+                <span class="layer-tag green">Executor</span>
+                <div class="layer-info">
+                    <h4>Section</h4>
+                    <p>MonoBehaviour — possiede una List&lt;Action&gt;, esegue con Wait/Forget e crash handling</p>
+                </div>
+            </div>
+            <div class="arch-arrow">▼</div>
+            <div class="arch-layer">
+                <span class="layer-tag gray">Atomic</span>
+                <div class="layer-info">
+                    <h4>Action</h4>
+                    <p>POCO class — single responsibility, serializzata via [SerializeReference], decouplata da Unity</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 3. COMPONENTI CORE -->
+        <h2 class="section-title" id="componenti">/Componenti_Core</h2>
+
+        <h3 style="color:var(--term-green); margin-bottom:12px; font-size:1.1rem;">ActionFlowMGR</h3>
+        <div class="project-description">
+            <p>
+                Il gestore centrale. Validazione sezioni all'Awake, inizializzazione della Blackboard, attivazione
+                della prima Section. Quando una Section completa, il MGR decide se avanzare sequenzialmente o eseguire
+                un jump tramite flow override. Ogni transizione pulisce CTS, unsubscribe e disattiva la sezione
+                precedente.
+            </p>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-bar">
+                <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+                <span class="t-title">ActionFlowMGR.cs — Ciclo di Vita</span>
+            </div>
+            <div class="terminal-body">
+                <p class="t-line"><span class="t-out">// Awake: valida sections, crea blackboard, disattiva tutto</span></p>
+                <p class="t-line"><span class="t-out">// Start: avvia la prima section (o la debug section)</span></p>
+                <p class="t-line"><span class="t-out">// HandleSectionComplete: callback di completamento</span></p>
+                <p class="t-line"><span class="t-out">// StartNextSection: avanzamento sequenziale o jump</span></p>
+                <p class="t-line"><span class="t-out">// ExecuteSection: attiva, subscribe, start</span></p>
+                <p class="t-line"><span class="t-out">// CleanUpCurrentSection: cancel CTS, unsubscribe, disattiva</span></p>
+            </div>
+        </div>
+
+        <h3 style="color:var(--term-green); margin:25px 0 12px; font-size:1.1rem;">Section</h3>
+        <div class="project-description">
+            <p>
+                L'esecutore. Ogni Section possiede una lista di Actions e le esegue in sequenza. Supporta due
+                modalita': <strong>Wait</strong> (la Section attende il completamento dell'Action prima di proseguire)
+                e <strong>Forget</strong> (l'Action viene lanciata e la Section prosegue immediatamente). Il crash
+                handler catta le eccezioni e ferma la catena in modo pulito.
+            </p>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-bar">
+                <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+                <span class="t-title">Section.cs — ExecuteActionChain</span>
+            </div>
+            <div class="terminal-body">
+                <p class="t-line"><span class="t-type">void</span> <span class="t-cmd">ExecuteActionChain</span>(<span class="t-type">CancellationToken</span> ct) {</p>
+                <p class="t-line">  <span class="t-out">// foreach action in Actions:</span></p>
+                <p class="t-line">  <span class="t-out">//   crea ActionContext</span></p>
+                <p class="t-line">  <span class="t-out">//   if ShouldWaitForCompletion → await Execute</span></p>
+                <p class="t-line">  <span class="t-out">//   else → fire-and-forget</span></p>
+                <p class="t-line">  <span class="t-out">//   catch → log error, BREAK chain</span></p>
+                <p class="t-line">  <span class="t-out">// onComplete → SectionCompleted.Invoke()</span></p>
+                <p class="t-line">}</p>
+            </div>
+        </div>
+
+        <h3 style="color:var(--term-green); margin:25px 0 12px; font-size:1.1rem;">Action</h3>
+        <div class="project-description">
+            <p>
+                L'unita' atomica. Classe POCO astratta con un solo metodo: <code>UniTask Execute(ActionContext context)</code>.
+                Ogni Action ha una singola responsabilita'. Il flag <code>_waitForCompletion</code> (DynamicBool)
+                controlla se la Section deve attendere. Il metodo virtuale <code>IsInstantaneousAction()</code>
+                nasconde il flag in editor per le azioni sincrone.
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 4. DATI E COMUNICAZIONE -->
+        <h2 class="section-title" id="dati">/Dati_Comunicazione</h2>
+
+        <h3 style="color:var(--term-green); margin-bottom:12px; font-size:1.1rem;">FlowBlackboard</h3>
+        <div class="project-description">
+            <p>
+                ScriptableObject che funge da bus di comunicazione centralizzato. Supporta tipi primitivi
+                (bool, float, int, string), vettori, quaternioni, oggetti generici e ScriptableObjects.
+                Tutti i getter lanciano eccezioni in caso di errore (fail-fast): <code>KeyNotFoundException</code>
+                per chiavi mancanti, <code>InvalidCastException</code> per tipi sbagliati.
+            </p>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-bar">
+                <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+                <span class="t-title">FlowBlackboard.cs — API</span>
+            </div>
+            <div class="terminal-body">
+                <p class="t-line"><span class="t-type">bool</span> <span class="t-cmd">GetBool</span>(<span class="t-type">string</span> key)</p>
+                <p class="t-line"><span class="t-type">void</span> <span class="t-cmd">SetBool</span>(<span class="t-type">string</span> key, <span class="t-type">bool</span> value)</p>
+                <p class="t-line"><span class="t-type">float</span> <span class="t-cmd">GetFloat</span>(<span class="t-type">string</span> key)</p>
+                <p class="t-line"><span class="t-type">void</span> <span class="t-cmd">SetFloat</span>(<span class="t-type">string</span> key, <span class="t-type">float</span> value)</p>
+                <p class="t-line"><span class="t-type">T</span> <span class="t-cmd">Get&lt;T&gt;</span>(<span class="t-type">string</span> key) <span class="t-out">// generic access</span></p>
+                <p class="t-line"><span class="t-type">void</span> <span class="t-cmd">SetFlowOverride</span>(<span class="t-type">int</span> sectionIndex) <span class="t-out">// jump navigation</span></p>
+            </div>
+        </div>
+
+        <h3 style="color:var(--term-green); margin:25px 0 12px; font-size:1.1rem;">DynamicValue&lt;T&gt;</h3>
+        <div class="project-description">
+            <p>
+                Pattern generico per parametri risolvibili a runtime. Ogni Action puo' ricevere valori sia da
+                sorgente <strong>Locale</strong> (valore hardcoded nell'Inspector) che da <strong>Blackboard</strong>
+                (letto dinamicamente a runtime). Implementazioni concrete: DynamicFloat, DynamicInt, DynamicBool,
+                DynamicString, DynamicVector3, DynamicQuaternion, DynamicAudioSource, DynamicVideoPlayer,
+                DynamicAnimator, DynamicGameObject, DynamicRenderer, DynamicMaterial e molte altre.
+            </p>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-bar">
+                <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+                <span class="t-title">DynamicValue&lt;T&gt; — Pattern</span>
+            </div>
+            <div class="terminal-body">
+                <p class="t-line"><span class="t-type">enum</span> <span class="t-cmd">DataSource</span> { Local, Blackboard }</p>
+                <p class="t-line"></p>
+                <p class="t-line"><span class="t-type">abstract</span> <span class="t-type">T</span> <span class="t-cmd">GetBlackboardValue</span>(<span class="t-type">FlowBlackboard</span> bb, <span class="t-type">string</span> key)</p>
+                <p class="t-line"></p>
+                <p class="t-line"><span class="t-out">// Se DataSource == Local → ritorna il valore hardcoded</span></p>
+                <p class="t-line"><span class="t-out">// Se DataSource == Blackboard → legge da FlowBlackboard</span></p>
+                <p class="t-line"><span class="t-out">// Tutti i parametri delle Actions usano questo pattern</span></p>
+            </div>
+        </div>
+
+        <h3 style="color:var(--term-green); margin:25px 0 12px; font-size:1.1rem;">FlowSignal & GameEvent</h3>
+        <div class="project-description">
+            <p>
+                Due meccanismi di comunicazione event-driven. <strong>FlowSignal</strong> e' basato su UniTaskCompletionSource
+                per l'async waiting: puo' essere alzato e atteso con <code>WaitAsync(CancellationToken)</code>.
+                <strong>GameEvent</strong> e' il classico observer pattern con registrazione/rimozione listener,
+                pensato per eventi broadcast (UI update, feedback sonoro, ecc.).
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 5. LIBRERIA AZIONI CORE -->
+        <h2 class="section-title" id="azioni">/Libreria_Azioni_Core</h2>
+        <p style="margin-bottom:20px; color:var(--term-gray);">
+            Il pacchetto Core include 44 Actions suddivise per categoria. Ecco le principali:
+        </p>
+
+        <h3 style="color:var(--term-green); margin-bottom:12px; font-size:1rem;">Flow Control</h3>
+        <table class="action-table">
+            <thead>
+                <tr><th>Azione</th><th>Descrizione</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="t-name">Act_Group</td><td>Container: esegue sub-actions in sequenza</td></tr>
+                <tr><td class="t-name">Act_If</td><td>Bramching condizionale Then/Else su blackboard bool</td></tr>
+                <tr><td class="t-name">Act_Parallel</td><td>Esecuzione simultanea via UniTask.WhenAll</td></tr>
+                <tr><td class="t-name">Act_Race</td><td>Competitor pattern: primo che completa vince</td></tr>
+                <tr><td class="t-name">Act_WaitDelay</td><td>Sospensione per N millisecondi</td></tr>
+                <tr><td class="t-name">Act_SmartTimer</td><td>Timer con pausa condizionale e reset opzionale</td></tr>
+                <tr><td class="t-name">Act_BranchBySignal</td><td>Race multi-signal, jump a sezione target</td></tr>
+                <tr><td class="t-name">Act_ExecutePreset</td><td>Esegue ActionPreset in contesto blackboard isolato</td></tr>
+            </tbody>
+        </table>
+
+        <h3 style="color:var(--term-green); margin:25px 0 12px; font-size:1rem;">BlackBoard & Events</h3>
+        <table class="action-table">
+            <thead>
+                <tr><th>Azione</th><th>Descrizione</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="t-name">Act_SetBlackboardBool</td><td>Crea o sovrascrive un bool nella blackboard</td></tr>
+                <tr><td class="t-name">Act_SetBlackboardObject</td><td>Registra un oggetto con protezione overwrite</td></tr>
+                <tr><td class="t-name">Act_SetFlowOverride</td><td>Imposta override indice per jump di flusso</td></tr>
+                <tr><td class="t-name">Act_WaitForSignal</td><td>Sospende fino a FlowSignal alzato</td></tr>
+                <tr><td class="t-name">Act_WaitForSignalBranch</td><td>Race success/fail signal, scrive bool result</td></tr>
+                <tr><td class="t-name">Act_RaiseEvent</td><td>Alza GameEvent (broadcast pattern)</td></tr>
+                <tr><td class="t-name">Act_InvokeUnityEvent</td><td>Invoca UnityEvent</td></tr>
+            </tbody>
+        </table>
+
+        <h3 style="color:var(--term-green); margin:25px 0 12px; font-size:1rem;">Scene & GameObject</h3>
+        <table class="action-table">
+            <thead>
+                <tr><th>Azione</th><th>Descrizione</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="t-name">Act_LoadScene</td><td>Caricamento async con start/complete events</td></tr>
+                <tr><td class="t-name">Act_LoadSceneBackground</td><td>Load in background (allowSceneActivation=false)</td></tr>
+                <tr><td class="t-name">Act_ActivateScene</td><td>Attiva scena pre-caricata da blackboard</td></tr>
+                <tr><td class="t-name">Act_SetActive</td><td>Abilita/disabilita singolo GameObject</td></tr>
+                <tr><td class="t-name">Act_DestroyObject</td><td>Distrugge GameObject</td></tr>
+                <tr><td class="t-name">Act_MoveObject</td><td>Sposta con rotazione mask e toggle opzionale</td></tr>
+                <tr><td class="t-name">Act_SetMaterial</td><td>Cambia material su Renderer</td></tr>
+                <tr><td class="t-name">Act_SetComponentState</td><td>Abilita/disabilita componenti polimorficamente</td></tr>
+            </tbody>
+        </table>
+
+        <h3 style="color:var(--term-green); margin:25px 0 12px; font-size:1rem;">Audio & Video</h3>
+        <table class="action-table">
+            <thead>
+                <tr><th>Azione</th><th>Descrizione</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="t-name">Act_PlayAudio / Act_StopAudio / Act_PauseAudio</td><td>Controllo playback audio</td></tr>
+                <tr><td class="t-name">Act_FadeAudio</td><td>Interpolazione volume con ignoreTimeScale</td></tr>
+                <tr><td class="t-name">Act_WaitForAudioEnd</td><td>Attende fine riproduzione</td></tr>
+                <tr><td class="t-name">Act_PlayVideo / Act_StopVideo / Act_PauseVideo</td><td>Controllo playback video</td></tr>
+                <tr><td class="t-name">Act_PrepareVideo</td><td>Prepara VideoPlayer (async wait)</td></tr>
+                <tr><td class="t-name">Act_WaitForVideoEnd</td><td>Attende fine video</td></tr>
+                <tr><td class="t-name">Act_SetAnimatorParameter</td><td>Set Trigger/Bool/Int/Float con validazione</td></tr>
+            </tbody>
+        </table>
+
+        <hr class="section-divider">
+
+        <!-- 6. PATTERN ESMPLI -->
+        <h2 class="section-title" id="pattern">/Pattern_Esempi</h2>
+
+        <div class="project-description">
+            <p>
+                Il sistema supporta tre pattern di esecuzione principali, ognuno con un contratto di eccezione
+                specifico:
+            </p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3>Root Executor</h3>
+                <p>try-catch-BREAK. La Section catta l'eccezione e ferma la catena. Crash isolation.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Nested Executor</h3>
+                <p>try-catch-THROW. Act_Group e Act_Parallel propagano l'eccezione verso l'alto.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Isolated Executor</h3>
+                <p>try-finally. Act_ExecutePreset usa un blackboard locale isolato con cleanup garantito.</p>
+            </div>
+        </div>
+
+        <div class="terminal-window">
+            <div class="terminal-bar">
+                <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+                <span class="t-title">Code-First API — Esempio</span>
+            </div>
+            <div class="terminal-body">
+                <p class="t-line"><span class="t-out">// Flusso definito da codice, non da Inspector</span></p>
+                <p class="t-line"><span class="t-type">ActionFlowCodeFirst</span>.<span class="t-cmd">Template</span>(<span class="t-str">"GameLoop"</span>,</p>
+                <p class="t-line">  <span class="t-type">Act_WaitForSignal</span>(startSignal)</p>
+                <p class="t-line">  .<span class="t-cmd">Then</span>(<span class="t-type">Act_LoadScene</span>(<span class="t-str">"Level01"</span>))</p>
+                <p class="t-line">  .<span class="t-cmd">Wait</span>(<span class="t-type">Act_FadeAudio</span>(music, 2f))</p>
+                <p class="t-line">  .<span class="t-cmd">Group</span>(</p>
+                <p class="t-line">    <span class="t-type">Act_PlayVideo</span>(cutscene),</p>
+                <p class="t-line">    <span class="t-type">Act_PlayAudio</span>(sfx)</p>
+                <p class="t-line">  )</p>
+                <p class="t-line">  .<span class="t-cmd">Parallel</span>(enemies.Select(e =&gt; e.Attack()))</p>
+                <p class="t-line">);</p>
+            </div>
+        </div>
+        <p class="code-caption">// Fluent API: .Then() .Wait() .Group() .Parallel() .Race() .If()</p>
+
+        <hr class="section-divider">
+
+        <!-- 7. NOTE -->
+        <h2 class="section-title" id="note">/Note</h2>
+        <div class="notes-box">
+            <p>
+                ActionFlow e' nato come soluzione a un problema reale: i flussi di gioco enterprise in Unity
+                (training VR, simulazioni industriali) tendevano a diventare <span class="highlight">ingestibili
+                </span> con MonoBehaviour tradizionali. La separazione in Actions atomiche con comunicazione
+                via Blackboard ha reso il codice testabile, manutenibile e comprensibile anche per team non
+                tecnici.
+            </p>
+            <p>
+                Il pacchetto e' distribuito come <span class="highlight">3 UPM packages</span> separati:
+                Core (base), HurricaneVR (integrazione VR), AdvancedDissolve (effetti dissolve). Ogni package
+                e' installabile indipendente via Git URL.
+            </p>
+            <p>
+                Questa documentazione copre il <span class="highlight">Core package</span>. Le integrazioni
+                HurricaneVR e AdvancedDissolve saranno documentate separatamente.
+            </p>
+            <p style="text-align:right; color:var(--term-orange); margin-bottom:0;">
+                — Antonio Troiano
+            </p>
+        </div>
+
+        <div class="project-actions">
+            <a href="index.html" class="retro-btn">[ < ] HOME</a>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

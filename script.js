@@ -43,6 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const companyLinks = document.querySelectorAll('.timeline-item a.company'); 
     const hobbyItems = document.querySelectorAll('.hobby-item'); // Selezione elementi hobbies
 
+    // --- Retro Page Transition ---
+    const overlay = document.createElement('div');
+    overlay.className = 'page-transition-overlay';
+    overlay.innerHTML = '<span class="transition-text">Loading...</span><div class="transition-bar"></div>';
+    document.body.appendChild(overlay);
+
+    function retroNavigate(href) {
+        overlay.classList.remove('exit');
+        overlay.classList.add('active');
+        setTimeout(() => { window.location.href = href; }, 500);
+    }
+
     // We iterate over standard buttons assigning distinct audio feedback for hovering and clicking actions
     retroButtons.forEach(button => {
         button.addEventListener('mouseenter', () => {
@@ -53,6 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener('mousedown', () => {
             // A lower frequency square wave on mouse down simulates the satisfying physical click of a mechanical keyboard switch
             playRetroBeep(440, 'square', 0.1, 0.1); 
+        });
+
+        button.addEventListener('click', (e) => {
+            const href = button.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('#')) {
+                e.preventDefault();
+                retroNavigate(href);
+            }
         });
     });
 
@@ -81,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (card.getAttribute('data-target') === '_blank') {
                 window.open(href, '_blank');
             } else {
-                window.location.href = href;
+                retroNavigate(href);
             }
         });
     });
