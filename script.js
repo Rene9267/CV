@@ -115,6 +115,47 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // --- Scroll Lock: snap between sections with the mouse wheel ---
+    const layers = document.querySelectorAll('.layer');
+    if (layers.length > 1) {
+        let scrollLocked = false;
+
+        window.addEventListener('wheel', (e) => {
+            if (scrollLocked) { e.preventDefault(); return; }
+
+            const scrollY = window.scrollY;
+            const vh = window.innerHeight;
+            const currentSection = Math.round(scrollY / vh);
+            const atSectionTop = Math.abs(scrollY - currentSection * vh) < 5;
+            const layer = layers[currentSection];
+            const scrollable = layer ? layer.querySelector('.scrollable-content') : null;
+
+            if (scrollable && scrollable.scrollHeight > scrollable.clientHeight) {
+                const atTop = scrollable.scrollTop < 5;
+                const atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 2;
+
+                if (e.deltaY > 0 && !atBottom) return;
+                if (e.deltaY < 0 && !atTop) return;
+            }
+
+            if (!atSectionTop) { e.preventDefault(); return; }
+
+            let target = currentSection;
+            if (e.deltaY > 0 && currentSection < layers.length - 1) {
+                target = currentSection + 1;
+            } else if (e.deltaY < 0 && currentSection > 0) {
+                target = currentSection - 1;
+            } else {
+                return;
+            }
+
+            e.preventDefault();
+            scrollLocked = true;
+            window.scrollTo({ top: target * vh, behavior: 'smooth' });
+            setTimeout(() => { scrollLocked = false; }, 600);
+        }, { passive: false });
+    }
+
     console.log("Terminal Audio System and Interaction Grids Successfully Initialized.");
 
     // --- Certificate Modal Logic ---
