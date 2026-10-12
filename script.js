@@ -136,7 +136,7 @@ const startPortfolio = () => {
     });
 
     // --- Scroll Lock: snap between sections with the mouse wheel ---
-    const layers = document.querySelectorAll('.layer');
+    const layers = document.querySelectorAll('.layer:not(.layer-off)');
     if (layers.length > 1) {
         let scrollLocked = false;
 

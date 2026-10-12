@@ -37,7 +37,8 @@
         </div>
     </section>
 
-    <section class="layer" id="lavoro">
+    <!-- layer-off: /Produzione è nascosta finché i progetti lavorativi non sono pubblicabili. Togliere la classe per riattivarla. -->
+    <section class="layer layer-off" id="lavoro">
         <div class="content">
             <h2>/Produzione</h2>
             <p>Progetti realizzati in ambito professionale. Software scalabile e soluzioni XR enterprise.</p>
@@ -87,7 +88,27 @@
 
             <div class="projects-grid">
                 <article class="project-card" data-href="project-cv.html">
-                    <div class="card-visual"><div class="placeholder-img">SHOWCASE.HTML</div></div>
+                    <div class="card-visual" aria-hidden="true">
+                        <div class="card-screen card-screen--showcase">
+                            <div class="card-screen__bar">
+                                <span class="card-screen__title">SHOWCASE.HTML</span>
+                                <span class="card-screen__controls">
+                                    <span class="card-screen__win">—</span>
+                                    <span class="card-screen__win">□</span>
+                                    <span class="card-screen__win card-screen__win--close">×</span>
+                                </span>
+                            </div>
+                            <div class="card-screen__body">
+                                <p class="card-screen__name">ANTONIO TROIANO</p>
+                                <p class="card-screen__badge card-screen__hide-mobile">XR DEV</p>
+                                <span class="card-screen__btn">PROFILE.EXE</span>
+                                <div class="card-screen__layers">
+                                    <div class="card-screen__layer-strip"></div>
+                                    <div class="card-screen__layer-strip card-screen__layer-strip--alt card-screen__hide-mobile"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-info">
                         <div class="tag-container">
                             <span class="tag">HTML</span> <span class="tag">CSS</span> <span class="tag">JS</span> <span class="tag">OPENCODE</span>
@@ -98,7 +119,37 @@
                     </div>
                 </article>
                 <article class="project-card" data-href="project-actionflow.html">
-                    <div class="card-visual"><div class="placeholder-img">ACTIONFLOW_CORE.V1.2</div></div>
+                    <div class="card-visual" aria-hidden="true">
+                        <div class="card-screen card-screen--actionflow">
+                            <div class="card-screen__bar">
+                                <span class="card-screen__title">ACTIONFLOW_CORE.V1.2</span>
+                                <span class="card-screen__controls">
+                                    <span class="card-screen__win">—</span>
+                                    <span class="card-screen__win">□</span>
+                                    <span class="card-screen__win card-screen__win--close">×</span>
+                                </span>
+                            </div>
+                            <div class="card-screen__body card-screen__body--flow">
+                                <span class="card-screen__chip card-screen__hide-mobile">BLACKBOARD</span>
+                                <div class="card-screen__flow">
+                                    <div class="card-screen__arch">
+                                        <span class="card-screen__tag card-screen__tag--orange">MGR</span>
+                                        <span class="card-screen__arch-label">ActionFlowMGR</span>
+                                    </div>
+                                    <span class="card-screen__arrow" aria-hidden="true">▼</span>
+                                    <div class="card-screen__arch">
+                                        <span class="card-screen__tag card-screen__tag--green">SECTION</span>
+                                        <span class="card-screen__arch-label">Section</span>
+                                    </div>
+                                    <span class="card-screen__arrow" aria-hidden="true">▼</span>
+                                    <div class="card-screen__arch">
+                                        <span class="card-screen__tag card-screen__tag--gray">ACTION</span>
+                                        <span class="card-screen__arch-label">Action</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-info">
                         <div class="tag-container">
                             <span class="tag">UNITY</span>
@@ -148,6 +199,22 @@
                         </div>
                         <h3>Undergroove</h3>
                         <p>Sottosuolo pulsante al tema Roots: due canzoni allungano o richiamano le radici, Shift ti attacca al terreno che ruota. Puzzle-platformer in jam.</p>
+                        <span class="card-btn">Scopri >></span>
+                    </div>
+                </article>
+
+                <article class="project-card" data-href="project-burning-keys.html">
+                    <div class="card-visual">
+                        <img src="assets/burning-keys-card.jpg" alt="Burning Keys — menu in ufficio" class="card-visual-img" style="object-position: 68% center;">
+                    </div>
+                    <div class="card-info">
+                        <div class="tag-container">
+                            <span class="tag">GLOBAL GAME JAM 2022</span>
+                            <span class="tag">UNITY</span>
+                            <span class="tag">C#</span>
+                        </div>
+                        <h3>Burning Keys</h3>
+                        <p>Ufficio in prima persona sul tema Duality: mail, telefono e desktop sotto stress, giorno e notte che cambiano la luce, fidget spinner per respirare.</p>
                         <span class="card-btn">Scopri >></span>
                     </div>
                 </article>

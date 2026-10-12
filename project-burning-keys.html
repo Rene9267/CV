@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burning Keys | Antonio Troiano</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --night-deep: #0c0f1a;
+            --night-mid: #151a2e;
+            --indigo-glow: #5a6fd6;
+            --indigo-dim: #3d4a8c;
+            --ember: #e86a2a;
+            --ember-soft: #f4a261;
+            --moon-pale: #d4dcf5;
+            --desk-muted: #9aa3c2;
+        }
+
+        body.about-page.burning-keys-page {
+            background-color: var(--night-deep);
+            color: var(--desk-muted);
+        }
+
+        .container-about {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2.section-title,
+        h2.section-title-code {
+            scroll-margin-top: 110px;
+        }
+
+        .top-nav .retro-btn {
+            background-color: var(--night-deep);
+            color: var(--ember-soft);
+            border-color: var(--indigo-dim);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6);
+        }
+
+        .top-nav .retro-btn:hover {
+            background-color: var(--night-mid);
+            color: var(--moon-pale);
+            border-color: var(--ember);
+        }
+
+        .section-divider {
+            border: none;
+            height: 3px;
+            margin: 50px 0;
+            opacity: 0.55;
+            background: linear-gradient(90deg, var(--indigo-dim), var(--ember), var(--indigo-dim));
+            mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+        }
+
+        .project-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 50px 0 40px;
+            border-bottom: 3px solid var(--indigo-dim);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .project-hero::after {
+            content: "☀ / ☾";
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--ember-soft);
+            font-size: 0.95rem;
+            background-color: var(--night-deep);
+            padding: 0 12px;
+            letter-spacing: 2px;
+        }
+
+        .project-hero .hero-cover {
+            width: min(100%, 640px);
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--indigo-dim);
+            box-shadow: 0 0 28px rgba(232, 106, 42, 0.12), 6px 6px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .project-hero h1 {
+            font-size: clamp(2.2rem, 9vw, 4.2rem);
+            margin-bottom: 0.5rem;
+            color: var(--ember-soft);
+            text-shadow: 0 0 24px rgba(232, 106, 42, 0.3), 3px 3px 0 rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .project-hero .subtitle {
+            font-size: 0.9rem;
+            color: var(--indigo-glow);
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags .tag {
+            background-color: var(--night-mid);
+            color: var(--ember-soft);
+            border: 1px solid var(--indigo-dim);
+            font-size: 0.7rem;
+        }
+
+        .project-hero .byline {
+            color: var(--desk-muted);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--ember-soft);
+            border-left: 5px solid var(--ember);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title-code {
+            font-size: 1.6rem;
+            color: var(--ember-soft);
+            border-left: 5px solid var(--indigo-glow);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-description p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--desk-muted);
+        }
+
+        .highlight-box {
+            background-color: rgba(90, 111, 214, 0.12);
+            border-left: 6px solid var(--indigo-glow);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-top: 1px solid rgba(232, 106, 42, 0.15);
+            border-bottom: 1px solid rgba(232, 106, 42, 0.15);
+        }
+
+        .highlight-box p {
+            color: var(--moon-pale);
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tech-card {
+            min-width: 0;
+            border: 1px solid var(--indigo-dim);
+            background-color: rgba(21, 26, 46, 0.85);
+            padding: 18px;
+            text-align: center;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .tech-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6);
+        }
+
+        .tech-card h3 {
+            font-size: 0.85rem;
+            color: var(--ember-soft);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .tech-card p {
+            font-size: 0.9rem;
+            color: var(--desk-muted);
+            margin-bottom: 0;
+        }
+
+        .code-block {
+            background-color: #080a12;
+            border: 1px solid var(--indigo-dim);
+            padding: 20px;
+            margin: 15px 0 25px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #b8c4e8;
+        }
+
+        .code-block .keyword { color: #e06c75; }
+        .code-block .type { color: #56b6c2; }
+        .code-block .string { color: #98c379; }
+        .code-block .comment { color: #5c6370; font-style: italic; }
+        .code-block .method { color: #61afef; }
+        .code-block .property { color: #d19a66; }
+
+        .code-caption {
+            font-size: 0.85rem;
+            color: var(--indigo-glow);
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .notes-box {
+            background-color: rgba(21, 26, 46, 0.65);
+            border: 1px solid var(--indigo-dim);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .notes-box p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--desk-muted);
+            margin-bottom: 1rem;
+        }
+
+        .notes-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .notes-box .highlight {
+            color: var(--ember-soft);
+            font-weight: bold;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .screenshot-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border: 1px solid var(--indigo-dim);
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+            transition: box-shadow 0.2s, border-color 0.2s;
+            cursor: zoom-in;
+        }
+
+        .screenshot-img:hover {
+            border-color: var(--ember);
+            box-shadow: 0 0 20px rgba(232, 106, 42, 0.2), 6px 6px 0px rgba(0, 0, 0, 0.6);
+            z-index: 5;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .project-actions .retro-btn {
+            background-color: var(--night-deep);
+            color: var(--ember-soft);
+            border-color: var(--indigo-dim);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-actions .retro-btn:hover {
+            background-color: var(--night-mid);
+            color: var(--moon-pale);
+            border-color: var(--ember);
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+        }
+
+        .office-bg {
+            position: fixed;
+            inset: -8%;
+            z-index: 0;
+            pointer-events: none;
+            background: url('assets/burning-keys-office.jpg') center 40% / cover no-repeat;
+            filter: blur(10px) saturate(1);
+            transform: scale(1.08);
+        }
+
+        .office-dim {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse at 50% 40%, rgba(8, 10, 14, 0.35), rgba(8, 10, 14, 0.55) 80%);
+        }
+
+        .index-nav {
+            position: fixed;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            width: 240px;
+            background-color: rgba(8, 10, 18, 0.9);
+            border: 1px solid var(--indigo-dim);
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            padding: 14px 12px;
+        }
+
+        .index-nav h3 {
+            font-size: 0.62rem;
+            color: var(--indigo-glow);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--indigo-dim);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .index-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .index-nav li {
+            margin-bottom: 7px;
+        }
+
+        .index-nav a {
+            display: block;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: var(--desk-muted);
+            text-decoration: none;
+            padding: 9px 10px;
+            border-left: 2px solid transparent;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+        }
+
+        .index-nav a:hover,
+        .index-nav a.active {
+            color: var(--ember-soft);
+            background-color: rgba(232, 106, 42, 0.08);
+            border-left-color: var(--ember);
+        }
+
+        @media (max-width: 600px) {
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+            .code-block {
+                font-size: 0.7rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page burning-keys-page">
+
+    <div class="office-bg" aria-hidden="true"></div>
+    <div class="office-dim" aria-hidden="true"></div>
+
+    <aside class="index-nav" id="page-index-nav" aria-label="Indice della pagina">
+        <h3>[ // Indice ]</h3>
+    </aside>
+
+    <nav class="top-nav">
+        <a href="index.html" class="retro-btn">[ &lt; ] HOME</a>
+        <button type="button" class="retro-btn nav-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="page-index-nav">[ ≡ ]</button>
+    </nav>
+
+    <main class="container-about">
+
+        <div class="project-hero">
+            <img src="assets/burning-keys-cover-16x9.jpg" alt="Burning Keys — menu in ufficio" class="hero-cover" width="640" height="360">
+            <p class="subtitle">Global Game Jam 2022 — Tema: Duality</p>
+            <h1>Burning Keys</h1>
+            <div class="meta-tags">
+                <span class="tag">UNITY</span>
+                <span class="tag">C#</span>
+                <span class="tag">URP</span>
+                <span class="tag">FIRST PERSON</span>
+                <span class="tag">OFFICE SIM</span>
+            </div>
+            <p class="byline">Antonio Troiano, programming — con Lorenzo Guerrini, Mauro Cirafisi e Michele Rossi</p>
+        </div>
+
+        <h2 class="section-title">/Introduzione_Al_Gioco</h2>
+        <div class="project-description">
+            <p>
+                Alla scrivania, tra una sveglia che suona, mail da smaltire e un telefono che non smette,
+                <strong>Burning Keys</strong> è il nostro ingresso alla Global Game Jam 2022 sul tema <em>Duality</em>.
+                Prima persona in un ufficio stilizzato: completi task sul monitor, tieni sotto controllo la barra dello stress
+                e, quando il fidget spinner entra in scena, il resto del mondo si ferma mentre cerchi un attimo di respiro.
+            </p>
+            <div class="highlight-box">
+                <p>
+                    Giorno e notte non sono solo atmosfera: il ciclo sole/luna accende e spegne la luce della lampada,
+                    e la camera si sposta dal punto di vista «seduto» al desktop, alla posta e al telefono —
+                    il gioco è fatto di piccoli dualismi tra calma e panico.
+                </p>
+            </div>
+            <p>
+                Il team era grande (code, design, art, audio). Io mi sono concentrato su
+                <strong>flusso di scena e sensazione di spazio</strong>: menu start/win/lose, ciclo giorno-notte,
+                gestione luci, camera con lerp tra i punti di interazione, integrazione UI e, dopo la jam,
+                il blur URP sul minigioco dello spinner nella release 1.1.
+            </p>
+            <p style="font-size: 0.85rem; opacity: 0.8;">
+                Code: Antonio Troiano, Lorenzo Guerrini, Mauro Cirafisi, Michele Rossi — design, art e audio come nel
+                <a href="https://github.com/mikymod/burning_keys" target="_blank" rel="noopener noreferrer" style="color: var(--ember-soft);">README</a>.
+                Il task di scrittura sul monitor è di Lorenzo; telefono, stress, audio e tutorial sono soprattutto Michele e Mauro.
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Tecnologie_Usate</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3>Unity 2021.2.7f1</h3>
+                <p>Engine della jam. Scene condivise, prefab interattivi e build Windows pubblicata come v1.1.0.</p>
+            </div>
+            <div class="tech-card">
+                <h3>C#</h3>
+                <p>Manager di gioco a eventi, ciclo temporale, camera e integrazione dei task in prima persona.</p>
+            </div>
+            <div class="tech-card">
+                <h3>URP</h3>
+                <p>Illuminazione sole/luna, luci area sulla scrivania e Depth of Field sullo spinner (post-jam).</p>
+            </div>
+            <div class="tech-card">
+                <h3>TextMesh Pro</h3>
+                <p>UI di menu, fine partita e overlay sul monitor — tavoletta 3D nel menu start.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Animator</h3>
+                <p>Transizioni del fidget verso la camera, rotazione e hook per blur e audio (team + fix post-jam).</p>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title-code">/Comparto_Tecnico</h2>
+
+        <p style="margin-bottom: 20px; color: var(--desk-muted);">
+            Quello che segue è ciò che ho introdotto in jam (o subito dopo) e che è rimasto nel repo pubblico.
+            Dove Michele o Mauro hanno esteso il sistema — soprattutto <code>GameManager</code>, stress bar e spinner —
+            lo segnalo nelle didascalie.
+        </p>
+
+        <h3 style="color: var(--ember-soft); margin-bottom: 10px;">Ciclo giorno / notte</h3>
+        <div class="code-block">
+            <span class="keyword">if</span> (sun.transform.eulerAngles.x &gt; <span class="string">0</span> &amp;&amp; sun.transform.eulerAngles.x &lt; <span class="string">180</span>) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;DayTime.<span class="method">Invoke</span>();<br>
+            } <span class="keyword">else</span> {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;NightTime.<span class="method">Invoke</span>();<br>
+            }
+        </div>
+        <p class="code-caption">// Day_NightCycle.cs — eventi statici usati da LightMgr e dall'illuminazione di scena.</p>
+
+        <h3 style="color: var(--ember-soft); margin-bottom: 10px;">Lampada da scrivania</h3>
+        <div class="code-block">
+            <span class="keyword">private void</span> <span class="method">OnNightArrive</span>() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Lamp_Light.intensity = <span class="string">2</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;AreaLight[<span class="string">1</span>].intensity = <span class="string">0.40f</span>;<br>
+            }<br>
+            <span class="keyword">private void</span> <span class="method">OnDayArrive</span>() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Lamp_Light.intensity = <span class="string">0</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;AreaLight[<span class="string">1</span>].intensity = <span class="string">0</span>;<br>
+            }
+        </div>
+        <p class="code-caption">// LightMgr.cs — risposta alla dualità luce/buio sul punto di gioco principale.</p>
+
+        <h3 style="color: var(--ember-soft); margin-bottom: 10px;">Camera tra seduta, desktop, mail e telefono</h3>
+        <div class="code-block">
+            <span class="keyword">private</span> <span class="type">IEnumerator</span> <span class="method">MoveCameraCoroutine</span>(<span class="type">Vector3</span> position, <span class="type">Quaternion</span> rotation, <span class="type">float</span> speed) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;moving = <span class="keyword">true</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> (<span class="type">Vector3</span>.<span class="method">Distance</span>(<span class="type">Camera</span>.main.transform.position, position) &gt; <span class="string">0.01f</span>) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Camera</span>.main.transform.position = <span class="type">Vector3</span>.<span class="method">Lerp</span>(...);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">Camera</span>.main.transform.rotation = <span class="type">Quaternion</span>.<span class="method">Slerp</span>(...);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">yield return null</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;moving = <span class="keyword">false</span>;<br>
+            }
+        </div>
+        <p class="code-caption">// CameraMgr.cs — struttura e listener ai task; Michele ha ritoccato movimento e tutorial in jam.</p>
+
+        <h3 style="color: var(--ember-soft); margin-bottom: 10px;">Blur URP sullo spinner (post-jam)</h3>
+        <div class="code-block">
+            <span class="keyword">public void</span> <span class="method">OnBlurStart</span>() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="method">StartCoroutine</span>(<span class="method">BlurFadeIn</span>());<br>
+            }<br>
+            <span class="keyword">private</span> <span class="type">IEnumerator</span> <span class="method">BlurFadeIn</span>() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;myDheph.focalLength.value = <span class="type">Mathf</span>.<span class="method">Lerp</span>(<span class="string">0</span>, blurAmount, i);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// … sincronizzato con l'animazione verso la camera</span><br>
+            }
+        </div>
+        <p class="code-caption">// Spinner.cs — commit «Pinner blur» / «Spinner Blur Fix» (feb 2022); logica spinner di base da Jumbax/Michele.</p>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Mie_Note_Sul_Progetto</h2>
+        <div class="notes-box">
+            <p>
+                La <span class="highlight">Global Game Jam 2022</span> è stata una delle prime volte in cui ho lavorato
+                su un prototipo 3D con un team così articolato. Non avevo il compito del «minigioco wow»:
+                serviva che la stanza respirasse e che passare da una task all'altra fosse leggibile in pochi secondi.
+            </p>
+            <p>
+                Ho messo su menu e scene di vittoria/sconfitta, il ciclo sole-luna con le luci che seguono,
+                la camera che «si alza» dal punto di vista alla scrivania e il blur sullo spinner quando,
+                un mese dopo la jam, abbiamo rifinito la build 1.1. Su GitHub il mio nome compare nel README ma non tra i
+                contributor automatici: i commit sono firmati con la mail, senza account collegato — il lavoro c'è comunque nello storico.
+            </p>
+            <p style="text-align: right; color: var(--ember-soft); margin-bottom: 0;">
+                — Antonio Troiano
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Screenshot</h2>
+        <p style="font-size: 0.85rem; opacity: 0.75; margin-bottom: 1rem;">
+            Frame dal <a href="https://www.youtube.com/watch?v=zDJlVRkj79k" target="_blank" rel="noopener noreferrer" style="color: var(--ember-soft);">trailer ufficiale</a>.
+        </p>
+        <div class="screenshot-grid">
+            <img src="assets/burning-keys-1.jpg" alt="Monitor e dialogo Endless tasks" class="screenshot-img">
+            <img src="assets/burning-keys-2.jpg" alt="Telefono sulla scrivania" class="screenshot-img">
+            <img src="assets/burning-keys-3.jpg" alt="Task di scrittura sul desktop" class="screenshot-img">
+            <img src="assets/burning-keys-4.jpg" alt="Scrivania di notte" class="screenshot-img">
+            <img src="assets/burning-keys-5.jpg" alt="Due monitor e fidget spinner" class="screenshot-img">
+        </div>
+
+        <div class="project-actions">
+            <a href="https://www.youtube.com/watch?v=zDJlVRkj79k" target="_blank" rel="noopener noreferrer" class="retro-btn">TRAILER YOUTUBE &gt;&gt;</a>
+            <a href="https://github.com/mikymod/burning_keys" target="_blank" rel="noopener noreferrer" class="retro-btn">REPO GITHUB &gt;&gt;</a>
+            <a href="https://globalgamejam.org/2022/games/burning-keys-0" target="_blank" rel="noopener noreferrer" class="retro-btn">SCHEDA GGJ &gt;&gt;</a>
+            <a href="index.html" class="retro-btn">[ &lt; ] HOME</a>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
