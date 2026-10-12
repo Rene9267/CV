@@ -269,28 +269,6 @@
             font-weight: bold;
         }
 
-        .screenshot-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .screenshot-placeholder {
-            aspect-ratio: 16 / 9;
-            background: linear-gradient(135deg, #0f0f0f 0%, #222222 100%);
-            border: 1px solid var(--term-line);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--term-muted);
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-align: center;
-            padding: 10px;
-            opacity: 0.7;
-        }
-
         .project-actions {
             display: flex;
             gap: 20px;
@@ -449,18 +427,10 @@
             }
         }
 
-        @media (max-width: 1399px) {
-            .index-nav {
-                display: none;
-            }
-        }
 
         @media (max-width: 600px) {
             .tech-grid {
                 grid-template-columns: 1fr 1fr;
-            }
-            .screenshot-grid {
-                grid-template-columns: 1fr;
             }
             .terminal-body {
                 font-size: 0.75rem;
@@ -479,12 +449,13 @@
         <div class="term-code-field"></div>
     </div>
 
-    <aside class="index-nav" aria-label="Indice della pagina">
+    <aside class="index-nav" id="page-index-nav" aria-label="Indice della pagina">
         <h3>[ // Indice ]</h3>
     </aside>
 
     <nav class="top-nav">
         <a href="index.html" class="retro-btn">[ < ] HOME</a>
+        <button type="button" class="retro-btn nav-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="page-index-nav">[ ≡ ]</button>
     </nav>
 
     <main class="container-about">

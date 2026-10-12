@@ -524,11 +524,6 @@
             }
         }
 
-        @media (max-width: 1399px) {
-            .index-nav {
-                display: none;
-            }
-        }
 
         @media (max-width: 600px) {
             .tech-grid {
@@ -557,12 +552,13 @@
         <div class="term-code-field"></div>
     </div>
 
-    <aside class="index-nav" aria-label="Indice della pagina">
+    <aside class="index-nav" id="page-index-nav" aria-label="Indice della pagina">
         <h3>[ // Indice ]</h3>
     </aside>
 
     <nav class="top-nav">
         <a href="index.html" class="retro-btn">[ < ] HOME</a>
+        <button type="button" class="retro-btn nav-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="page-index-nav">[ ≡ ]</button>
     </nav>
 
     <main class="container-about">

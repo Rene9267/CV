@@ -253,21 +253,6 @@
             margin: 20px 0;
         }
 
-        .screenshot-placeholder {
-            aspect-ratio: 16 / 9;
-            background: linear-gradient(135deg, #0d0a09 0%, #2a1f1a 100%);
-            border: 1px solid var(--faded-amber);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--faded-amber);
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-align: center;
-            padding: 10px;
-            opacity: 0.7;
-        }
-
         .screenshot-img {
             width: 100%;
             height: auto;
@@ -488,11 +473,6 @@
             border-left-color: var(--velvet-red);
         }
 
-        @media (max-width: 1399px) {
-            .index-nav {
-                display: none;
-            }
-        }
 
         @media (max-width: 600px) {
             .tech-grid {
@@ -520,12 +500,13 @@
         <div class="ember-field"></div>
     </div>
 
-    <aside class="index-nav" aria-label="Indice della pagina">
+    <aside class="index-nav" id="page-index-nav" aria-label="Indice della pagina">
         <h3>[ // Indice ]</h3>
     </aside>
 
     <nav class="top-nav">
         <a href="index.html" class="retro-btn">[ < ] HOME</a>
+        <button type="button" class="retro-btn nav-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="page-index-nav">[ ≡ ]</button>
     </nav>
 
     <main class="container-about">

@@ -37,6 +37,7 @@ body {
     border-bottom: var(--retro-border);
     padding: 60px 20px 20px 20px;
     scroll-snap-align: start;
+    overflow: hidden;
 }
 
 /* Alternating the background color of even layers creates a clear visual separation when they stack over each other */
@@ -49,8 +50,10 @@ body {
     width: 100%;
     max-width: 1000px;
     height: 100%;
+    min-height: 0;
     overflow-y: auto;
     padding-right: 15px;
+    padding-bottom: 24px;
 }
 
 /* Custom retro scrollbar styling applied specifically for Webkit browsers to match the heavy industrial aesthetic */
@@ -126,7 +129,7 @@ p {
 /* The projects grid uses CSS Grid with auto-fit to automatically stack cards on mobile and place them side by side on desktop */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 2rem;
     width: 100%;
@@ -233,6 +236,91 @@ p {
     top: 20px;
     left: 20px;
     z-index: 100;
+}
+
+.nav-menu-btn {
+    display: none;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.nav-drawer-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+body.nav-drawer-open {
+    overflow: hidden;
+}
+
+body.nav-drawer-open .nav-drawer-backdrop {
+    display: block;
+}
+
+/* Pannello indice su viewport stretti (pagine progetto) */
+@media (max-width: 1399px) {
+    .top-nav {
+        left: 0;
+        right: 0;
+        top: 10px;
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        pointer-events: none;
+    }
+
+    .top-nav .retro-btn,
+    .top-nav .nav-menu-btn {
+        pointer-events: auto;
+    }
+
+    .nav-menu-btn {
+        display: inline-block;
+        flex-shrink: 0;
+    }
+
+    body .index-nav {
+        display: block;
+        left: auto;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: min(320px, 86vw);
+        max-height: none;
+        height: auto;
+        transform: translateX(100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 120;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-top: 72px;
+    }
+
+    body .index-nav.is-open {
+        transform: translateX(0);
+    }
+
+    body .index-nav h3.index-nav-links-title {
+        margin-top: 14px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .nav-menu-btn {
+        display: none !important;
+    }
+
+    body.nav-drawer-open .nav-drawer-backdrop {
+        display: none !important;
+    }
 }
 
 .about-header {
@@ -816,6 +904,10 @@ p {
         margin-top: 1.2rem;
     }
 
+    .projects-grid .project-card:only-child {
+        grid-column: 1 / -1;
+    }
+
     .project-card {
         box-shadow: 4px 4px 0px var(--brutal-black);
     }
@@ -877,10 +969,14 @@ p {
 
     .top-nav {
         top: 10px;
+    }
+
+    .top-nav:not(:has(.nav-menu-btn)) {
         left: 10px;
     }
 
-    .top-nav .retro-btn {
+    .top-nav .retro-btn,
+    .top-nav .nav-menu-btn {
         padding: 8px 14px;
         font-size: 0.8rem;
     }

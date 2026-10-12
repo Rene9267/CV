@@ -33,7 +33,7 @@ function playRetroBeep(frequency, type = 'square', duration = 0.1, volume = 0.1)
 
 // Event Listeners and User Interaction Management
 // We wait for the entire Document Object Model to finish loading before we attempt to attach events to our HTML elements
-document.addEventListener("DOMContentLoaded", () => {
+const startPortfolio = () => {
     
     // We select all the interactive UI elements present on the page storing them in variables for easy iteration
     const retroButtons = document.querySelectorAll('.retro-btn, .card-btn');
@@ -140,39 +140,52 @@ document.addEventListener("DOMContentLoaded", () => {
     if (layers.length > 1) {
         let scrollLocked = false;
 
+        const snapTo = (index) => {
+            scrollLocked = true;
+            window.scrollTo({ top: index * window.innerHeight, behavior: 'smooth' });
+            setTimeout(() => { scrollLocked = false; }, 600);
+        };
+
         window.addEventListener('wheel', (e) => {
             if (scrollLocked) { e.preventDefault(); return; }
 
-            const scrollY = window.scrollY;
             const vh = window.innerHeight;
-            const currentSection = Math.round(scrollY / vh);
-            const atSectionTop = Math.abs(scrollY - currentSection * vh) < 5;
-            const layer = layers[currentSection];
-            const scrollable = layer ? layer.querySelector('.scrollable-content') : null;
+            const currentSection = Math.max(0, Math.min(layers.length - 1, Math.round(window.scrollY / vh)));
+            const atSectionTop = Math.abs(window.scrollY - currentSection * vh) < 8;
 
-            if (scrollable && scrollable.scrollHeight > scrollable.clientHeight) {
-                const atTop = scrollable.scrollTop < 5;
-                const atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 2;
-
-                if (e.deltaY > 0 && !atBottom) return;
-                if (e.deltaY < 0 && !atTop) return;
-            }
-
-            if (!atSectionTop) { e.preventDefault(); return; }
-
-            let target = currentSection;
-            if (e.deltaY > 0 && currentSection < layers.length - 1) {
-                target = currentSection + 1;
-            } else if (e.deltaY < 0 && currentSection > 0) {
-                target = currentSection - 1;
-            } else {
+            if (!atSectionTop) {
+                e.preventDefault();
+                const nearest = e.deltaY > 0
+                    ? Math.min(layers.length - 1, Math.ceil(window.scrollY / vh))
+                    : Math.max(0, Math.floor(window.scrollY / vh));
+                snapTo(nearest);
                 return;
             }
 
-            e.preventDefault();
-            scrollLocked = true;
-            window.scrollTo({ top: target * vh, behavior: 'smooth' });
-            setTimeout(() => { scrollLocked = false; }, 600);
+            const scrollable = layers[currentSection].querySelector('.scrollable-content');
+            if (scrollable && scrollable.scrollHeight > scrollable.clientHeight + 2) {
+                const atTop = scrollable.scrollTop <= 1;
+                const atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 2;
+                const goingDown = e.deltaY > 0;
+
+                if ((goingDown && !atBottom) || (!goingDown && !atTop)) {
+                    e.preventDefault();
+                    scrollable.scrollTop += e.deltaY;
+                    return;
+                }
+            }
+
+            if (e.deltaY > 0 && currentSection < layers.length - 1) {
+                e.preventDefault();
+                const next = layers[currentSection + 1].querySelector('.scrollable-content');
+                if (next) next.scrollTop = 0;
+                snapTo(currentSection + 1);
+            } else if (e.deltaY < 0 && currentSection > 0) {
+                e.preventDefault();
+                const prev = layers[currentSection - 1].querySelector('.scrollable-content');
+                if (prev) prev.scrollTop = prev.scrollHeight;
+                snapTo(currentSection - 1);
+            }
         }, { passive: false });
     }
 
@@ -365,6 +378,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Indice laterale delle sezioni ---
     const indexNav = document.querySelector('.index-nav');
+    const menuBtn = document.querySelector('.nav-menu-btn');
+    let closeNavDrawer = () => {};
+
     if (indexNav) {
         const headings = Array.from(document.querySelectorAll(
             '.container-about h2.section-title, .container-about h2.section-title-code'
@@ -413,6 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         e.preventDefault();
                         playRetroBeep(700, 'square', 0.08, 0.05);
                         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        closeNavDrawer();
                     }
                 });
             });
@@ -431,5 +448,76 @@ document.addEventListener("DOMContentLoaded", () => {
                 headings.forEach(h => observer.observe(h));
             }
         }
+
+        const projectActions = document.querySelector('.project-actions');
+        if (projectActions) {
+            const externalAnchors = Array.from(projectActions.querySelectorAll('a')).filter((anchor) => {
+                const href = anchor.getAttribute('href') || '';
+                return /itch\.io/i.test(href) || /github\.com/i.test(href);
+            });
+            if (externalAnchors.length) {
+                const linksTitle = document.createElement('h3');
+                linksTitle.className = 'index-nav-links-title';
+                linksTitle.textContent = '[ // Link ]';
+                const linksList = document.createElement('ul');
+                externalAnchors.forEach((source) => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = source.href;
+                    a.textContent = source.textContent.trim();
+                    a.classList.add('index-link', 'index-link--external');
+                    if (source.target) a.target = source.target;
+                    if (source.rel) a.rel = source.rel;
+                    else if (a.target === '_blank') a.rel = 'noopener noreferrer';
+                    li.appendChild(a);
+                    linksList.appendChild(li);
+                    a.addEventListener('click', () => closeNavDrawer());
+                    a.addEventListener('mouseenter', () => {
+                        playRetroBeep(1100, 'square', 0.03, 0.02);
+                    });
+                });
+                indexNav.appendChild(linksTitle);
+                indexNav.appendChild(linksList);
+            }
+        }
     }
-});
+
+    if (indexNav && menuBtn) {
+        let backdrop = document.querySelector('.nav-drawer-backdrop');
+        if (!backdrop) {
+            backdrop = document.createElement('button');
+            backdrop.type = 'button';
+            backdrop.className = 'nav-drawer-backdrop';
+            backdrop.setAttribute('aria-label', 'Chiudi menu');
+            document.body.appendChild(backdrop);
+        }
+
+        const setDrawerOpen = (open) => {
+            document.body.classList.toggle('nav-drawer-open', open);
+            indexNav.classList.toggle('is-open', open);
+            menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+
+        closeNavDrawer = () => setDrawerOpen(false);
+
+        menuBtn.addEventListener('click', () => {
+            const willOpen = !indexNav.classList.contains('is-open');
+            playRetroBeep(willOpen ? 900 : 600, 'square', 0.06, 0.04);
+            setDrawerOpen(willOpen);
+        });
+
+        backdrop.addEventListener('click', closeNavDrawer);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && indexNav.classList.contains('is-open')) {
+                closeNavDrawer();
+            }
+        });
+    }
+};
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startPortfolio);
+} else {
+    startPortfolio();
+}
