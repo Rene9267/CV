@@ -1,0 +1,258 @@
+/* Blu Caligo page theme — night / Mediterranean sea */
+:root {
+    --sea-deep: #0a1218;
+    --sea-mid: #12202c;
+    --sea-line: #2a4a5c;
+    --mist: #6b8fa3;
+    --mist-soft: #9ec4d4;
+    --foam: #d8e8f0;
+    --ink-muted: #a8b8c4;
+    --caligo-accent: #3d7a9e;
+
+    --pp-top-nav-retro-btn-0: var(--sea-deep);
+    --pp-top-nav-retro-btn-1: var(--mist-soft);
+    --pp-top-nav-retro-btn-2: var(--sea-line);
+    --pp-top-nav-retro-btn-hover-0: var(--sea-mid);
+    --pp-top-nav-retro-btn-hover-1: var(--foam);
+    --pp-top-nav-retro-btn-hover-2: var(--caligo-accent);
+    --pp-project-hero-0: var(--sea-line);
+    --pp-project-hero-meta-tags-tag-0: var(--sea-mid);
+    --pp-project-hero-meta-tags-tag-1: var(--mist-soft);
+    --pp-project-hero-meta-tags-tag-2: var(--sea-line);
+    --pp-section-title-0: var(--mist-soft);
+    --pp-section-title-1: var(--mist);
+    --pp-project-description-p-0: var(--ink-muted);
+    --pp-highlight-box-0: rgba(61, 122, 158, 0.12);
+    --pp-highlight-box-1: var(--caligo-accent);
+    --pp-highlight-box-2: var(--sea-line);
+    --pp-highlight-box-3: var(--sea-line);
+    --pp-highlight-box-p-0: var(--foam);
+    --pp-notes-box-p-0: var(--ink-muted);
+    --pp-notes-box-highlight-0: var(--mist-soft);
+    --pp-project-actions-retro-btn-0: var(--sea-deep);
+    --pp-project-actions-retro-btn-1: var(--mist-soft);
+    --pp-project-actions-retro-btn-2: var(--sea-line);
+    --pp-index-nav-h3-0: var(--mist);
+    --pp-index-nav-h3-1: var(--sea-line);
+    --pp-credits-list-strong-0: var(--mist-soft);
+}
+
+body.about-page.blucaligo-page {
+    background-color: var(--sea-deep);
+    color: var(--ink-muted);
+    --particle: #c8dce8;
+}
+
+.section-divider {
+    border: none;
+    border-top: 2px dashed var(--sea-line);
+    margin: 50px 0;
+    opacity: 0.85;
+}
+
+.project-hero::after {
+    content: "▼";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--caligo-accent);
+    font-size: 1.2rem;
+    background-color: var(--sea-deep);
+    padding: 0 10px;
+}
+
+.project-hero .hero-cover {
+    width: min(100%, 640px);
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--sea-line);
+    box-shadow: 0 0 28px rgba(61, 122, 158, 0.2), 6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.project-hero h1 {
+    font-size: clamp(1.8rem, 7vw, 3.2rem);
+    margin-bottom: 0.5rem;
+    color: var(--foam);
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+.project-hero .subtitle {
+    font-size: 0.85rem;
+    color: var(--mist);
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.project-hero .byline {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.tech-card {
+    border: 1px solid var(--sea-line);
+    background-color: rgba(18, 32, 44, 0.85);
+    padding: 18px;
+    text-align: center;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+.tech-card h3 {
+    font-size: 0.8rem;
+    color: var(--mist-soft);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.tech-card p {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    margin-bottom: 0;
+    line-height: 1.55;
+}
+
+.credits-list {
+    list-style: none;
+    margin: 0;
+    padding: 20px 24px;
+    border: 1px solid var(--sea-line);
+    background-color: rgba(18, 32, 44, 0.75);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+.notes-box {
+    background-color: rgba(18, 32, 44, 0.65);
+    border: 1px solid var(--sea-line);
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+.video-embed {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 20px 0 10px;
+    border: 2px solid var(--sea-line);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+    background: #000;
+}
+
+.video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    pointer-events: auto;
+}
+
+.video-embed-fallback {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: var(--foam);
+    overflow: hidden;
+}
+
+.video-embed-fallback img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+}
+
+.video-embed-fallback:hover img {
+    opacity: 1;
+}
+
+.video-embed-fallback-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(12, 20, 32, 0.88);
+    border: 1px solid var(--caligo-accent);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.project-actions .retro-btn:hover {
+    background-color: var(--sea-mid);
+    color: var(--foam);
+    border-color: var(--caligo-accent);
+}
+
+.caligo-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(10, 18, 24, 0.78), rgba(10, 18, 24, 0.92)),
+        url('../assets/blucaligo-trailer-thumb.jpg') center / cover no-repeat;
+}
+
+.blucaligo-page .ember-field .ember {
+    background: radial-gradient(circle, #e8f4ff 0%, #9ec4d4 42%, rgba(158, 196, 212, 0) 74%);
+    box-shadow: 0 0 7px 1px rgba(158, 196, 212, 0.35);
+}
+
+.index-nav {
+    position: fixed;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    width: 240px;
+    background-color: rgba(10, 18, 24, 0.94);
+    border: 1px solid var(--sea-line);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+    padding: 14px 12px;
+}
+
+.index-nav a {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: var(--ink-muted);
+    text-decoration: none;
+    padding: 9px 10px;
+    border-left: 2px solid transparent;
+    transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+}
+
+.index-nav a:hover,
+.index-nav a.active {
+    color: var(--mist-soft);
+    background-color: rgba(61, 122, 158, 0.12);
+    border-left-color: var(--caligo-accent);
+}
+
+@media (max-width: 600px) {
+    .tech-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

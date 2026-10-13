@@ -1,0 +1,22 @@
+/* UI Components feature hard shadows and translation effects to simulate the tactile feedback of physical mechanical buttons */
+.retro-btn {
+    display: inline-block;
+    background-color: var(--bg-gray);
+    color: var(--brutal-black);
+    border: var(--retro-border);
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 8px 8px 0px var(--brutal-black);
+    transition: 0.1s;
+}
+
+.retro-btn:hover {
+    background-color: var(--cmd-orange);
+    color: white;
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+}
+

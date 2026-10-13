@@ -1,0 +1,292 @@
+/* The projects grid uses CSS Grid with auto-fit to automatically stack cards on mobile and place them side by side on desktop */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+/* Project cards represent individual hardware modules and react by lifting upwards when the user hovers over them */
+.project-card {
+    background-color: var(--bg-gray);
+    border: var(--retro-border);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: transform 0.2s;
+    box-shadow: 6px 6px 0px var(--brutal-black);
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.project-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0px var(--brutal-black);
+}
+
+.card-visual {
+    width: 100%;
+    height: 180px;
+    border-bottom: var(--retro-border);
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* We ensure that any media inside the card visual area behaves like a background-cover object */
+.card-visual video, 
+.card-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(110%);
+}
+
+.placeholder-img {
+    color: var(--cmd-orange);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Terminal-style miniatures for project cards without screenshots */
+.card-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #161616;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+}
+
+.card-screen__bar {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 28px;
+    padding-left: 10px;
+    background-color: #1A1A1A;
+    border-bottom: 2px solid var(--brutal-black);
+    flex-shrink: 0;
+}
+
+.card-screen__title {
+    align-self: center;
+    font-size: clamp(0.5rem, 2vw, 0.7rem);
+    color: #b6b6b3;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.card-screen__controls {
+    display: flex;
+    align-items: stretch;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.card-screen__win {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    font-size: 0.75rem;
+    line-height: 1;
+    color: #b6b6b3;
+    border-left: 1px solid #2e2e2c;
+}
+
+.card-screen__win--close {
+    color: var(--cmd-orange);
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.card-screen__body {
+    flex: 1;
+    min-height: 0;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+}
+
+.card-screen--showcase .card-screen__name {
+    margin: 0;
+    font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+    font-weight: bold;
+    color: #b6b6b3;
+    letter-spacing: 0.05em;
+}
+
+.card-screen__badge {
+    margin: 0;
+    font-size: clamp(0.5rem, 2vw, 0.65rem);
+    color: var(--cmd-orange);
+    font-weight: bold;
+    letter-spacing: 0.15em;
+}
+
+.card-screen__btn {
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: 2px;
+    padding: 4px 10px;
+    font-size: clamp(0.45rem, 1.8vw, 0.6rem);
+    font-weight: bold;
+    color: var(--brutal-black);
+    background-color: var(--bg-gray);
+    border: 2px solid var(--brutal-black);
+    box-shadow: 3px 3px 0 var(--brutal-black);
+    text-transform: uppercase;
+}
+
+.card-screen__layers {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-screen__layer-strip {
+    height: 8px;
+    background: linear-gradient(90deg, var(--bg-dark-gray) 0%, var(--bg-gray) 50%, var(--bg-dark-gray) 100%);
+    border: 2px solid var(--brutal-black);
+}
+
+.card-screen__layer-strip--alt {
+    opacity: 0.85;
+    margin-left: 4px;
+}
+
+.card-screen__body--flow {
+    padding: 6px 10px;
+    justify-content: center;
+}
+
+.card-screen__chip {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 0.45rem;
+    color: #4ade80;
+    border: 1px solid #2e2e2c;
+    padding: 2px 5px;
+    letter-spacing: 0.05em;
+}
+
+.card-screen__flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+}
+
+.card-screen__arch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 4px 8px;
+    background: rgba(15, 15, 15, 0.9);
+    border: 1px solid #2e2e2c;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+.card-screen__tag {
+    font-size: clamp(0.45rem, 1.6vw, 0.55rem);
+    font-weight: bold;
+    padding: 2px 6px;
+    color: #161616;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.card-screen__tag--orange {
+    background: var(--cmd-orange);
+}
+
+.card-screen__tag--green {
+    background: #4ade80;
+}
+
+.card-screen__tag--gray {
+    background: #7a7a76;
+}
+
+.card-screen__arch-label {
+    font-size: clamp(0.45rem, 1.6vw, 0.6rem);
+    color: #b6b6b3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.card-screen__arrow {
+    font-size: 0.5rem;
+    color: var(--cmd-orange);
+    line-height: 1;
+}
+
+.card-info {
+    padding: 20px;
+}
+
+.tag-container {
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.card-info h3 {
+    margin: 10px 0;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+}
+
+.card-info p {
+    font-size: 0.95rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    min-height: 50px;
+}
+
+.card-info p:last-child {
+    margin-bottom: 0;
+}
+
+.tag {
+    font-size: 0.7rem;
+    background-color: var(--brutal-black);
+    color: var(--bg-gray);
+    padding: 2px 8px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.card-btn {
+    display: inline-block;
+    color: var(--cmd-orange);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.card-btn:hover {
+    text-decoration: underline;
+}
+

@@ -11,6 +11,12 @@
 <body>
 
     <section class="layer" id="intro">
+        <nav class="contact-links" aria-label="Contact links">
+            <a href="mailto:EMAIL@DOMINIO" class="retro-btn contact-link">MAIL: EMAIL@DOMINIO</a>
+            <a href="https://www.linkedin.com/in/PROFILO" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">LINKEDIN: /in/PROFILO</a>
+            <a href="https://github.com/UTENTE" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">GIT: /UTENTE</a>
+            <a href="https://x.com/UTENTE" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">X: /UTENTE</a>
+        </nav>
         <div class="content">
             <div class="profile-icon-container">
                 <img src="assets/profile-8bit.jpg" alt="Antonio Troiano Pixel Art" class="profile-pixel-art">
@@ -20,13 +26,6 @@
             <h2>XR & Spatial Developer</h2>
             <p>XR developer focused on Unity XR and C# — enterprise training, spatial apps, and game jams. Building digital worlds with a retro soul.</p>
 
-            <nav class="contact-links" aria-label="Contact links">
-                <a href="mailto:EMAIL@DOMINIO" class="retro-btn contact-link">MAIL: EMAIL@DOMINIO</a>
-                <a href="https://www.linkedin.com/in/PROFILO" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">LINKEDIN: /in/PROFILO</a>
-                <a href="https://github.com/UTENTE" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">GIT: /UTENTE</a>
-                <a href="https://x.com/UTENTE" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">X: /UTENTE</a>
-            </nav>
-            
             <div class="btn-scroll-wrapper">
                 <a href="about.html" class="retro-btn btn-intro">Initialize Profile.exe</a>
             </div>
@@ -44,20 +43,21 @@
         </div>
     </section>
 
-    <!-- /Produzione: progetti con scheda o demo pubblica -->
+    <!-- /Produzione: consegne fatte per altri -->
     <section class="layer" id="lavoro">
         <div class="content scrollable-content">
             <h2>/Produzione</h2>
-            <p>Progetti professionali con demo o scheda pubblicabile.</p>
+            <p>Consegne fatte per altri — commesse, collaborazioni, contest.</p>
 
            <div class="projects-grid">
 
-                <article class="project-card" data-href="project-mtm.html">
+                <a class="project-card" href="project-mtm.html">
                     <div class="card-visual">
                         <img src="assets/mtm-vr-hero.jpg" alt="Visita VR — impianto farina, demo MTM" class="card-visual-img">
                     </div>
                     <div class="card-info">
                         <div class="tag-container">
+                            <span class="tag">COMMESSA</span>
                             <span class="tag">QUEST</span>
                             <span class="tag">UNITY</span>
                             <span class="tag">C#</span>
@@ -67,7 +67,23 @@
                         <p>Training VR per Meta Quest: rivivere in classe la visita a un impianto di produzione. Sviluppo esperienza e interazioni (MTM, 2024).</p>
                         <span class="card-btn">Scheda &gt;&gt;</span>
                     </div>
-                </article>
+                </a>
+
+                <a class="project-card" href="project-blucaligo.html">
+                    <div class="card-visual">
+                        <img src="assets/blucaligo-trailer-thumb.jpg" alt="Blu Caligo — first trailer, Eostrix Studio" class="card-visual-img">
+                    </div>
+                    <div class="card-info">
+                        <div class="tag-container">
+                            <span class="tag">COLLABORAZIONE</span>
+                            <span class="tag">UNREAL</span>
+                            <span class="tag">HORROR</span>
+                        </div>
+                        <h3>Blu Caligo</h3>
+                        <p>Gameplay Unreal per Eostrix Studio: horror survival in prima persona su isola mediterranea. Collaborazione indie non retribuita; gioco ancora non uscito (2023–2024).</p>
+                        <span class="card-btn">Scheda &gt;&gt;</span>
+                    </div>
+                </a>
 
             </div>
         </div>
@@ -79,7 +95,7 @@
             <p>Progetti personali documentati.</p>
 
             <div class="projects-grid">
-                <article class="project-card" data-href="project-cv.html">
+                <a class="project-card" href="project-cv.html">
                     <div class="card-visual" aria-hidden="true">
                         <div class="card-screen card-screen--showcase">
                             <div class="card-screen__bar">
@@ -109,8 +125,8 @@
                         <p>Portfolio retrò statico (HTML/CSS/JS): terminale visivo, sticky scroll, zero build. Case study su workflow agentico e tempi di consegna.</p>
                         <span class="card-btn">Leggi >></span>
                     </div>
-                </article>
-                <article class="project-card" data-href="project-actionflow.html">
+                </a>
+                <a class="project-card" href="project-actionflow.html">
                     <div class="card-visual" aria-hidden="true">
                         <div class="card-screen card-screen--actionflow">
                             <div class="card-screen__bar">
@@ -152,7 +168,7 @@
                         <p>Framework di orchestrazione asincrona per Unity. Actions atomiche, Blackboard, UniTask.</p>
                         <span class="card-btn">Docs >></span>
                     </div>
-                </article>
+                </a>
             </div>
         </div>
     </section>
@@ -163,7 +179,7 @@
             <p>Progetti sviluppati con poco sonno e tanta caffeina.</p>
 
             <div class="projects-grid">
-                <article class="project-card" data-href="project-shit-shit-shit.html">
+                <a class="project-card" href="project-shit-shit-shit.html" data-href="project-shit-shit-shit.html">
                     <div class="card-visual">
                         <img src="assets/shit-5.jpg" alt="Shit! Shit! Shit! screenshot" class="card-visual-img">
                     </div>
@@ -175,11 +191,10 @@
                         </div>
                         <h3>Shit! Shit! Shit!</h3>
                         <p>Napoli, 1700. Sei la maschera fantasma del Real Teatro S.C. Tieni accese le candele, guida i nobili, consegna messaggi proibiti. Ogni segreto ha un prezzo.</p>
-                        <span class="card-btn">Scopri >></span>
                     </div>
-                </article>
+                </a>
 
-                <article class="project-card" data-href="project-undergroove.html">
+                <a class="project-card" href="project-undergroove.html" data-href="project-undergroove.html">
                     <div class="card-visual">
                         <img src="assets/undergroove-2.png" alt="Undergroove screenshot" class="card-visual-img">
                     </div>
@@ -191,11 +206,10 @@
                         </div>
                         <h3>Undergroove</h3>
                         <p>Sottosuolo pulsante al tema Roots: due canzoni allungano o richiamano le radici, Shift ti attacca al terreno che ruota. Puzzle-platformer in jam.</p>
-                        <span class="card-btn">Scopri >></span>
                     </div>
-                </article>
+                </a>
 
-                <article class="project-card" data-href="project-mexican-hat.html">
+                <a class="project-card" href="project-mexican-hat.html" data-href="project-mexican-hat.html">
                     <div class="card-visual" aria-hidden="true">
                         <div class="placeholder-img">MEXICAN_HAT // UE4.27</div>
                     </div>
@@ -207,11 +221,10 @@
                         </div>
                         <h3>Mexican Hat</h3>
                         <p>Platformer in terza persona: raccogli cappelli, impilali sulla testa e arrampicati per raggiungere gli amici. Jam AIV su Unreal, ottobre 2022.</p>
-                        <span class="card-btn">Scopri &gt;&gt;</span>
                     </div>
-                </article>
+                </a>
 
-                <article class="project-card" data-href="project-burning-keys.html">
+                <a class="project-card" href="project-burning-keys.html" data-href="project-burning-keys.html">
                     <div class="card-visual">
                         <img src="assets/burning-keys-card.jpg" alt="Burning Keys — menu in ufficio" class="card-visual-img" style="object-position: 68% center;">
                     </div>
@@ -223,11 +236,10 @@
                         </div>
                         <h3>Burning Keys</h3>
                         <p>Ufficio in prima persona sul tema Duality: mail, telefono e desktop sotto stress, giorno e notte che cambiano la luce, fidget spinner per respirare.</p>
-                        <span class="card-btn">Scopri >></span>
                     </div>
-                </article>
+                </a>
 
-                <article class="project-card" data-href="project-post-umi.html">
+                <a class="project-card" href="project-post-umi.html" data-href="project-post-umi.html">
                     <div class="card-visual">
                         <img src="assets/post-umi-lounge.png" alt="Post-Umi — salone top-down" class="card-visual-img">
                     </div>
@@ -239,13 +251,19 @@
                         </div>
                         <h3>Post-Umi</h3>
                         <p>Primo passo in jam: ti svegli chiuso in casa dopo la festa e cerchi la chiave tra ricordi smarriti. Point &amp; click a Roma, tema Lost &amp; Found.</p>
-                        <span class="card-btn">Scopri >></span>
                     </div>
-                </article>
+                </a>
             </div>
         </div>
     </section>
     
+    <script src="js/retro-audio.js"></script>
+    <script src="js/pointer-feedback.js"></script>
+    <script src="js/section-snap.js"></script>
+    <script src="js/certificate-modal.js"></script>
+    <script src="js/skill-typewriter.js"></script>
+    <script src="js/scene-effects.js"></script>
+    <script src="js/section-index.js"></script>
     <script src="script.js"></script>
 </body>
 

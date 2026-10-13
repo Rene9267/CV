@@ -1,0 +1,240 @@
+/* Mexican Hat fiesta backdrop. */
+
+/* ===== SFONDO FIESTA / Cappelli ===== */
+.fiesta-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--fiesta-deep);
+}
+
+.fiesta-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 78% 12%, rgba(42, 157, 143, 0.1), transparent 42%),
+        radial-gradient(ellipse at 12% 22%, rgba(193, 18, 31, 0.09), transparent 38%);
+}
+
+.fiesta-horizon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 44vh;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(193, 18, 31, 0.08) 28%,
+        rgba(232, 185, 35, 0.14) 58%,
+        rgba(42, 157, 143, 0.07) 100%
+    );
+}
+
+.fiesta-sun {
+    position: absolute;
+    bottom: 16vh;
+    left: 50%;
+    width: min(34vmax, 420px);
+    height: min(34vmax, 420px);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(245, 215, 110, 0.2) 0%,
+        rgba(232, 185, 35, 0.09) 38%,
+        transparent 68%
+    );
+    filter: blur(10px);
+    animation: fiestaSunGlow 20s ease-in-out infinite alternate;
+}
+
+@keyframes fiestaSunGlow {
+    0% {
+        opacity: 0.55;
+        transform: translateX(-50%) scale(1);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateX(-50%) scale(1.06);
+    }
+}
+
+.fiesta-hat {
+    position: absolute;
+    pointer-events: none;
+    filter: blur(0.6px);
+    opacity: 0.22;
+}
+
+.fiesta-hat--sombrero {
+    bottom: 10vh;
+    left: 1%;
+    width: min(30vw, 220px);
+    height: min(16vw, 110px);
+}
+
+.fiesta-hat--sombrero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 42%;
+    background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(139, 105, 20, 0.85), rgba(92, 69, 16, 0.35));
+    border-radius: 50%;
+    transform: scaleY(0.55);
+}
+
+.fiesta-hat--sombrero::after {
+    content: "";
+    position: absolute;
+    width: 36%;
+    height: 58%;
+    left: 32%;
+    bottom: 22%;
+    background: linear-gradient(180deg, rgba(166, 124, 26, 0.9), rgba(107, 80, 18, 0.75));
+    border-radius: 48% 48% 42% 42%;
+}
+
+.fiesta-hat--bowler {
+    bottom: 28vh;
+    right: 3%;
+    width: min(18vw, 120px);
+    height: min(14vw, 90px);
+    opacity: 0.18;
+}
+
+.fiesta-hat--bowler::before {
+    content: "";
+    position: absolute;
+    width: 118%;
+    height: 26%;
+    left: -9%;
+    bottom: 2%;
+    background: rgba(61, 52, 40, 0.75);
+    border-radius: 50%;
+    transform: scaleY(0.45);
+}
+
+.fiesta-hat--bowler::after {
+    content: "";
+    position: absolute;
+    width: 68%;
+    height: 72%;
+    left: 16%;
+    bottom: 14%;
+    background: linear-gradient(180deg, rgba(74, 64, 53, 0.85), rgba(42, 36, 28, 0.8));
+    border-radius: 50% 50% 44% 44%;
+}
+
+.fiesta-hat--straw {
+    top: 20vh;
+    right: 10%;
+    width: min(22vw, 150px);
+    height: min(12vw, 80px);
+    opacity: 0.16;
+}
+
+.fiesta-hat--straw::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 38%;
+    background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(196, 160, 74, 0.7), rgba(139, 115, 48, 0.25));
+    border-radius: 50%;
+    transform: scaleY(0.5);
+}
+
+.fiesta-hat--straw::after {
+    content: "";
+    position: absolute;
+    width: 42%;
+    height: 52%;
+    left: 29%;
+    bottom: 20%;
+    background: linear-gradient(180deg, rgba(212, 178, 88, 0.75), rgba(150, 120, 50, 0.65));
+    border-radius: 50% 50% 38% 38%;
+}
+
+.hat-stack {
+    position: absolute;
+    bottom: 7vh;
+    right: 6%;
+    width: 80px;
+    height: 88px;
+    opacity: 0.24;
+    filter: blur(0.4px);
+}
+
+.hat-stack__layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 14px;
+}
+
+.hat-stack__layer::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background: rgba(139, 105, 20, 0.8);
+    border-radius: 50%;
+    transform: scaleY(0.42);
+}
+
+.hat-stack__layer::after {
+    content: "";
+    position: absolute;
+    width: 44%;
+    height: 20px;
+    left: 28%;
+    bottom: 5px;
+    background: rgba(166, 124, 26, 0.85);
+    border-radius: 50% 50% 40% 40%;
+}
+
+.hat-stack__layer--1 {
+    bottom: 0;
+    width: 68px;
+}
+
+.hat-stack__layer--2 {
+    bottom: 17px;
+    width: 58px;
+    opacity: 0.92;
+}
+
+.hat-stack__layer--3 {
+    bottom: 32px;
+    width: 48px;
+    opacity: 0.85;
+}
+
+.mexican-hat-page .ember-field .ember {
+    background: radial-gradient(circle, #fff6d8 0%, #e0a020 38%, rgba(224, 160, 32, 0) 72%);
+    box-shadow: 0 0 8px 2px rgba(224, 160, 32, 0.45);
+}
+
+.fiesta-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 42%, rgba(0, 0, 0, 0) 22%, rgba(20, 16, 8, 0.78) 88%),
+        radial-gradient(ellipse at 50% 100%, rgba(20, 16, 8, 0.35), transparent 55%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fiesta-sun {
+        animation: none;
+        opacity: 0.7;
+    }
+}

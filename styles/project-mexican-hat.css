@@ -1,0 +1,206 @@
+/* mexican-hat page theme, scene, and overrides. */
+:root {
+    --fiesta-deep: #141008;
+    --fiesta-mid: #241a0c;
+    --teal-glow: #2a9d8f;
+    --teal-dim: #1d6b62;
+    --gold: #e8b923;
+    --gold-soft: #f5d76e;
+    --chili: #c1121f;
+    --ink-muted: #b8a898;
+    --parchment: #ebe4d8;
+
+    --pp-top-nav-retro-btn-0: var(--fiesta-deep);
+    --pp-top-nav-retro-btn-1: var(--gold-soft);
+    --pp-top-nav-retro-btn-2: var(--teal-dim);
+    --pp-top-nav-retro-btn-hover-0: var(--fiesta-mid);
+    --pp-top-nav-retro-btn-hover-1: var(--parchment);
+    --pp-top-nav-retro-btn-hover-2: var(--gold);
+    --pp-project-hero-0: var(--teal-dim);
+    --pp-project-hero-meta-tags-tag-0: var(--fiesta-mid);
+    --pp-project-hero-meta-tags-tag-1: var(--gold-soft);
+    --pp-project-hero-meta-tags-tag-2: var(--teal-dim);
+    --pp-section-title-0: var(--gold-soft);
+    --pp-section-title-1: var(--chili);
+    --pp-project-description-p-0: var(--ink-muted);
+    --pp-highlight-box-0: rgba(42, 157, 143, 0.1);
+    --pp-highlight-box-1: var(--teal-glow);
+    --pp-highlight-box-2: rgba(232, 185, 35, 0.12);
+    --pp-highlight-box-3: rgba(232, 185, 35, 0.12);
+    --pp-highlight-box-p-0: var(--parchment);
+    --pp-notes-box-p-0: var(--ink-muted);
+    --pp-notes-box-highlight-0: var(--gold-soft);
+    --pp-project-actions-retro-btn-0: var(--fiesta-deep);
+    --pp-project-actions-retro-btn-1: var(--gold-soft);
+    --pp-project-actions-retro-btn-2: var(--teal-dim);
+    --pp-index-nav-h3-0: var(--teal-glow);
+    --pp-index-nav-h3-1: var(--teal-dim);
+    --pp-credits-list-strong-0: var(--gold-soft);
+}
+
+body.about-page.mexican-hat-page {
+    background-color: var(--fiesta-deep);
+    color: var(--ink-muted);
+    --particle: #e0a020;
+}
+
+.section-divider {
+    border: none;
+    height: 3px;
+    margin: 50px 0;
+    opacity: 0.55;
+    background: linear-gradient(90deg, var(--teal-dim), var(--gold), var(--chili), var(--teal-dim));
+    mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+}
+
+.project-hero::after {
+    content: "🎩";
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.1rem;
+    background-color: var(--fiesta-deep);
+    padding: 0 12px;
+}
+
+.hero-cover-placeholder {
+    width: min(100%, 640px);
+    aspect-ratio: 16 / 9;
+    margin-bottom: 1.5rem;
+    border: 2px dashed var(--teal-dim);
+    background: linear-gradient(145deg, rgba(42, 157, 143, 0.12), rgba(232, 185, 35, 0.08));
+    box-shadow: 0 0 28px rgba(232, 185, 35, 0.1), 6px 6px 0 rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+}
+
+.hero-cover-placeholder span {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    font-weight: bold;
+}
+
+.hero-cover-placeholder p {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin: 0;
+    max-width: 28rem;
+    line-height: 1.5;
+}
+
+.project-hero h1 {
+    font-size: clamp(2.2rem, 9vw, 4.2rem);
+    margin-bottom: 0.5rem;
+    color: var(--gold-soft);
+    text-shadow: 0 0 24px rgba(232, 185, 35, 0.28), 3px 3px 0 rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+}
+
+.project-hero .subtitle {
+    font-size: 0.9rem;
+    color: var(--teal-glow);
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.project-hero .byline {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.project-description .highlight {
+    color: var(--gold-soft);
+    font-weight: bold;
+}
+
+.credits-list {
+    list-style: none;
+    margin: 0;
+    padding: 20px 24px;
+    border: 1px solid var(--teal-dim);
+    background-color: rgba(36, 26, 12, 0.75);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+.contrib-list {
+    margin: 1rem 0 0;
+    padding-left: 1.25rem;
+    color: var(--ink-muted);
+    line-height: 1.75;
+    font-size: 0.95rem;
+}
+
+.contrib-list li {
+    margin-bottom: 0.35rem;
+}
+
+.contrib-list code {
+    font-size: 0.85em;
+    color: var(--gold-soft);
+}
+
+.notes-box {
+    background-color: rgba(36, 26, 12, 0.65);
+    border: 1px solid var(--teal-dim);
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+.media-note {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--ink-muted);
+    border: 1px dashed var(--teal-dim);
+    padding: 1.25rem 1.5rem;
+    background-color: rgba(20, 16, 8, 0.5);
+}
+
+.project-actions .retro-btn:hover {
+    background-color: var(--fiesta-mid);
+    color: var(--parchment);
+    border-color: var(--gold);
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+}
+
+.index-nav {
+    position: fixed;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    width: 240px;
+    background-color: rgba(14, 10, 8, 0.92);
+    border: 1px solid var(--teal-dim);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    padding: 14px 12px;
+}
+
+.index-nav a {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: var(--ink-muted);
+    text-decoration: none;
+    padding: 9px 10px;
+    border-left: 2px solid transparent;
+    transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+}
+
+.index-nav a:hover,
+.index-nav a.active {
+    color: var(--gold-soft);
+    background-color: rgba(232, 185, 35, 0.08);
+    border-left-color: var(--gold);
+}

@@ -1,0 +1,64 @@
+/* Scroll hint: animated chevrons flanking the CTA button */
+.btn-scroll-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Scroll hint wrapping the "Scroll for projects" label below the CTA */
+.projects-hint {
+    flex-direction: row;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 48px;
+}
+
+.projects-hint .chevron-group {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    align-items: center;
+}
+
+.scroll-label {
+    font-size: 0.8rem;
+    color: var(--brutal-black);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.scroll-hint .chevron {
+    font-size: 0.9rem;
+    line-height: 0.75;
+    color: var(--cmd-orange);
+    opacity: 0;
+    animation: chevronDrop 1.8s ease-in-out infinite;
+}
+
+.scroll-hint .chevron:nth-child(1) { animation-delay: 0s; }
+.scroll-hint .chevron:nth-child(2) { animation-delay: 0.25s; }
+
+@keyframes chevronDrop {
+    0% { opacity: 0; transform: translateY(-6px); }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(6px); }
+}
+
+#intro p {
+    margin-bottom: 30px;
+}
+
+.btn-intro {
+    margin-top: 0px;
+}
+

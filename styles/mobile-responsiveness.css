@@ -1,0 +1,23 @@
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+    .timeline-split {
+        flex-direction: column;
+        gap: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .certificate-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .cert-scroll-viewer {
+        max-height: 600px;
+    }
+}
+

@@ -4,371 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Visita VR — impianto farina | MTM Project</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        :root {
-            --plant-deep: #12161c;
-            --plant-mid: #1c2430;
-            --plant-line: #3a4a5c;
-            --safety: #f0a020;
-            --safety-soft: #ffc857;
-            --steel: #8fa8c4;
-            --ink-muted: #b4bcc6;
-            --parchment: #e8ecf0;
-        }
-
-        body.about-page.mtm-page {
-            background-color: var(--plant-deep);
-            color: var(--ink-muted);
-        }
-
-        .container-about {
-            max-width: 900px;
-            position: relative;
-            z-index: 1;
-        }
-
-        h2.section-title {
-            scroll-margin-top: 110px;
-        }
-
-        .top-nav .retro-btn {
-            background-color: var(--plant-deep);
-            color: var(--safety-soft);
-            border-color: var(--plant-line);
-            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6);
-        }
-
-        .top-nav .retro-btn:hover {
-            background-color: var(--plant-mid);
-            color: var(--parchment);
-            border-color: var(--safety);
-        }
-
-        .section-divider {
-            border: none;
-            border-top: 2px dashed var(--plant-line);
-            margin: 50px 0;
-            opacity: 0.85;
-        }
-
-        .project-hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 50px 0 40px;
-            border-bottom: 3px solid var(--plant-line);
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .project-hero::after {
-            content: "▼";
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--safety);
-            font-size: 1.2rem;
-            background-color: var(--plant-deep);
-            padding: 0 10px;
-        }
-
-        .project-hero .hero-cover {
-            width: min(100%, 640px);
-            margin-bottom: 1.5rem;
-            border: 2px solid var(--plant-line);
-            box-shadow: 0 0 24px rgba(240, 160, 32, 0.12), 6px 6px 0 rgba(0, 0, 0, 0.5);
-        }
-
-        .project-hero h1 {
-            font-size: clamp(1.8rem, 7vw, 3.2rem);
-            margin-bottom: 0.5rem;
-            color: var(--parchment);
-            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
-            letter-spacing: 1px;
-        }
-
-        .project-hero .subtitle {
-            font-size: 0.85rem;
-            color: var(--steel);
-            font-weight: bold;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .project-hero .meta-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-
-        .project-hero .meta-tags .tag {
-            background-color: var(--plant-mid);
-            color: var(--safety-soft);
-            border: 1px solid var(--plant-line);
-            font-size: 0.7rem;
-        }
-
-        .project-hero .byline {
-            color: var(--ink-muted);
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            color: var(--safety-soft);
-            border-left: 5px solid var(--steel);
-            padding-left: 15px;
-            margin: 40px 0 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .project-description p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--ink-muted);
-        }
-
-        .highlight-box {
-            background-color: rgba(240, 160, 32, 0.08);
-            border-left: 6px solid var(--safety);
-            padding: 20px 25px;
-            margin: 25px 0;
-            border-top: 1px solid var(--plant-line);
-            border-bottom: 1px solid var(--plant-line);
-        }
-
-        .highlight-box p {
-            color: var(--parchment);
-            margin-bottom: 0;
-            font-style: italic;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .tech-card {
-            border: 1px solid var(--plant-line);
-            background-color: rgba(28, 36, 48, 0.85);
-            padding: 18px;
-            text-align: center;
-            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
-        }
-
-        .tech-card h3 {
-            font-size: 0.8rem;
-            color: var(--safety-soft);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .tech-card p {
-            font-size: 0.88rem;
-            color: var(--ink-muted);
-            margin-bottom: 0;
-            line-height: 1.55;
-        }
-
-        .credits-list {
-            list-style: none;
-            margin: 0;
-            padding: 20px 24px;
-            border: 1px solid var(--plant-line);
-            background-color: rgba(28, 36, 48, 0.75);
-            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
-        }
-
-        .credits-list li {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: var(--ink-muted);
-            margin-bottom: 0.35rem;
-        }
-
-        .credits-list strong {
-            color: var(--safety-soft);
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
-
-        .notes-box {
-            background-color: rgba(28, 36, 48, 0.65);
-            border: 1px solid var(--plant-line);
-            padding: 25px;
-            margin: 20px 0;
-            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35);
-        }
-
-        .notes-box p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--ink-muted);
-            margin-bottom: 1rem;
-        }
-
-        .notes-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        .notes-box .highlight {
-            color: var(--safety-soft);
-            font-weight: bold;
-        }
-
-        .video-embed {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            margin: 20px 0 10px;
-            border: 2px solid var(--plant-line);
-            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
-            background: #000;
-        }
-
-        .video-embed iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .screenshot-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .screenshot-img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            border: 1px solid var(--plant-line);
-            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
-        }
-
-        .screenshot-caption {
-            font-size: 0.78rem;
-            opacity: 0.75;
-            margin-top: 6px;
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 50px 0;
-        }
-
-        .project-actions .retro-btn {
-            background-color: var(--plant-deep);
-            color: var(--safety-soft);
-            border-color: var(--plant-line);
-            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.6);
-        }
-
-        .project-actions .retro-btn:hover {
-            background-color: var(--plant-mid);
-            color: var(--parchment);
-            border-color: var(--safety);
-        }
-
-        .plant-bg {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background:
-                linear-gradient(180deg, rgba(18, 22, 28, 0.92), rgba(18, 22, 28, 0.97)),
-                url('assets/mtm-vr-hero.jpg') center / cover no-repeat;
-            filter: saturate(0.85);
-        }
-
-        .index-nav {
-            position: fixed;
-            left: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 50;
-            width: 240px;
-            background-color: rgba(18, 22, 28, 0.94);
-            border: 1px solid var(--plant-line);
-            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
-            padding: 14px 12px;
-        }
-
-        .index-nav h3 {
-            font-size: 0.62rem;
-            color: var(--steel);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            border-bottom: 1px dashed var(--plant-line);
-            padding-bottom: 8px;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .index-nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .index-nav li {
-            margin-bottom: 7px;
-        }
-
-        .index-nav a {
-            display: block;
-            font-size: 0.78rem;
-            line-height: 1.4;
-            color: var(--ink-muted);
-            text-decoration: none;
-            padding: 9px 10px;
-            border-left: 2px solid transparent;
-            transition: color 0.15s, background-color 0.15s, border-color 0.15s;
-        }
-
-        .index-nav a:hover,
-        .index-nav a.active {
-            color: var(--safety-soft);
-            background-color: rgba(240, 160, 32, 0.08);
-            border-left-color: var(--safety);
-        }
-
-        @media (max-width: 600px) {
-            .tech-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .screenshot-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/project-page.css">
+    <link rel="stylesheet" href="styles/project-mtm.css">
 </head>
 
 <body class="about-page mtm-page">
 
-    <div class="plant-bg" aria-hidden="true"></div>
+    <div class="plant-bg" aria-hidden="true">
+        <div class="ember-field" data-motion="flour"></div>
+    </div>
 
     <aside class="index-nav" id="page-index-nav" aria-label="Indice della pagina">
         <h3>[ // Indice ]</h3>
@@ -423,13 +70,10 @@
         <p style="font-size: 0.88rem; opacity: 0.8; margin-bottom: 0.5rem;">
             Registrazione ufficiale su YouTube — unica fonte visiva usata per questa scheda.
         </p>
-        <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/XpfIY52K1dQ"
-                title="Demo VR — visita impianto (MTM Project)"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        </div>
+        <div class="video-embed"
+            data-youtube-id="XpfIY52K1dQ"
+            data-poster="assets/mtm-vr-hero.jpg"
+            data-title="Demo VR — visita impianto (MTM Project)"></div>
 
         <hr class="section-divider">
 
@@ -502,20 +146,20 @@
         </p>
         <div class="screenshot-grid">
             <div>
-                <img src="assets/mtm-vr-hero.jpg" alt="Vista della linea in VR" class="screenshot-img">
-                <p class="screenshot-caption">Panoramica della linea</p>
+                <img src="assets/mtm-vr-still-1.jpg" alt="Silo e passerella nel capannone VR" class="screenshot-img">
+                <p class="screenshot-caption">Silo e passerella</p>
             </div>
             <div>
-                <img src="assets/mtm-vr-still-1.jpg" alt="Frame demo VR 1" class="screenshot-img">
-                <p class="screenshot-caption">Frame dalla registrazione</p>
+                <img src="assets/mtm-vr-still-2.jpg" alt="Nastri con sacchi di farina e protezioni" class="screenshot-img">
+                <p class="screenshot-caption">Sacchi sui nastri</p>
             </div>
             <div>
-                <img src="assets/mtm-vr-still-2.jpg" alt="Frame demo VR 2" class="screenshot-img">
-                <p class="screenshot-caption">Frame dalla registrazione</p>
+                <img src="assets/mtm-vr-still-3.jpg" alt="Condotti e quadri sotto la passerella" class="screenshot-img">
+                <p class="screenshot-caption">Impianto sotto la passerella</p>
             </div>
             <div>
-                <img src="assets/mtm-vr-still-3.jpg" alt="Frame demo VR 3" class="screenshot-img">
-                <p class="screenshot-caption">Frame dalla registrazione</p>
+                <img src="assets/mtm-vr-still-4.jpg" alt="Semaforo di linea e sacchi sul nastro" class="screenshot-img">
+                <p class="screenshot-caption">Semaforo e sacchi sul nastro</p>
             </div>
         </div>
 
@@ -527,6 +171,13 @@
 
     </main>
 
+    <script src="js/retro-audio.js"></script>
+    <script src="js/pointer-feedback.js"></script>
+    <script src="js/section-snap.js"></script>
+    <script src="js/certificate-modal.js"></script>
+    <script src="js/skill-typewriter.js"></script>
+    <script src="js/scene-effects.js"></script>
+    <script src="js/section-index.js"></script>
     <script src="script.js"></script>
 </body>
 

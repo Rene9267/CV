@@ -1,0 +1,36 @@
+/* --- PROFILE PIXEL ICON STYLING (RAW BRUTALIST UPDATE) --- */
+
+.profile-icon-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px; 
+}
+
+.profile-pixel-art {
+    width: 250px; 
+    height: 250px;
+    object-fit: cover;
+    padding: 0;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-color: #ffffff; 
+    border: var(--retro-border);
+    box-shadow: 15px 15px 0px var(--brutal-black); 
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.profile-pixel-art:hover {
+    transform: translate(-8px, -8px); 
+    box-shadow: 23px 23px 0px var(--brutal-black); 
+    border-color: var(--cmd-orange); 
+}
+
+#intro {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding-top: 18px;
+    gap: 10px;
+}
+

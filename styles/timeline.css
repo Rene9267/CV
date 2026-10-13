@@ -1,0 +1,96 @@
+/* --- DUAL TIMELINE LAYOUT --- */
+.timeline-split {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+}
+
+.timeline-column {
+    flex: 1;
+}
+
+.timeline-column h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* The timeline design relies on a left border and strategically placed absolute pseudo-elements to draw the connecting nodes */
+.timeline {
+    border-left: 4px solid var(--brutal-black);
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.timeline-item {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* This is the dot on the timeline line */
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -28px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background: var(--cmd-orange);
+    border: 2px solid var(--brutal-black);
+}
+
+.date {
+    font-size: 0.8rem;
+    font-weight: bold;
+    background: var(--brutal-black);
+    color: #fff;
+    padding: 2px 6px;
+}
+
+/* --- TIMELINE REFINEMENT WITH GRAPHIC ELEMENTS --- */
+.timeline-item h3 {
+    font-size: 1.2rem;
+    color: var(--brutal-black);
+    margin-top: 12px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+/* We create a small orange block before the company name to act as a visual anchor */
+.timeline-item .company {
+    font-size: 1rem;
+    color: var(--brutal-black);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    text-decoration: none; 
+    transition: color 0.2s ease, transform 0.2s ease; 
+}
+
+/* Effetto hover per le aziende che sono cliccabili (link) */
+.timeline-item a.company:hover {
+    color: var(--cmd-orange);
+    transform: translateX(5px);
+}
+
+.timeline-item .company::before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: var(--cmd-orange);
+    margin-right: 10px;
+    border: 1px solid var(--brutal-black);
+}
+
+.timeline-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #444;
+    border-left: 2px solid var(--bg-dark-gray);
+    padding-left: 15px;
+    margin-left: 5px;
+    margin-bottom: 0;
+}
+

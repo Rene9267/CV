@@ -1,0 +1,14 @@
+/* Basic reset ensures that margins and paddings do not interfere with our custom box sizing across different browsers */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--bg-gray);
+    color: var(--brutal-black);
+    overflow-x: hidden;
+}
+

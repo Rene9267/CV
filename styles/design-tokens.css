@@ -1,0 +1,13 @@
+/* Global variables define the core color palette and border styling for the retro brutalist theme */
+:root {
+    --bg-gray: #D4D4D2;
+    --bg-dark-gray: #c2c2c0;
+    --brutal-black: #1A1A1A;
+    --cmd-orange: #FF5722;
+    --retro-border: 4px solid var(--brutal-black);
+}
+
+html {
+    scroll-snap-type: y proximity;
+}
+

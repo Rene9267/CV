@@ -1,0 +1,138 @@
+/* Terminal backdrop and window shared by the ActionFlow and portfolio-site pages. */
+
+.terminal-window {
+    background-color: var(--term-panel);
+    border: 1px solid var(--term-line);
+    margin: 15px 0 25px;
+    overflow-x: auto;
+}
+
+.terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: var(--term-line);
+    border-bottom: 1px solid var(--term-panel);
+}
+
+.t-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--term-orange);
+}
+
+.t-dot:nth-child(2) {
+ background-color: var(--term-muted); 
+}
+
+.t-dot:nth-child(3) {
+ background-color: var(--term-green); 
+}
+
+.t-title {
+    margin-left: 8px;
+    font-size: 0.75rem;
+    color: var(--term-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.terminal-body {
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    line-height: 1.9;
+}
+
+.terminal-body .t-line {
+    margin: 0;
+    color: var(--term-gray);
+}
+
+.t-prompt {
+ color: var(--term-green); font-weight: bold; 
+}
+
+.t-cmd {
+ color: var(--term-orange); 
+}
+
+.t-out {
+ color: var(--term-muted); 
+}
+
+/* ===== SFONDO TERMINALE ===== */
+.term-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.term-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 3px,
+        rgba(46,46,44,0.1) 3px,
+        rgba(46,46,44,0.1) 4px
+    );
+    opacity: 0.6;
+}
+
+.term-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,87,34,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,87,34,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 75%);
+}
+
+.term-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 15%, rgba(74,222,128,0.05), rgba(0,0,0,0) 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%);
+}
+
+.term-code-field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.term-code-field .term-glyph {
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: var(--term-orange);
+    opacity: 0;
+    animation-name: glyphFloat;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.term-code-field .term-glyph.t-green {
+ color: var(--term-green); 
+}
+
+.term-code-field .term-glyph.t-muted {
+ color: var(--term-muted); 
+}
+
+@keyframes glyphFloat {
+    0%   { transform: translate(0, 0) rotate(-4deg); opacity: 0; }
+    15%  { opacity: 0.8; }
+    50%  { opacity: 0.4; }
+    85%  { opacity: 0.8; }
+    100% { transform: translate(var(--drift-x), var(--drift-y)) rotate(4deg); opacity: 0; }
+}

@@ -1,0 +1,27 @@
+/* Typewriter terminal block replacing the skill list */
+.about-typed {
+    border: 2px solid var(--brutal-black);
+    padding: 14px 16px;
+    background: var(--bg-gray);
+    min-height: 60px;
+    margin-top: 10px;
+}
+
+.about-typed .typed-line {
+    display: block;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--brutal-black);
+}
+
+.about-typed .cursor {
+    display: inline-block;
+    color: var(--cmd-orange);
+    animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
