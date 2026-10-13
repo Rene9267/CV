@@ -536,6 +536,32 @@ body.nav-drawer-open .nav-drawer-backdrop {
     font-size: 0.9rem;
 }
 
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+    max-width: 100%;
+}
+
+.about-header .contact-links {
+    justify-content: flex-start;
+    margin-top: 14px;
+}
+
+.contact-link {
+    font-size: 0.72rem;
+    padding: 8px 12px;
+    text-align: center;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+#intro .contact-links {
+    margin-bottom: 8px;
+}
+
 .about-section {
     margin-bottom: 60px;
 }

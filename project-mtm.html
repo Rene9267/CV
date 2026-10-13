@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visita VR — impianto farina | MTM Project</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --plant-deep: #12161c;
+            --plant-mid: #1c2430;
+            --plant-line: #3a4a5c;
+            --safety: #f0a020;
+            --safety-soft: #ffc857;
+            --steel: #8fa8c4;
+            --ink-muted: #b4bcc6;
+            --parchment: #e8ecf0;
+        }
+
+        body.about-page.mtm-page {
+            background-color: var(--plant-deep);
+            color: var(--ink-muted);
+        }
+
+        .container-about {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2.section-title {
+            scroll-margin-top: 110px;
+        }
+
+        .top-nav .retro-btn {
+            background-color: var(--plant-deep);
+            color: var(--safety-soft);
+            border-color: var(--plant-line);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6);
+        }
+
+        .top-nav .retro-btn:hover {
+            background-color: var(--plant-mid);
+            color: var(--parchment);
+            border-color: var(--safety);
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 2px dashed var(--plant-line);
+            margin: 50px 0;
+            opacity: 0.85;
+        }
+
+        .project-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 50px 0 40px;
+            border-bottom: 3px solid var(--plant-line);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .project-hero::after {
+            content: "▼";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--safety);
+            font-size: 1.2rem;
+            background-color: var(--plant-deep);
+            padding: 0 10px;
+        }
+
+        .project-hero .hero-cover {
+            width: min(100%, 640px);
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--plant-line);
+            box-shadow: 0 0 24px rgba(240, 160, 32, 0.12), 6px 6px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .project-hero h1 {
+            font-size: clamp(1.8rem, 7vw, 3.2rem);
+            margin-bottom: 0.5rem;
+            color: var(--parchment);
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+        }
+
+        .project-hero .subtitle {
+            font-size: 0.85rem;
+            color: var(--steel);
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags .tag {
+            background-color: var(--plant-mid);
+            color: var(--safety-soft);
+            border: 1px solid var(--plant-line);
+            font-size: 0.7rem;
+        }
+
+        .project-hero .byline {
+            color: var(--ink-muted);
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--safety-soft);
+            border-left: 5px solid var(--steel);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-description p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--ink-muted);
+        }
+
+        .highlight-box {
+            background-color: rgba(240, 160, 32, 0.08);
+            border-left: 6px solid var(--safety);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-top: 1px solid var(--plant-line);
+            border-bottom: 1px solid var(--plant-line);
+        }
+
+        .highlight-box p {
+            color: var(--parchment);
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .tech-card {
+            border: 1px solid var(--plant-line);
+            background-color: rgba(28, 36, 48, 0.85);
+            padding: 18px;
+            text-align: center;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .tech-card h3 {
+            font-size: 0.8rem;
+            color: var(--safety-soft);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .tech-card p {
+            font-size: 0.88rem;
+            color: var(--ink-muted);
+            margin-bottom: 0;
+            line-height: 1.55;
+        }
+
+        .credits-list {
+            list-style: none;
+            margin: 0;
+            padding: 20px 24px;
+            border: 1px solid var(--plant-line);
+            background-color: rgba(28, 36, 48, 0.75);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .credits-list li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--ink-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .credits-list strong {
+            color: var(--safety-soft);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .notes-box {
+            background-color: rgba(28, 36, 48, 0.65);
+            border: 1px solid var(--plant-line);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .notes-box p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--ink-muted);
+            margin-bottom: 1rem;
+        }
+
+        .notes-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .notes-box .highlight {
+            color: var(--safety-soft);
+            font-weight: bold;
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            margin: 20px 0 10px;
+            border: 2px solid var(--plant-line);
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+            background: #000;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .screenshot-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border: 1px solid var(--plant-line);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .screenshot-caption {
+            font-size: 0.78rem;
+            opacity: 0.75;
+            margin-top: 6px;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .project-actions .retro-btn {
+            background-color: var(--plant-deep);
+            color: var(--safety-soft);
+            border-color: var(--plant-line);
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.6);
+        }
+
+        .project-actions .retro-btn:hover {
+            background-color: var(--plant-mid);
+            color: var(--parchment);
+            border-color: var(--safety);
+        }
+
+        .plant-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg, rgba(18, 22, 28, 0.92), rgba(18, 22, 28, 0.97)),
+                url('assets/mtm-vr-hero.jpg') center / cover no-repeat;
+            filter: saturate(0.85);
+        }
+
+        .index-nav {
+            position: fixed;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            width: 240px;
+            background-color: rgba(18, 22, 28, 0.94);
+            border: 1px solid var(--plant-line);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+            padding: 14px 12px;
+        }
+
+        .index-nav h3 {
+            font-size: 0.62rem;
+            color: var(--steel);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--plant-line);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .index-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .index-nav li {
+            margin-bottom: 7px;
+        }
+
+        .index-nav a {
+            display: block;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: var(--ink-muted);
+            text-decoration: none;
+            padding: 9px 10px;
+            border-left: 2px solid transparent;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+        }
+
+        .index-nav a:hover,
+        .index-nav a.active {
+            color: var(--safety-soft);
+            background-color: rgba(240, 160, 32, 0.08);
+            border-left-color: var(--safety);
+        }
+
+        @media (max-width: 600px) {
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page mtm-page">
+
+    <div class="plant-bg" aria-hidden="true"></div>
+
+    <aside class="index-nav" id="page-index-nav" aria-label="Indice della pagina">
+        <h3>[ // Indice ]</h3>
+    </aside>
+
+    <nav class="top-nav">
+        <a href="index.html" class="retro-btn">[ &lt; ] HOME</a>
+        <button type="button" class="retro-btn nav-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="page-index-nav">[ ≡ ]</button>
+    </nav>
+
+    <main class="container-about">
+
+        <div class="project-hero">
+            <img src="assets/mtm-vr-hero.jpg" alt="Demo VR — linea industriale" class="hero-cover" width="640" height="360">
+            <p class="subtitle">MTM Project — Collaborazione mag–lug 2024</p>
+            <h1>Visita VR — impianto farina</h1>
+            <div class="meta-tags">
+                <span class="tag">META QUEST</span>
+                <span class="tag">UNITY</span>
+                <span class="tag">C#</span>
+                <span class="tag">OPENXR</span>
+                <span class="tag">XRI</span>
+                <span class="tag">URP</span>
+            </div>
+            <p class="byline">Antonio Troiano — sviluppo Unity e costruzione dell’esperienza</p>
+        </div>
+
+        <h2 class="section-title" id="introduzione">/Introduzione</h2>
+        <div class="project-description">
+            <p>
+                Per <a href="https://www.mtmproject.com/" target="_blank" rel="noopener noreferrer" style="color: var(--safety-soft);">MTM Project</a>
+                ho sviluppato un’esperienza VR per <strong>Meta Quest</strong>, commissionata da una scuola che, dopo una visita
+                a un impianto di produzione e stoccaggio della farina, voleva <strong>rivivere il percorso in realtà virtuale</strong>.
+                Nomi di scuola e stabilimento non sono pubblici: in pagina resta solo il contesto didattico-industriale
+                già visibile nella demo ufficiale.
+            </p>
+            <div class="highlight-box">
+                <p>
+                    Esplorazione della linea, dispositivi di protezione, infobox informativi, interazione con i macchinari
+                    e flusso di pesatura dei sacchi sul nastro — tutto ciò che compare nel video pubblico sotto.
+                </p>
+            </div>
+            <p>
+                Il lavoro è stato svolto tra <strong>maggio e luglio 2024</strong> in collaborazione coordinata con MTM.
+                Altri prototipi VR realizzati nello stesso periodo non sono pubblicabili e non compaiono su questo sito.
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title" id="demo">/Demo_Pubblica</h2>
+        <p style="font-size: 0.88rem; opacity: 0.8; margin-bottom: 0.5rem;">
+            Registrazione ufficiale su YouTube — unica fonte visiva usata per questa scheda.
+        </p>
+        <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/XpfIY52K1dQ"
+                title="Demo VR — visita impianto (MTM Project)"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title" id="tecnologie">/Tecnologie_Usate</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3>Unity</h3>
+                <p>Costruzione scena, logica di gioco e build per stand-alone Quest.</p>
+            </div>
+            <div class="tech-card">
+                <h3>C#</h3>
+                <p>Interazioni, flussi guidati e comportamento dei macchinari in VR.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Meta Quest</h3>
+                <p>Piattaforma di riferimento per fruizione in classe.</p>
+            </div>
+            <div class="tech-card">
+                <h3>OpenXR</h3>
+                <p>Stack XR su dispositivo standalone.</p>
+            </div>
+            <div class="tech-card">
+                <h3>XR Interaction Toolkit</h3>
+                <p>Grab, puntatori e interazioni con oggetti di scena.</p>
+            </div>
+            <div class="tech-card">
+                <h3>URP</h3>
+                <p>Rendering e lighting per ambienti industriali in VR.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Audio</h3>
+                <p>Effetti da librerie online; integrazione in scena.</p>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title" id="crediti">/Crediti</h2>
+        <ul class="credits-list">
+            <li><strong>Committente</strong> — MTM Project (per conto di una scuola)</li>
+            <li><strong>Sviluppo VR</strong> — Antonio Troiano (esperienza, interazioni, costruzione scena)</li>
+            <li><strong>Modelli 3D</strong> — forniti dal team di progetto</li>
+            <li><strong>Audio</strong> — librerie online</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title" id="note">/Mie_Note_Sul_Progetto</h2>
+        <div class="notes-box">
+            <p>
+                Su questo incarico mi sono occupato dell’intero lato <span class="highlight">sviluppo e costruzione
+                dell’esperienza</span>: integrazione dei modelli ricevuti, collaudi su Quest, infobox, sequenze
+                interattive e messa in scena del percorso visitato dagli studenti. Non pubblico dettagli su tool
+                o metodi interni all’azienda committente.
+            </p>
+            <p>
+                È stato il mio primo contatto prolungato con training VR «serio» dopo le jam: meno caos da 48 ore,
+                più attenzione a chi deve capire un processo reale senza essere in fabbrica.
+            </p>
+            <p style="text-align: right; color: var(--steel); margin-bottom: 0;">
+                — Antonio Troiano
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title" id="screenshot">/Frame_Dalla_Demo</h2>
+        <p style="font-size: 0.85rem; opacity: 0.75; margin-bottom: 1rem;">
+            Still estratti dal video pubblico YouTube (nessun materiale di lavorazione interno).
+        </p>
+        <div class="screenshot-grid">
+            <div>
+                <img src="assets/mtm-vr-hero.jpg" alt="Vista della linea in VR" class="screenshot-img">
+                <p class="screenshot-caption">Panoramica della linea</p>
+            </div>
+            <div>
+                <img src="assets/mtm-vr-still-1.jpg" alt="Frame demo VR 1" class="screenshot-img">
+                <p class="screenshot-caption">Frame dalla registrazione</p>
+            </div>
+            <div>
+                <img src="assets/mtm-vr-still-2.jpg" alt="Frame demo VR 2" class="screenshot-img">
+                <p class="screenshot-caption">Frame dalla registrazione</p>
+            </div>
+            <div>
+                <img src="assets/mtm-vr-still-3.jpg" alt="Frame demo VR 3" class="screenshot-img">
+                <p class="screenshot-caption">Frame dalla registrazione</p>
+            </div>
+        </div>
+
+        <div class="project-actions">
+            <a href="https://www.youtube.com/watch?v=XpfIY52K1dQ" target="_blank" rel="noopener noreferrer" class="retro-btn">YOUTUBE &gt;&gt;</a>
+            <a href="https://www.mtmproject.com/" target="_blank" rel="noopener noreferrer" class="retro-btn">MTM PROJECT &gt;&gt;</a>
+            <a href="index.html#lavoro" class="retro-btn">/PRODUZIONE &gt;&gt;</a>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

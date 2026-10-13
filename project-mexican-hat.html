@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mexican Hat | Antonio Troiano</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --fiesta-deep: #141008;
+            --fiesta-mid: #241a0c;
+            --teal-glow: #2a9d8f;
+            --teal-dim: #1d6b62;
+            --gold: #e8b923;
+            --gold-soft: #f5d76e;
+            --chili: #c1121f;
+            --ink-muted: #b8a898;
+            --parchment: #ebe4d8;
+        }
+
+        body.about-page.mexican-hat-page {
+            background-color: var(--fiesta-deep);
+            color: var(--ink-muted);
+        }
+
+        .container-about {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2.section-title {
+            scroll-margin-top: 110px;
+        }
+
+        .top-nav .retro-btn {
+            background-color: var(--fiesta-deep);
+            color: var(--gold-soft);
+            border-color: var(--teal-dim);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6);
+        }
+
+        .top-nav .retro-btn:hover {
+            background-color: var(--fiesta-mid);
+            color: var(--parchment);
+            border-color: var(--gold);
+        }
+
+        .section-divider {
+            border: none;
+            height: 3px;
+            margin: 50px 0;
+            opacity: 0.55;
+            background: linear-gradient(90deg, var(--teal-dim), var(--gold), var(--chili), var(--teal-dim));
+            mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+        }
+
+        .project-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 50px 0 40px;
+            border-bottom: 3px solid var(--teal-dim);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .project-hero::after {
+            content: "🎩";
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.1rem;
+            background-color: var(--fiesta-deep);
+            padding: 0 12px;
+        }
+
+        .hero-cover-placeholder {
+            width: min(100%, 640px);
+            aspect-ratio: 16 / 9;
+            margin-bottom: 1.5rem;
+            border: 2px dashed var(--teal-dim);
+            background: linear-gradient(145deg, rgba(42, 157, 143, 0.12), rgba(232, 185, 35, 0.08));
+            box-shadow: 0 0 28px rgba(232, 185, 35, 0.1), 6px 6px 0 rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.5rem;
+        }
+
+        .hero-cover-placeholder span {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--teal-glow);
+            font-weight: bold;
+        }
+
+        .hero-cover-placeholder p {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            margin: 0;
+            max-width: 28rem;
+            line-height: 1.5;
+        }
+
+        .project-hero h1 {
+            font-size: clamp(2.2rem, 9vw, 4.2rem);
+            margin-bottom: 0.5rem;
+            color: var(--gold-soft);
+            text-shadow: 0 0 24px rgba(232, 185, 35, 0.28), 3px 3px 0 rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .project-hero .subtitle {
+            font-size: 0.9rem;
+            color: var(--teal-glow);
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero .meta-tags .tag {
+            background-color: var(--fiesta-mid);
+            color: var(--gold-soft);
+            border: 1px solid var(--teal-dim);
+            font-size: 0.7rem;
+        }
+
+        .project-hero .byline {
+            color: var(--ink-muted);
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--gold-soft);
+            border-left: 5px solid var(--chili);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-description p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--ink-muted);
+        }
+
+        .project-description .highlight {
+            color: var(--gold-soft);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background-color: rgba(42, 157, 143, 0.1);
+            border-left: 6px solid var(--teal-glow);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-top: 1px solid rgba(232, 185, 35, 0.12);
+            border-bottom: 1px solid rgba(232, 185, 35, 0.12);
+        }
+
+        .highlight-box p {
+            color: var(--parchment);
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .credits-list {
+            list-style: none;
+            margin: 0;
+            padding: 20px 24px;
+            border: 1px solid var(--teal-dim);
+            background-color: rgba(36, 26, 12, 0.75);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .credits-list li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--ink-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .credits-list strong {
+            color: var(--gold-soft);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .contrib-list {
+            margin: 1rem 0 0;
+            padding-left: 1.25rem;
+            color: var(--ink-muted);
+            line-height: 1.75;
+            font-size: 0.95rem;
+        }
+
+        .contrib-list li {
+            margin-bottom: 0.35rem;
+        }
+
+        .contrib-list code {
+            font-size: 0.85em;
+            color: var(--gold-soft);
+        }
+
+        .notes-box {
+            background-color: rgba(36, 26, 12, 0.65);
+            border: 1px solid var(--teal-dim);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .notes-box p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--ink-muted);
+            margin-bottom: 1rem;
+        }
+
+        .notes-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .notes-box .highlight {
+            color: var(--gold-soft);
+            font-weight: bold;
+        }
+
+        .media-note {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: var(--ink-muted);
+            border: 1px dashed var(--teal-dim);
+            padding: 1.25rem 1.5rem;
+            background-color: rgba(20, 16, 8, 0.5);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .project-actions .retro-btn {
+            background-color: var(--fiesta-deep);
+            color: var(--gold-soft);
+            border-color: var(--teal-dim);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-actions .retro-btn:hover {
+            background-color: var(--fiesta-mid);
+            color: var(--parchment);
+            border-color: var(--gold);
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+        }
+
+        /* ===== SFONDO FIESTA / Cappelli ===== */
+        .fiesta-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            background: var(--fiesta-deep);
+        }
+
+        .fiesta-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 78% 12%, rgba(42, 157, 143, 0.1), transparent 42%),
+                radial-gradient(ellipse at 12% 22%, rgba(193, 18, 31, 0.09), transparent 38%);
+        }
+
+        .fiesta-horizon {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 44vh;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(193, 18, 31, 0.08) 28%,
+                rgba(232, 185, 35, 0.14) 58%,
+                rgba(42, 157, 143, 0.07) 100%
+            );
+        }
+
+        .fiesta-sun {
+            position: absolute;
+            bottom: 16vh;
+            left: 50%;
+            width: min(34vmax, 420px);
+            height: min(34vmax, 420px);
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(245, 215, 110, 0.2) 0%,
+                rgba(232, 185, 35, 0.09) 38%,
+                transparent 68%
+            );
+            filter: blur(10px);
+            animation: fiestaSunGlow 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes fiestaSunGlow {
+            0% {
+                opacity: 0.55;
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                opacity: 0.9;
+                transform: translateX(-50%) scale(1.06);
+            }
+        }
+
+        .fiesta-hat {
+            position: absolute;
+            pointer-events: none;
+            filter: blur(0.6px);
+            opacity: 0.22;
+        }
+
+        .fiesta-hat--sombrero {
+            bottom: 10vh;
+            left: 1%;
+            width: min(30vw, 220px);
+            height: min(16vw, 110px);
+        }
+
+        .fiesta-hat--sombrero::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 42%;
+            background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(139, 105, 20, 0.85), rgba(92, 69, 16, 0.35));
+            border-radius: 50%;
+            transform: scaleY(0.55);
+        }
+
+        .fiesta-hat--sombrero::after {
+            content: "";
+            position: absolute;
+            width: 36%;
+            height: 58%;
+            left: 32%;
+            bottom: 22%;
+            background: linear-gradient(180deg, rgba(166, 124, 26, 0.9), rgba(107, 80, 18, 0.75));
+            border-radius: 48% 48% 42% 42%;
+        }
+
+        .fiesta-hat--bowler {
+            bottom: 28vh;
+            right: 3%;
+            width: min(18vw, 120px);
+            height: min(14vw, 90px);
+            opacity: 0.18;
+        }
+
+        .fiesta-hat--bowler::before {
+            content: "";
+            position: absolute;
+            width: 118%;
+            height: 26%;
+            left: -9%;
+            bottom: 2%;
+            background: rgba(61, 52, 40, 0.75);
+            border-radius: 50%;
+            transform: scaleY(0.45);
+        }
+
+        .fiesta-hat--bowler::after {
+            content: "";
+            position: absolute;
+            width: 68%;
+            height: 72%;
+            left: 16%;
+            bottom: 14%;
+            background: linear-gradient(180deg, rgba(74, 64, 53, 0.85), rgba(42, 36, 28, 0.8));
+            border-radius: 50% 50% 44% 44%;
+        }
+
+        .fiesta-hat--straw {
+            top: 20vh;
+            right: 10%;
+            width: min(22vw, 150px);
+            height: min(12vw, 80px);
+            opacity: 0.16;
+        }
+
+        .fiesta-hat--straw::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 38%;
+            background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(196, 160, 74, 0.7), rgba(139, 115, 48, 0.25));
+            border-radius: 50%;
+            transform: scaleY(0.5);
+        }
+
+        .fiesta-hat--straw::after {
+            content: "";
+            position: absolute;
+            width: 42%;
+            height: 52%;
+            left: 29%;
+            bottom: 20%;
+            background: linear-gradient(180deg, rgba(212, 178, 88, 0.75), rgba(150, 120, 50, 0.65));
+            border-radius: 50% 50% 38% 38%;
+        }
+
+        .hat-stack {
+            position: absolute;
+            bottom: 7vh;
+            right: 6%;
+            width: 80px;
+            height: 88px;
+            opacity: 0.24;
+            filter: blur(0.4px);
+        }
+
+        .hat-stack__layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 14px;
+        }
+
+        .hat-stack__layer::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            background: rgba(139, 105, 20, 0.8);
+            border-radius: 50%;
+            transform: scaleY(0.42);
+        }
+
+        .hat-stack__layer::after {
+            content: "";
+            position: absolute;
+            width: 44%;
+            height: 20px;
+            left: 28%;
+            bottom: 5px;
+            background: rgba(166, 124, 26, 0.85);
+            border-radius: 50% 50% 40% 40%;
+        }
+
+        .hat-stack__layer--1 {
+            bottom: 0;
+            width: 68px;
+        }
+
+        .hat-stack__layer--2 {
+            bottom: 17px;
+            width: 58px;
+            opacity: 0.92;
+        }
+
+        .hat-stack__layer--3 {
+            bottom: 32px;
+            width: 48px;
+            opacity: 0.85;
+        }
+
+        .fiesta-vignette {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 42%, rgba(0, 0, 0, 0) 22%, rgba(20, 16, 8, 0.78) 88%),
+                radial-gradient(ellipse at 50% 100%, rgba(20, 16, 8, 0.35), transparent 55%);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fiesta-sun {
+                animation: none;
+                opacity: 0.7;
+            }
+        }
+
+        .index-nav {
+            position: fixed;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            width: 240px;
+            background-color: rgba(14, 10, 8, 0.92);
+            border: 1px solid var(--teal-dim);
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            padding: 14px 12px;
+        }
+
+        .index-nav h3 {
+            font-size: 0.62rem;
+            color: var(--teal-glow);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--teal-dim);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .index-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .index-nav li {
+            margin-bottom: 7px;
+        }
+
+        .index-nav a {
+            display: block;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: var(--ink-muted);
+            text-decoration: none;
+            padding: 9px 10px;
+            border-left: 2px solid transparent;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+        }
+
+        .index-nav a:hover,
+        .index-nav a.active {
+            color: var(--gold-soft);
+            background-color: rgba(232, 185, 35, 0.08);
+            border-left-color: var(--gold);
+        }
+    </style>
+</head>
+
+<body class="about-page mexican-hat-page">
+
+    <div class="fiesta-bg" aria-hidden="true">
+        <div class="fiesta-horizon"></div>
+        <div class="fiesta-sun"></div>
+        <div class="fiesta-hat fiesta-hat--sombrero"></div>
+        <div class="fiesta-hat fiesta-hat--bowler"></div>
+        <div class="fiesta-hat fiesta-hat--straw"></div>
+        <div class="hat-stack">
+            <span class="hat-stack__layer hat-stack__layer--1"></span>
+            <span class="hat-stack__layer hat-stack__layer--2"></span>
+            <span class="hat-stack__layer hat-stack__layer--3"></span>
+        </div>
+        <div class="fiesta-vignette"></div>
+    </div>
+
+    <aside class="index-nav" id="page-index-nav" aria-label="Indice della pagina">
+        <h3>[ // Indice ]</h3>
+    </aside>
+
+    <nav class="top-nav">
+        <a href="index.html" class="retro-btn">[ &lt; ] HOME</a>
+        <button type="button" class="retro-btn nav-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="page-index-nav">[ ≡ ]</button>
+    </nav>
+
+    <main class="container-about">
+
+        <div class="project-hero">
+            <div class="hero-cover-placeholder" role="img" aria-label="Anteprima non disponibile — screenshot in arrivo">
+                <span>Mexican Hat · UE 4.27</span>
+                <p>Nessun still pubblico salvato dalla jam. Il repo GitHub resta la fonte del progetto.</p>
+            </div>
+            <p class="subtitle">AIV Summer Jam 2022 — ottobre 2022</p>
+            <h1>Mexican Hat</h1>
+            <div class="meta-tags">
+                <span class="tag">UNREAL ENGINE 4.27</span>
+                <span class="tag">BLUEPRINTS</span>
+                <span class="tag">3D PLATFORMER</span>
+            </div>
+            <p class="byline">Antonio Troiano &amp; Igor (Rygor01) — AIV</p>
+        </div>
+
+        <h2 class="section-title">/Introduzione_Al_Gioco</h2>
+        <div class="project-description">
+            <p>
+                <strong>Mexican Hat</strong> è il nostro ingresso alla <em>AIV Summer Jam</em> del 2022: pochi giorni intensi
+                a ottobre, subito dopo l’esperienza Unity di <em>Burning Keys</em> e prima del ciclo GGJ che sul sito continua
+                con <em>Undergroove</em>. È anche l’unico progetto jam qui documentato su <span class="highlight">Unreal Engine</span>
+                — tutto in Blueprint, senza C++ custom.
+            </p>
+            <div class="highlight-box">
+                <p>
+                    Platformer in terza persona: controlli un nacho in corsa per raggiungere gli amici raccogliendo
+                    cappelli sparsi per il livello. Ogni cappello si impila sulla testa, diventa una scala per arrampicarti
+                    e cambia il ritmo del platforming fino alla scena di vittoria.
+                </p>
+            </div>
+            <p>
+                Non c’è pagina itch né build scaricabile oggi: resta il repository
+                <a href="https://github.com/Rene9267/MexicanHat" target="_blank" rel="noopener noreferrer" style="color: var(--gold-soft);">MexicanHat</a>
+                sul mio account studentesco AIV. Il README della jam è essenziale; la storia del lavoro sta nei commit
+                e nei branch ancora presenti nel repo.
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Crediti</h2>
+        <ul class="credits-list">
+            <li><strong>Programming &amp; systems (Blueprints)</strong> — Antonio Troiano</li>
+            <li><strong>Level design &amp; ambiente</strong> — Igor (<a href="https://github.com/Rygor01" target="_blank" rel="noopener noreferrer" style="color: var(--teal-glow);">Rygor01</a>)</li>
+            <li><strong>Engine</strong> — Unreal Engine 4.27</li>
+        </ul>
+        <p style="margin-top: 1.25rem; font-size: 0.95rem; line-height: 1.75; color: var(--ink-muted);">
+            Squadra piccola, repo condivisa: merge last-minute, branch dedicati per audio, stack dei cappelli e cutscene finale.
+            Alcuni props della stanza riusano asset già modellati per <em>Burning Keys</em> (sveglia, monitor, mouse, porta penne)
+            — un riciclo pragmatico tipico delle jam scolastiche.
+        </p>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Il_Mio_Contributo</h2>
+        <p style="font-size: 0.95rem; line-height: 1.75; color: var(--ink-muted); margin-bottom: 0.75rem;">
+            Quello che segue è ciò che ho introdotto durante la jam e che compare ancora nel repository pubblico.
+            Igor ha curato il livello <code style="color: var(--gold-soft);">Livello_1</code>, menu e props ambientali.
+        </p>
+        <ul class="contrib-list">
+            <li>Personaggio e animazioni — <code>ABP_Nacho</code>, montate di climb, blend space e skeleton del nacho</li>
+            <li>Gameplay cappelli — raccolta, stack, scale di cappelli e ostacoli (<code>BP_HatStack</code>, <code>BP_HatStair</code>, <code>BP_HatSpawn</code>, <code>BP_FinalHat</code>)</li>
+            <li>UI jam — menu, retry, controlli, HUD livello e widget di interazione col cappello</li>
+            <li>Audio — musiche di menu/gameplay/vittoria, SFX di raccolta e voci legate ai tipi di cappello</li>
+            <li>Finale — cutscene di chiusura (<code>EndGameCutScene-Antonio</code>, mappe <code>WinScene</code> / <code>EndGame</code>)</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Mie_Note_Sul_Progetto</h2>
+        <div class="notes-box">
+            <p>
+                Era la mia prima jam su Unreal: imparare a non impazzire con i merge su asset binari conta quanto
+                «far funzionare lo stack». I Blueprint non si citano come snippet in pagina — sono grafi — ma
+                nel repo restano traccia verificabile del lavoro.
+            </p>
+            <p>
+                Sul sito tengo <span class="highlight">Mexican Hat</span> come complemento alla filiera Unity/Fast2D:
+                mostra che il platforming e il lavoro di squadra non dipendono da un solo engine. Quando recupererò
+                screenshot o una build Windows, aggiornerò hero e galleria; per ora racconto il progetto onestamente,
+                senza immagini inventate.
+            </p>
+            <p style="text-align: right; color: var(--gold-soft); margin-bottom: 0;">
+                — Antonio Troiano
+            </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Media</h2>
+        <p class="media-note">
+            Non ho trovato foto o video pubblici della jam (né su YouTube, itch o social). Se hai ancora il progetto
+            in locale, basta un giro in PIE con due o tre inquadrature per completare questa sezione.
+        </p>
+
+        <div class="project-actions">
+            <a href="https://github.com/Rene9267/MexicanHat" target="_blank" rel="noopener noreferrer" class="retro-btn">REPO GITHUB &gt;&gt;</a>
+            <a href="index.html" class="retro-btn">[ &lt; ] HOME</a>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

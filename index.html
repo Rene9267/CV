@@ -18,7 +18,14 @@
             
             <h1>Antonio Troiano</h1>
             <h2>XR & Spatial Developer</h2>
-            <p>Developer specialized in extended reality. C++, C#, Unity, Unreal Engine, and Vibe Coding. Building digital worlds with a retro soul.</p>
+            <p>XR developer focused on Unity XR and C# — enterprise training, spatial apps, and game jams. Building digital worlds with a retro soul.</p>
+
+            <nav class="contact-links" aria-label="Contact links">
+                <a href="mailto:EMAIL@DOMINIO" class="retro-btn contact-link">MAIL: EMAIL@DOMINIO</a>
+                <a href="https://www.linkedin.com/in/PROFILO" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">LINKEDIN: /in/PROFILO</a>
+                <a href="https://github.com/UTENTE" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">GIT: /UTENTE</a>
+                <a href="https://x.com/UTENTE" class="retro-btn contact-link" target="_blank" rel="noopener noreferrer">X: /UTENTE</a>
+            </nav>
             
             <div class="btn-scroll-wrapper">
                 <a href="about.html" class="retro-btn btn-intro">Initialize Profile.exe</a>
@@ -37,43 +44,28 @@
         </div>
     </section>
 
-    <!-- layer-off: /Produzione è nascosta finché i progetti lavorativi non sono pubblicabili. Togliere la classe per riattivarla. -->
-    <section class="layer layer-off" id="lavoro">
-        <div class="content">
+    <!-- /Produzione: progetti con scheda o demo pubblica -->
+    <section class="layer" id="lavoro">
+        <div class="content scrollable-content">
             <h2>/Produzione</h2>
-            <p>Progetti realizzati in ambito professionale. Software scalabile e soluzioni XR enterprise.</p>
+            <p>Progetti professionali con demo o scheda pubblicabile.</p>
 
            <div class="projects-grid">
-                
-                <article class="project-card" data-href="https://domoanalytics.it/" data-target="_blank">
-                    <div class="card-visual">
-                        <div class="placeholder-img">DOMO_XR_SOLUTION.MP4</div>
-                    </div>
-                    <div class="card-info">
-                        <div class="tag-container">
-                            <span class="tag">UNITY XR</span>
-                            <span class="tag">C#</span>
-                            <span class="tag">ENTERPRISE</span>
-                        </div>
-                        <h3>XR Unity Developer</h3>
-                        <p>Currently developing enterprise-grade extended reality solutions and interactive data visualizations.</p>
-                        <span class="card-btn">Company_Site >></span>
-                    </div>
-                </article>
 
-                <article class="project-card" data-href="https://www.youtube.com/watch?v=S254m687S-k" data-target="_blank">
+                <article class="project-card" data-href="project-mtm.html">
                     <div class="card-visual">
-                        <div class="placeholder-img">MTM_VR_TRAINING.MP4</div>
+                        <img src="assets/mtm-vr-hero.jpg" alt="Visita VR — impianto farina, demo MTM" class="card-visual-img">
                     </div>
                     <div class="card-info">
                         <div class="tag-container">
-                            <span class="tag">VR</span>
+                            <span class="tag">QUEST</span>
                             <span class="tag">UNITY</span>
-                            <span class="tag">TRAINING</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">VR</span>
                         </div>
-                        <h3>Production Line VR Simulator</h3>
-                        <p>Developed immersive VR software for high-fidelity industrial training and assembly line simulations.</p>
-                        <span class="card-btn">Watch_Demo >></span>
+                        <h3>Visita VR — impianto farina</h3>
+                        <p>Training VR per Meta Quest: rivivere in classe la visita a un impianto di produzione. Sviluppo esperienza e interazioni (MTM, 2024).</p>
+                        <span class="card-btn">Scheda &gt;&gt;</span>
                     </div>
                 </article>
 
@@ -114,7 +106,7 @@
                             <span class="tag">HTML</span> <span class="tag">CSS</span> <span class="tag">JS</span> <span class="tag">OPENCODE</span>
                         </div>
                         <h3>Portfolio Showcase</h3>
-                        <p>Portfolio retrò costruito insieme a un'agente AI. Il CV che si legge come un terminale.</p>
+                        <p>Portfolio retrò statico (HTML/CSS/JS): terminale visivo, sticky scroll, zero build. Case study su workflow agentico e tempi di consegna.</p>
                         <span class="card-btn">Leggi >></span>
                     </div>
                 </article>
@@ -203,6 +195,22 @@
                     </div>
                 </article>
 
+                <article class="project-card" data-href="project-mexican-hat.html">
+                    <div class="card-visual" aria-hidden="true">
+                        <div class="placeholder-img">MEXICAN_HAT // UE4.27</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="tag-container">
+                            <span class="tag">AIV SUMMER JAM 2022</span>
+                            <span class="tag">UNREAL</span>
+                            <span class="tag">BLUEPRINTS</span>
+                        </div>
+                        <h3>Mexican Hat</h3>
+                        <p>Platformer in terza persona: raccogli cappelli, impilali sulla testa e arrampicati per raggiungere gli amici. Jam AIV su Unreal, ottobre 2022.</p>
+                        <span class="card-btn">Scopri &gt;&gt;</span>
+                    </div>
+                </article>
+
                 <article class="project-card" data-href="project-burning-keys.html">
                     <div class="card-visual">
                         <img src="assets/burning-keys-card.jpg" alt="Burning Keys — menu in ufficio" class="card-visual-img" style="object-position: 68% center;">
@@ -215,6 +223,22 @@
                         </div>
                         <h3>Burning Keys</h3>
                         <p>Ufficio in prima persona sul tema Duality: mail, telefono e desktop sotto stress, giorno e notte che cambiano la luce, fidget spinner per respirare.</p>
+                        <span class="card-btn">Scopri >></span>
+                    </div>
+                </article>
+
+                <article class="project-card" data-href="project-post-umi.html">
+                    <div class="card-visual">
+                        <img src="assets/post-umi-lounge.png" alt="Post-Umi — salone top-down" class="card-visual-img">
+                    </div>
+                    <div class="card-info">
+                        <div class="tag-container">
+                            <span class="tag">GLOBAL GAME JAM 2021</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">FAST2D</span>
+                        </div>
+                        <h3>Post-Umi</h3>
+                        <p>Primo passo in jam: ti svegli chiuso in casa dopo la festa e cerchi la chiave tra ricordi smarriti. Point &amp; click a Roma, tema Lost &amp; Found.</p>
                         <span class="card-btn">Scopri >></span>
                     </div>
                 </article>
