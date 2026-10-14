@@ -159,18 +159,22 @@ body.about-page.mtm-page {
     pointer-events: auto;
 }
 
-.video-embed-fallback {
+.video-embed-play {
     position: absolute;
     inset: 0;
     display: block;
     width: 100%;
     height: 100%;
-    text-decoration: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
     color: var(--parchment);
+    cursor: pointer;
     overflow: hidden;
 }
 
-.video-embed-fallback img {
+.video-embed-play img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -179,11 +183,12 @@ body.about-page.mtm-page {
     transition: opacity 0.2s;
 }
 
-.video-embed-fallback:hover img {
+.video-embed-play:hover img,
+.video-embed-play:focus-visible img {
     opacity: 1;
 }
 
-.video-embed-fallback-label {
+.video-embed-play-label {
     position: absolute;
     left: 50%;
     top: 50%;

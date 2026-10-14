@@ -1,5 +1,51 @@
 /** Spawns ember particles, screenshot zoom, and floating terminal glyphs. */
 
+function spawnEruptionStreaks(field) {
+    const fieldRect = field.getBoundingClientRect();
+    const cover = document.querySelector('.hero-cover');
+    const coverRect = cover ? cover.getBoundingClientRect() : null;
+    const originX = coverRect
+        ? coverRect.left + coverRect.width / 2 - fieldRect.left
+        : fieldRect.width / 2;
+    const originY = -Math.max(220, fieldRect.height * 0.28);
+    const rays = Math.min(16, Math.max(11, Math.floor(fieldRect.width / 90)));
+    const waves = 2;
+    const maxAngle = 26 * Math.PI / 180;
+    const heats = [
+        'linear-gradient(to bottom, transparent 0%, rgba(255, 72, 16, 0.08) 16%, #ff4e12 46%, #ffc14a 76%, #fff6dc 100%)',
+        'linear-gradient(to bottom, transparent 0%, rgba(255, 220, 140, 0.12) 10%, #ffd15c 42%, #fff4c8 74%, #fff 100%)',
+        'linear-gradient(to bottom, transparent 0%, rgba(160, 12, 18, 0.06) 18%, #9d1218 50%, #e23a22 78%, #ffb199 100%)',
+    ];
+    for (let i = 0; i < rays * waves; i++) {
+        const ray = i % rays;
+        const wave = Math.floor(i / rays);
+        const t = rays === 1 ? 0.5 : ray / (rays - 1);
+        const angle = -maxAngle + t * maxAngle * 2;
+        const dist = fieldRect.height - originY + 140;
+        const dx = Math.sin(angle) * dist;
+        const dy = Math.cos(angle) * dist;
+        const tilt = Math.atan2(dx, dy) * (180 / Math.PI) + 180;
+        const width = wave === 0 ? 10 : 14;
+        const height = wave === 0 ? 86 : 58;
+        const duration = Math.min(1.7, Math.max(1.05, dist / 980));
+        const streak = document.createElement('span');
+        streak.className = 'ember eruption-streak';
+        streak.style.left = `${originX}px`;
+        streak.style.top = `${originY}px`;
+        streak.style.width = `${width}px`;
+        streak.style.height = `${height}px`;
+        streak.style.marginLeft = `${-width / 2}px`;
+        streak.style.marginTop = `${-height / 2}px`;
+        streak.style.background = heats[ray % heats.length];
+        streak.style.setProperty('--tx', `${dx.toFixed(1)}px`);
+        streak.style.setProperty('--ty', `${dy.toFixed(1)}px`);
+        streak.style.setProperty('--tilt', `${tilt.toFixed(2)}deg`);
+        streak.style.animationDuration = `${duration.toFixed(2)}s`;
+        streak.style.animationDelay = `${(-(t * duration) - wave * duration * 0.5).toFixed(2)}s`;
+        field.appendChild(streak);
+    }
+}
+
 function spawnFlourPuffs(field) {
     const count = Math.min(9, Math.max(6, Math.floor(window.innerWidth / 180)));
     for (let i = 0; i < count; i++) {
@@ -31,6 +77,10 @@ function initSceneEffects() {
         emberField.style.zIndex = '5';
         if (emberField.dataset.motion === 'flour') {
             spawnFlourPuffs(emberField);
+            return;
+        }
+        if (emberField.dataset.motion === 'eruption') {
+            spawnEruptionStreaks(emberField);
             return;
         }
         const falling = emberField.dataset.motion === 'fall';

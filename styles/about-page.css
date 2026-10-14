@@ -124,6 +124,10 @@ body.nav-drawer-open .nav-drawer-backdrop {
 }
 
 .contact-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
     font-size: 0.72rem;
     padding: 8px 12px;
     text-align: center;
@@ -131,18 +135,100 @@ body.nav-drawer-open .nav-drawer-backdrop {
     max-width: 100%;
 }
 
+.contact-link__icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.contact-link--linkedin .contact-link__icon {
+    color: #0a66c2;
+}
+
+.contact-link--github .contact-link__icon {
+    color: #24292f;
+}
+
+.contact-link--x .contact-link__icon {
+    color: var(--brutal-black);
+}
+
+.retro-btn.contact-link:hover .contact-link__icon:not(.contact-link__icon--gmail) {
+    color: #fff;
+}
+
+button.retro-btn.contact-link {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.contact-link--gmail {
+    position: relative;
+    text-transform: none;
+    overflow: visible;
+}
+
+.contact-mail-popup {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 4px);
+    transform: translateX(-50%);
+    pointer-events: none;
+    font-weight: bold;
+    font-size: 0.68rem;
+    line-height: 1;
+    color: #fff59d;
+    text-shadow:
+        1px 0 0 var(--brutal-black),
+        -1px 0 0 var(--brutal-black),
+        0 1px 0 var(--brutal-black),
+        0 -1px 0 var(--brutal-black),
+        2px 2px 0 var(--brutal-black);
+    white-space: nowrap;
+    z-index: 3;
+}
+
+.contact-mail-popup--show {
+    animation: contact-mail-popup-float 0.8s ease-out forwards;
+}
+
+@keyframes contact-mail-popup-float {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-16px);
+    }
+}
+
 #intro .contact-links {
     position: absolute;
     top: 18px;
     right: 20px;
+    left: 20px;
     margin: 0;
-    width: max-content;
+    width: auto;
+    max-width: min(520px, calc(100% - 40px));
     min-width: 0;
+    margin-left: auto;
     display: grid;
-    grid-template-columns: repeat(2, max-content);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px 12px;
     justify-content: end;
     z-index: 2;
+}
+
+#intro .contact-link {
+    min-width: 0;
+    box-sizing: border-box;
+    font-size: 0.65rem;
+    padding: 6px 10px;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 #intro .content {
