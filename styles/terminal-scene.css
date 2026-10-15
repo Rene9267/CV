@@ -131,8 +131,8 @@
 
 @keyframes glyphFloat {
     0%   { transform: translate(0, 0) rotate(-4deg); opacity: 0; }
-    15%  { opacity: 0.8; }
-    50%  { opacity: 0.4; }
-    85%  { opacity: 0.8; }
+    15%  { opacity: 0.12; }
+    50%  { opacity: 0.08; }
+    85%  { opacity: 0.12; }
     100% { transform: translate(var(--drift-x), var(--drift-y)) rotate(4deg); opacity: 0; }
 }

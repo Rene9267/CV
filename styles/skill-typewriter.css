@@ -12,6 +12,8 @@
     font-size: 0.95rem;
     line-height: 1.75;
     color: var(--brutal-black);
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .about-typed .cursor {

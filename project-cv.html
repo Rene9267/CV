@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Portfolio Showcase | Portfolio XR</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/project-page.css">
@@ -50,19 +50,9 @@
         <h2 class="section-title">/Introduzione</h2>
         <div class="project-description">
             <p>
-                Questo progetto nasce da un piccolo sogno che coltivavo dai tempi degli studi: creare un portfolio
-                digitale che potesse essere visitato come una pagina web, qualcosa che raccontasse di me e del mio
-                percorso attraverso tocchi interattivi e stimolanti, invece che un triste foglio digitale bianco
-                con sopra buttate tante scritte confuse.
-            </p>
-            <p>
-                Oggi questo sogno sta diventando una piccola realtà che mi riempie di gioia e rafforza la mia
-                curiosità. Venendo da un background fatto di C++, C#, Unity e Unreal, la sfida di approcciarmi
-                al web sembrava complessa; ma grazie alle nuove conoscenze acquisite tramite l'utilizzo dell'AI
-                e ai lavori realizzati fino a oggi, ho trovato il coraggio di iniziare questo progetto, anche come
-                <strong>banco di partenza</strong> per lo sviluppo con il supporto di strutture AI agentiche.
-                Spero che questo primo passo nel mondo del web possa lasciare un sorriso negli occhi di chi guarda,
-                così come sta lasciando un sorriso sul mio volto mentre prende forma.
+                Portfolio statico in HTML, CSS e JavaScript vanilla, senza framework. L'ho progettato e sviluppato con
+                un flusso di lavoro basato su agenti AI: io definisco architettura, requisiti e criteri di accettazione,
+                l'agente implementa, io verifico e correggo.
             </p>
         </div>
 
@@ -72,20 +62,24 @@
         <h2 class="section-title">/Tecnologie_Usate</h2>
         <div class="tech-grid">
             <div class="tech-card">
-                <h3>HTML</h3>
-                <p>Struttura semantica. Una sezione per ogni "livello" del CV, navigabile a scorrimento.</p>
+                <h3>HTML5</h3>
+                <p>Struttura semantica delle pagine: hero, sezioni progetto e contenuti navigabili.</p>
             </div>
             <div class="tech-card">
-                <h3>CSS</h3>
-                <p>Design tokens, layout a layer sticky, bordo retrò brutalista e animazioni leggere.</p>
+                <h3>CSS modulare</h3>
+                <p>Design tokens, layout responsive mobile-first e fogli di stile per pagina.</p>
             </div>
             <div class="tech-card">
-                <h3>Vanilla JS</h3>
-                <p>Audio 8-bit sintetizzato via Web Audio API, micro-interazioni, hover sounds e typewriter.</p>
+                <h3>JavaScript vanilla</h3>
+                <p>Effetti di scena, Web Audio API per i suoni 8-bit e micro-interazioni UI.</p>
             </div>
             <div class="tech-card">
-                <h3>opencode</h3>
-                <p>Struttura AI agentica che orchestri il flusso: pianifica, implementa, verifica.</p>
+                <h3>GitHub Pages</h3>
+                <p>Hosting del sito statico: deploy diretto dal repository, senza build step.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Cursor / OpenCode</h3>
+                <p>Strumenti AI per pianificare, implementare e iterare sul codice con revisione umana.</p>
             </div>
         </div>
 
@@ -93,21 +87,12 @@
 
         <!-- 3. FLOW OPERATIVO -->
         <h2 class="section-title">/Flow_Operativo</h2>
-        <p style="margin-bottom:20px; color:var(--term-gray);">
-            Questo progetto non ha pezzi di codice estremamente complessi o rivoluzionari — non è a questo che serve.
-            La parte interessante sta nell'utilizzo e nell'ottimizzazione dell'AI durante lo sviluppo. Ogni richiesta passa
-            per un flusso specifico: si valuta prima di tutto la difficoltà della task, si sceglie la tipologia di LLM da
-            interrogare e poi avviene la scrittura del codice da parte dell'AI, con una revisione finale.
-        </p>
-        <p style="margin-bottom:20px; color:var(--term-gray);">
-            Mi è servito a comprendere come lavorare al meglio con l'agente: ho imparato a esprimere correttamente
-            intenzioni e finalità, e a capire quando usare modelli più complessi e quando quelli più leggeri; dall'altra
-            parte, l'agente legge la struttura, scompone il lavoro in step, implementa e riporta il risultato.
-        </p>
-        <p style="margin-bottom:20px; color:var(--term-gray);">
-            Il progetto resta piccolo, leggibile e modificabile per scelta, in modo che sia facilmente interrogabile e
-            comprensibile anche da me, che di web non ho mai toccato niente.
-        </p>
+        <ol class="flow-steps">
+            <li>Definizione dei requisiti (architettura, file coinvolti, criteri di accettazione).</li>
+            <li>Piano generato dall'agente e revisionato prima di toccare il codice.</li>
+            <li>Implementazione per piccoli step, con diff rivisto a ogni incremento.</li>
+            <li>Test su desktop e Android, con correzioni fino al comportamento atteso.</li>
+        </ol>
 
         <div class="terminal-window">
             <div class="terminal-bar">
@@ -125,13 +110,13 @@
                 <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">verifica</span> → stato: tutto ok</p>
                 <p class="t-line"><span class="t-out"># ogni passo aggiorna lo stato: il registro tiene traccia delle decisioni prese</span></p>
                 <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">commit</span> "feat: scroll hint sotto la CTA"</p>
-                <p class="t-line"><span class="t-out"># un pezzetto alla volta</span></p>
             </div>
         </div>
         <p class="code-caption">// nessuna libreria, nessun build step: html statico pronto per qualsiasi hosting.</p>
 
-        <p style="color:var(--term-gray); margin-bottom:25px;">
-            La memoria su disco (obiettivi, stato, decisioni) fa da collante tra una sessione di lavoro e la successiva.
+        <p class="flow-delivery">
+            Rispetto a uno sviluppo tradizionale con lo stesso scope, la consegna del portfolio ha richiesto circa
+            <strong>[X giorni]</strong>.
         </p>
 
         <hr class="section-divider">
@@ -149,14 +134,53 @@
                 con suffusioni di colore usate con parsimonia per guidare l'occhio tra le sezioni.
             </p>
             <p>
-                Questo progetto rappresenta anche il mio <span class="highlight">primo contatto reale con il web</span>:
-                il primo portfolio, le prime righe di HTML e CSS scritte in modalità zen, la prima volta che ho guidato
-                un'agente AI nella costruzione di qualcosa fatto da zero. Un esperimento locale che, ogni sessione,
-                diventa un po' più portfolio.
+                Il background XR spiega perché il metodo conta: senza anni di pratica sul front-end, affidarmi solo
+                alla memoria a breve termine dell'agente non bastava. Documentazione su disco + verifica manuale nel
+                browser sono diventati il mio <span class="highlight">controllo qualità</span> su ogni incremento.
             </p>
             <p style="text-align:right; color:var(--term-orange); margin-bottom:0;">
                 — Antonio Troiano
             </p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Screenshot</h2>
+        <p style="font-size: 0.85rem; color: var(--term-muted); margin-bottom: 1rem;">
+            Home del portfolio su viewport desktop e mobile.
+        </p>
+        <div class="screenshot-grid">
+            <div class="screenshot-cell">
+                <img src="assets/cv/home-desktop.png" alt="Home del portfolio — vista desktop" class="screenshot-img"
+                    width="1280" height="720"
+                    onerror="this.hidden=true; this.parentElement.querySelector('.screenshot-pending').hidden=false;">
+                <div class="screenshot-pending" hidden>Screenshot in arrivo</div>
+                <p class="screenshot-caption">Desktop</p>
+            </div>
+            <div class="screenshot-cell">
+                <img src="assets/cv/home-mobile.png" alt="Home del portfolio — vista mobile" class="screenshot-img"
+                    width="390" height="844"
+                    onerror="this.hidden=true; this.parentElement.querySelector('.screenshot-pending').hidden=false;">
+                <div class="screenshot-pending" hidden>Screenshot in arrivo</div>
+                <p class="screenshot-caption">Mobile</p>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">/Frame</h2>
+        <p style="font-size: 0.85rem; color: var(--term-muted); margin-bottom: 1rem;">
+            Output del ciclo di sviluppo: ogni frame è una fetta verificata in browser prima del commit.
+        </p>
+        <div class="screenshot-grid">
+            <div>
+                <img src="assets/cv-showcase-home.jpg" alt="Home del portfolio — hero e layer sticky" class="screenshot-img" width="1280" height="720">
+                <p class="screenshot-caption">Home · layer sticky e intro interattiva (sessione UX front page)</p>
+            </div>
+            <div>
+                <img src="assets/cv-showcase-project-page.jpg" alt="Pagina progetto MTM — layout case study" class="screenshot-img" width="1280" height="720">
+                <p class="screenshot-caption">Pagina progetto · template case study replicato su più schede</p>
+            </div>
         </div>
 
         <div class="project-actions">

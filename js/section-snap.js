@@ -1,56 +1,59 @@
-/** Snaps the home page between full-height layers on wheel, including inner scrollports. */
+/** Snaps the home page between sections on wheel (desktop + fine pointer only). */
 function initSectionSnap() {
-    // --- Scroll Lock: snap between sections with the mouse wheel ---
     const layers = document.querySelectorAll('.layer:not(.layer-off)');
-    if (layers.length > 1) {
-        let scrollLocked = false;
+    if (layers.length <= 1) return;
 
-        const snapTo = (index) => {
-            scrollLocked = true;
-            window.scrollTo({ top: index * window.innerHeight, behavior: 'smooth' });
-            setTimeout(() => { scrollLocked = false; }, 600);
-        };
+    const canSnap = window.matchMedia('(min-width: 900px) and (pointer: fine)').matches
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canSnap) return;
 
-        window.addEventListener('wheel', (e) => {
-            if (scrollLocked) { e.preventDefault(); return; }
+    const sectionTops = () => Array.from(layers).map((layer) => layer.offsetTop);
 
-            const vh = window.innerHeight;
-            const currentSection = Math.max(0, Math.min(layers.length - 1, Math.round(window.scrollY / vh)));
-            const atSectionTop = Math.abs(window.scrollY - currentSection * vh) < 8;
+    let scrollLocked = false;
 
-            if (!atSectionTop) {
-                e.preventDefault();
-                const nearest = e.deltaY > 0
-                    ? Math.min(layers.length - 1, Math.ceil(window.scrollY / vh))
-                    : Math.max(0, Math.floor(window.scrollY / vh));
-                snapTo(nearest);
-                return;
-            }
+    const snapTo = (index) => {
+        const tops = sectionTops();
+        const top = tops[Math.max(0, Math.min(layers.length - 1, index))];
+        scrollLocked = true;
+        window.scrollTo({ top, behavior: 'smooth' });
+        setTimeout(() => { scrollLocked = false; }, 600);
+    };
 
-            const scrollable = layers[currentSection].querySelector('.scrollable-content');
-            if (scrollable && scrollable.scrollHeight > scrollable.clientHeight + 2) {
-                const atTop = scrollable.scrollTop <= 1;
-                const atBottom = scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 2;
-                const goingDown = e.deltaY > 0;
+    const currentSectionIndex = () => {
+        const tops = sectionTops();
+        const y = window.scrollY;
+        let idx = 0;
+        for (let i = 0; i < tops.length; i++) {
+            if (y + 8 >= tops[i]) idx = i;
+        }
+        return idx;
+    };
 
-                if ((goingDown && !atBottom) || (!goingDown && !atTop)) {
-                    e.preventDefault();
-                    scrollable.scrollTop += e.deltaY;
-                    return;
-                }
-            }
+    window.addEventListener('wheel', (e) => {
+        if (scrollLocked) {
+            e.preventDefault();
+            return;
+        }
 
-            if (e.deltaY > 0 && currentSection < layers.length - 1) {
-                e.preventDefault();
-                const next = layers[currentSection + 1].querySelector('.scrollable-content');
-                if (next) next.scrollTop = 0;
-                snapTo(currentSection + 1);
-            } else if (e.deltaY < 0 && currentSection > 0) {
-                e.preventDefault();
-                const prev = layers[currentSection - 1].querySelector('.scrollable-content');
-                if (prev) prev.scrollTop = prev.scrollHeight;
-                snapTo(currentSection - 1);
-            }
-        }, { passive: false });
-    }
+        const tops = sectionTops();
+        const currentSection = currentSectionIndex();
+        const atSectionTop = Math.abs(window.scrollY - tops[currentSection]) < 8;
+
+        if (!atSectionTop) {
+            e.preventDefault();
+            const nearest = e.deltaY > 0
+                ? Math.min(layers.length - 1, currentSection + 1)
+                : Math.max(0, currentSection - 1);
+            snapTo(nearest);
+            return;
+        }
+
+        if (e.deltaY > 0 && currentSection < layers.length - 1) {
+            e.preventDefault();
+            snapTo(currentSection + 1);
+        } else if (e.deltaY < 0 && currentSection > 0) {
+            e.preventDefault();
+            snapTo(currentSection - 1);
+        }
+    }, { passive: false });
 }

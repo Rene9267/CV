@@ -1,5 +1,6 @@
 /* ========================================= */
 /* --- MOBILE RESPONSIVENESS (≤ 768px)  ---- */
+/* TODO mobile-first: migrate to min-width breakpoints in base sheets */
 /* ========================================= */
 @media (max-width: 768px) {
 
@@ -27,11 +28,6 @@
         margin-bottom: 1rem;
     }
 
-    p {
-        font-size: 1rem;
-        margin-bottom: 1.2rem;
-    }
-
     /* --- INTRO / PROFILE --- */
     #intro {
         padding: 12px 18px 16px 12px;
@@ -48,14 +44,6 @@
         max-width: 100%;
         gap: 12px 10px;
         margin-bottom: 22px;
-    }
-
-    #intro .contact-link {
-        min-height: 40px;
-        padding: 8px 8px;
-        font-size: 0.62rem;
-        white-space: normal;
-        box-shadow: 4px 4px 0 var(--brutal-black);
     }
 
     .profile-pixel-art {
@@ -80,7 +68,7 @@
     }
 
     .scroll-label {
-        font-size: 0.65rem;
+        font-size: var(--label-min);
     }
 
     /* --- BUTTONS --- */
@@ -95,15 +83,10 @@
         box-shadow: 3px 3px 0px var(--brutal-black);
     }
 
-    /* --- PROJECTS GRID --- */
+    /* --- PROJECTS GRID: base grid handles columns --- */
     .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
         gap: 12px;
         margin-top: 1.2rem;
-    }
-
-    .projects-grid .project-card:only-child {
-        grid-column: 1 / -1;
     }
 
     .project-card {
@@ -115,128 +98,23 @@
         box-shadow: 6px 6px 0px var(--brutal-black);
     }
 
-    .card-visual {
-        height: 90px;
-    }
-
-    .card-visual video,
-    .card-visual img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .placeholder-img {
-        font-size: 0.6rem;
-    }
-
-    .card-screen__bar {
-        min-height: 18px;
-        padding-left: 6px;
-        gap: 4px;
-    }
-
-    .card-screen__title {
-        font-size: 0.45rem;
-    }
-
-    .card-screen__win {
-        width: 14px;
-        font-size: 0.45rem;
-    }
-
-    .card-screen__win--close {
-        font-size: 0.55rem;
-    }
-
-    .card-screen__body {
-        padding: 4px 6px;
-        gap: 2px;
-    }
-
-    .card-screen__hide-mobile {
-        display: none;
-    }
-
-    .card-screen--showcase .card-screen__name {
-        font-size: 0.5rem;
-    }
-
-    .card-screen__btn {
-        padding: 2px 5px;
-        font-size: 0.4rem;
-        box-shadow: 2px 2px 0 var(--brutal-black);
-    }
-
-    .card-screen__layers {
-        gap: 2px;
-    }
-
-    .card-screen__layer-strip {
-        height: 4px;
-        border-width: 1px;
-    }
-
-    .card-screen__arch-label {
-        display: none;
-    }
-
-    .card-screen__arch {
-        padding: 2px 6px;
-        gap: 4px;
-    }
-
-    .card-screen__arrow {
-        font-size: 0.35rem;
-    }
-
-    .card-screen__body--flow {
-        padding: 2px 4px;
-    }
-
     .card-info {
         padding: 10px;
     }
 
     .card-info h3 {
-        font-size: 0.8rem;
+        font-size: 1.1rem;
         margin: 6px 0;
     }
 
-    .card-info p {
-        font-size: 0.7rem;
-        min-height: auto;
-        margin-bottom: 0.6rem;
-        line-height: 1.4;
-    }
-
     .tag-container {
-        gap: 3px;
+        gap: 6px;
         margin-bottom: 4px;
-    }
-
-    .tag {
-        font-size: 0.5rem;
-        padding: 1px 4px;
     }
 
     /* --- ABOUT PAGE --- */
     .container-about {
-        padding: 70px 14px 40px 14px;
-    }
-
-    .top-nav {
-        top: 10px;
-    }
-
-    .top-nav:not(:has(.nav-menu-btn)) {
-        left: 10px;
-    }
-
-    .top-nav .retro-btn,
-    .top-nav .nav-menu-btn {
-        padding: 8px 14px;
-        font-size: 0.8rem;
+        padding: calc(var(--fixed-bar-h) + 20px + env(safe-area-inset-top)) 14px 40px 14px;
     }
 
     .about-header h1 {
@@ -261,7 +139,7 @@
     }
 
     .about-typed .typed-line {
-        font-size: 0.8rem;
+        font-size: 0.95rem;
     }
 
     /* --- BIO BOX --- */
@@ -269,10 +147,6 @@
         padding: 16px;
         border-left-width: 5px;
         box-shadow: 6px 6px 0px var(--bg-dark-gray);
-    }
-
-    .bio-box p {
-        font-size: 0.95rem;
     }
 
     /* --- TIMELINE --- */
@@ -288,35 +162,14 @@
         font-size: 0.9rem;
     }
 
-    .timeline-item p {
-        font-size: 0.85rem;
-    }
-
-    /* --- CERTIFICATES --- */
+    /* --- CERTIFICATES: gallery in certificates.css --- */
     .cert-scroll-viewer {
         padding: 12px;
-    }
-
-    .cert-thumbnail img {
-        height: 100px;
-    }
-
-    .cert-thumbnail p {
-        font-size: 0.65rem;
     }
 
     .modal-content {
         max-width: 95%;
         padding: 12px;
-    }
-
-    #modal-image {
-        max-height: 70vh;
-    }
-
-    .close-modal {
-        padding: 4px 10px;
-        font-size: 0.8rem;
     }
 
     /* --- HOBBIES MARQUEE --- */
@@ -328,21 +181,6 @@
     .hobbies-marquee-container {
         padding: 24px 0;
         margin-top: 20px;
-    }
-
-    .hobbies-marquee-track {
-        gap: 40px;
-        padding-right: 40px;
-    }
-
-    .hobby-item {
-        width: 80px;
-        height: 80px;
-    }
-
-    .hobby-item:hover {
-        transform: scale(1.15);
-        box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
     }
 
     .hobby-caption-panel {
@@ -362,10 +200,4 @@
         max-width: none;
         min-height: 72px;
     }
-
-    /* --- SCROLL SNAP OFF (JS handles transitions) --- */
-    html {
-        scroll-snap-type: none;
-    }
 }
-

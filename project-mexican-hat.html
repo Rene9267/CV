@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Mexican Hat | Antonio Troiano</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/project-page.css">
@@ -13,19 +13,50 @@
 
 <body class="about-page mexican-hat-page">
 
-    <div class="fiesta-bg" aria-hidden="true">
-        <div class="fiesta-horizon"></div>
-        <div class="fiesta-sun"></div>
-        <div class="fiesta-hat fiesta-hat--sombrero"></div>
-        <div class="fiesta-hat fiesta-hat--bowler"></div>
-        <div class="fiesta-hat fiesta-hat--straw"></div>
-        <div class="hat-stack">
-            <span class="hat-stack__layer hat-stack__layer--1"></span>
-            <span class="hat-stack__layer hat-stack__layer--2"></span>
-            <span class="hat-stack__layer hat-stack__layer--3"></span>
-        </div>
+    <div class="desert-bg" aria-hidden="true">
+        <div class="desert-sky"></div>
+        <div class="desert-sun" aria-hidden="true"></div>
+        <svg class="desert-cacti" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+            <g fill="#1a1208" shape-rendering="crispEdges">
+                <rect x="48" y="42" width="14" height="78"/>
+                <rect x="34" y="58" width="14" height="22"/>
+                <rect x="62" y="52" width="14" height="28"/>
+                <rect x="220" y="28" width="16" height="92"/>
+                <rect x="202" y="48" width="14" height="24"/>
+                <rect x="240" y="40" width="14" height="32"/>
+                <rect x="420" y="50" width="12" height="70"/>
+                <rect x="408" y="62" width="12" height="18"/>
+                <rect x="980" y="36" width="14" height="84"/>
+                <rect x="966" y="54" width="12" height="22"/>
+                <rect x="994" y="48" width="12" height="26"/>
+                <rect x="1100" y="44" width="14" height="76"/>
+                <rect x="1086" y="60" width="12" height="20"/>
+            </g>
+        </svg>
+        <svg class="desert-stack" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200" aria-hidden="true">
+            <g shape-rendering="crispEdges">
+                <polygon points="52,188 68,188 76,168 44,168" fill="#e8c45a"/>
+                <rect x="48" y="172" width="6" height="6" fill="#c45c2a"/>
+                <rect x="58" y="174" width="5" height="5" fill="#8b4513"/>
+                <ellipse cx="60" cy="162" rx="38" ry="8" fill="#6b3a28"/>
+                <rect x="48" y="148" width="24" height="14" fill="#a67c1a"/>
+                <ellipse cx="60" cy="148" rx="34" ry="7" fill="#8b6914"/>
+                <ellipse cx="60" cy="132" rx="32" ry="7" fill="#6b3a28"/>
+                <rect x="50" y="118" width="20" height="14" fill="#a67c1a"/>
+                <ellipse cx="60" cy="118" rx="30" ry="6" fill="#8b6914"/>
+                <ellipse cx="60" cy="102" rx="28" ry="6" fill="#6b3a28"/>
+                <rect x="52" y="88" width="16" height="14" fill="#a67c1a"/>
+                <ellipse cx="60" cy="88" rx="26" ry="6" fill="#8b6914"/>
+                <ellipse cx="60" cy="72" rx="24" ry="5" fill="#6b3a28"/>
+                <rect x="54" y="58" width="12" height="14" fill="#a67c1a"/>
+                <ellipse cx="60" cy="58" rx="22" ry="5" fill="#8b6914"/>
+                <ellipse cx="60" cy="42" rx="20" ry="5" fill="#6b3a28"/>
+                <rect x="56" y="28" width="8" height="14" fill="#a67c1a"/>
+                <ellipse cx="60" cy="28" rx="18" ry="4" fill="#c1121f"/>
+            </g>
+        </svg>
         <div class="ember-field"></div>
-        <div class="fiesta-vignette"></div>
+        <div class="desert-vignette"></div>
     </div>
 
     <aside class="index-nav" id="page-index-nav" aria-label="Indice della pagina">
@@ -40,9 +71,9 @@
     <main class="container-about">
 
         <div class="project-hero">
-            <div class="hero-cover-placeholder" role="img" aria-label="Anteprima non disponibile — screenshot in arrivo">
-                <span>Mexican Hat · UE 4.27</span>
-                <p>Nessun still pubblico salvato dalla jam. Il repo GitHub resta la fonte del progetto.</p>
+            <div class="mh-cover" role="img" aria-label="Mexican Hat, UE 4.27, AIV Summer Jam 2022">
+                <span class="mh-cover__title">MEXICAN HAT</span>
+                <span class="mh-cover__sub">UE4.27 // AIV Summer Jam 2022</span>
             </div>
             <p class="subtitle">AIV Summer Jam 2022 — ottobre 2022</p>
             <h1>Mexican Hat</h1>
@@ -129,10 +160,7 @@
         <hr class="section-divider">
 
         <h2 class="section-title">/Media</h2>
-        <p class="media-note">
-            Non ho trovato foto o video pubblici della jam (né su YouTube, itch o social). Se hai ancora il progetto
-            in locale, basta un giro in PIE con due o tre inquadrature per completare questa sezione.
-        </p>
+        <p class="media-note"><span class="tag tag--wip">WORK IN PROGRESS</span></p>
 
         <div class="project-actions">
             <a href="https://github.com/Rene9267/MexicanHat" target="_blank" rel="noopener noreferrer" class="retro-btn">REPO GITHUB &gt;&gt;</a>

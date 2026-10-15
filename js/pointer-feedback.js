@@ -10,11 +10,20 @@ function initPointerFeedback() {
 
     // --- Retro Page Transition ---
     const overlay = document.createElement('div');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     overlay.className = 'page-transition-overlay';
     overlay.innerHTML = '<span class="transition-text">Loading...</span><div class="transition-bar"></div>';
+    overlay.hidden = true;
+    overlay.setAttribute('aria-hidden', 'true');
     document.body.appendChild(overlay);
 
     function retroNavigate(href) {
+        if (reduceMotion) {
+            window.location.href = href;
+            return;
+        }
+        overlay.hidden = false;
+        overlay.setAttribute('aria-hidden', 'false');
         overlay.classList.remove('exit');
         overlay.classList.add('active');
         setTimeout(() => { window.location.href = href; }, 500);
@@ -39,6 +48,7 @@ function initPointerFeedback() {
                 return;
             }
             if (href.startsWith('#')) return;
+            if (button.hasAttribute('download') || /\.pdf$/i.test(href)) return;
             e.preventDefault();
             retroNavigate(href);
         });
@@ -74,6 +84,9 @@ function initPointerFeedback() {
             }
             if (href.startsWith('http') || href.startsWith('#')) return;
             e.preventDefault();
+            if (typeof saveHomeProjectCardScroll === 'function') {
+                saveHomeProjectCardScroll(card, href);
+            }
             retroNavigate(href);
         });
     });

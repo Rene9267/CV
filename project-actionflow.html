@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>ActionFlow Core | Portfolio XR</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/project-page.css">
@@ -67,6 +67,54 @@
         <div class="highlight-box">
             <p>"Eliminare il caos nei flussi di gioco complessi, un'Action alla volta."</p>
         </div>
+
+        <!-- CODICE SORGENTE -->
+        <h2 class="section-title" id="codice-sorgente">/Codice_sorgente</h2>
+        <div class="project-description">
+            <p>
+                ActionFlow Core è un framework proprietario e il suo repository è privato. Qui sotto trovi alcuni
+                estratti reali del codice e una demo in video. Su richiesta posso mostrare il codice completo durante
+                un colloquio tecnico.
+            </p>
+        </div>
+
+        <div class="af-demo" id="af-demo">
+            <video class="af-demo-video" id="af-demo-video" controls playsinline preload="metadata"
+                poster="assets/actionflow/poster.png">
+                <source src="assets/actionflow/demo.mp4" type="video/mp4">
+            </video>
+            <div class="af-demo-fallback" id="af-demo-fallback" hidden>
+                <p>Demo video in arrivo</p>
+            </div>
+        </div>
+
+        <figure class="af-arch-nested" aria-label="ActionFlowMGR contiene più Section; ogni Section contiene più Action; tutte collegate alla Blackboard">
+            <div class="af-arch-nested-mgr">
+                <span class="layer-tag">Container</span>
+                <span class="af-arch-nested-mgr-name">ActionFlowMGR</span>
+                <div class="af-arch-nested-sections">
+                    <div class="af-arch-nested-section af-arch-nested-link">
+                        <span class="layer-tag green">Section</span>
+                        <div class="af-arch-nested-actions">
+                            <span class="af-arch-nested-action af-arch-nested-link">Action</span>
+                            <span class="af-arch-nested-action af-arch-nested-link">Action</span>
+                        </div>
+                    </div>
+                    <div class="af-arch-nested-section af-arch-nested-link">
+                        <span class="layer-tag green">Section</span>
+                        <div class="af-arch-nested-actions">
+                            <span class="af-arch-nested-action af-arch-nested-link">Action</span>
+                            <span class="af-arch-nested-action af-arch-nested-link">Action</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="af-arch-nested-connector" aria-hidden="true"></div>
+            <div class="af-arch-nested-blackboard af-arch-nested-link">
+                <span class="layer-tag gray">Bus</span>
+                <span class="af-arch-nested-bb-name">Blackboard</span>
+            </div>
+        </figure>
 
         <hr class="section-divider">
 
@@ -396,6 +444,24 @@
     <script src="js/scene-effects.js"></script>
     <script src="js/section-index.js"></script>
     <script src="script.js"></script>
+    <script>
+        (function () {
+            const wrap = document.getElementById('af-demo');
+            const video = document.getElementById('af-demo-video');
+            const fallback = document.getElementById('af-demo-fallback');
+            if (!wrap || !video || !fallback) return;
+
+            function showFallback() {
+                wrap.classList.add('is-unavailable');
+                fallback.removeAttribute('hidden');
+            }
+
+            video.addEventListener('error', showFallback);
+            const source = video.querySelector('source');
+            if (source) source.addEventListener('error', showFallback);
+            if (video.error) showFallback();
+        })();
+    </script>
 </body>
 
 </html>

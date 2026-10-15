@@ -5,7 +5,7 @@
     --term-orange: #FF5722;
     --term-green: #4ade80;
     --term-gray: #b6b6b3;
-    --term-muted: #7a7a76;
+    --term-muted: #a3a39f;
     --term-line: #2e2e2c;
 
     --pp-top-nav-retro-btn-0: var(--term-black);
@@ -201,6 +201,162 @@ body.about-page {
     color: var(--term-orange);
     font-size: 1.2rem;
     opacity: 0.6;
+}
+
+/* Codice sorgente — demo video */
+.af-demo {
+    margin: 25px 0;
+    max-width: 100%;
+}
+
+.af-demo-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: var(--term-panel);
+    border: 1px solid var(--term-line);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+.af-demo-fallback {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: rgba(15, 15, 15, 0.8);
+    border: 1px dashed var(--term-line);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+.af-demo-fallback p {
+    margin: 0;
+    color: var(--term-green);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.af-demo.is-unavailable .af-demo-video {
+    display: none;
+}
+
+.af-demo.is-unavailable .af-demo-fallback {
+    display: flex;
+}
+
+/* Codice sorgente — schema annidato MGR / Section / Action / Blackboard */
+.af-arch-nested {
+    margin: 30px 0 10px;
+    padding: 0;
+    max-width: 100%;
+}
+
+.af-arch-nested-mgr {
+    border: 1px solid var(--term-line);
+    background-color: rgba(15, 15, 15, 0.8);
+    padding: 16px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.af-arch-nested-mgr-name {
+    font-size: 0.95rem;
+    color: var(--term-gray);
+    font-weight: bold;
+}
+
+.af-arch-nested-sections {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.af-arch-nested-section {
+    border: 1px dashed var(--term-orange);
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+.af-arch-nested-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.af-arch-nested-action {
+    flex: 1 1 calc(50% - 4px);
+    min-width: 4.5rem;
+    font-size: 0.75rem;
+    text-align: center;
+    color: var(--term-green);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    padding: 8px 6px;
+    border: 1px dashed var(--term-orange);
+    background-color: rgba(15, 15, 15, 0.6);
+}
+
+.af-arch-nested-connector {
+    height: 28px;
+    margin: 0 auto;
+    width: 0;
+    border-left: 2px dashed var(--term-orange);
+    opacity: 0.75;
+}
+
+.af-arch-nested-blackboard {
+    border: 1px solid var(--term-line);
+    background-color: rgba(15, 15, 15, 0.8);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+    border-bottom: 2px dashed var(--term-orange);
+}
+
+.af-arch-nested-bb-name {
+    font-size: 0.9rem;
+    color: var(--term-gray);
+    font-weight: bold;
+}
+
+.af-arch-nested .layer-tag {
+    font-size: 0.6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--term-black);
+    background: var(--term-orange);
+    padding: 4px 8px;
+    white-space: nowrap;
+    align-self: flex-start;
+}
+
+.af-arch-nested .layer-tag.green {
+    background: var(--term-green);
+}
+
+.af-arch-nested .layer-tag.gray {
+    background: var(--term-muted);
+    color: var(--term-black);
+}
+
+@media (max-width: 400px) {
+    .af-arch-nested-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .af-arch-nested-action {
+        flex: 1 1 100%;
+    }
 }
 
 .action-table {

@@ -11,13 +11,3 @@
         display: none;
     }
 }
-
-@media (max-width: 600px) {
-    .certificate-gallery {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .cert-scroll-viewer {
-        max-height: 600px;
-    }
-}
-

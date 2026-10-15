@@ -30,7 +30,7 @@
 }
 
 .scroll-label {
-    font-size: 0.8rem;
+    font-size: var(--label-min);
     color: var(--brutal-black);
     letter-spacing: 2px;
     text-transform: uppercase;

@@ -17,6 +17,10 @@
     transition: none;
 }
 
+.page-transition-overlay[hidden] {
+    display: none !important;
+}
+
 .page-transition-overlay.active {
     pointer-events: all;
     opacity: 1;

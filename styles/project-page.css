@@ -2,13 +2,21 @@
 
 h2.section-title,
 h2.section-title-code {
-    scroll-margin-top: 110px;
+    scroll-margin-top: calc(var(--fixed-bar-h) + 16px);
 }
 
 .container-about {
     max-width: 900px;
     position: relative;
     z-index: 1;
+    padding-top: calc(var(--fixed-bar-h) + 24px + env(safe-area-inset-top));
+}
+
+@media (max-width: 899px) {
+    body.about-page[class*="-page"] .top-nav {
+        background: var(--pp-top-nav-retro-btn-0, var(--bg-gray));
+        border-bottom-color: var(--pp-top-nav-retro-btn-2, var(--brutal-black));
+    }
 }
 
 .top-nav .retro-btn {
@@ -228,7 +236,7 @@ h2.section-title-code {
 .ember-field {
     position: absolute;
     inset: 0;
-    z-index: 5;
+    z-index: 0;
     overflow: hidden;
     pointer-events: none;
 }

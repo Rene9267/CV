@@ -1,8 +1,10 @@
-/* The layer class creates the sticky scrolling effect by fixing the height to the viewport and aligning content to the top */
+/* Home sections: natural document scroll (no nested scrollports). */
 .layer {
-    position: sticky;
-    top: 0;
-    height: 100vh;
+    position: relative;
+    top: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -10,7 +12,17 @@
     border-bottom: var(--retro-border);
     padding: 60px 20px 20px 20px;
     scroll-snap-align: start;
-    overflow: hidden;
+    overflow: visible;
+}
+
+@media (max-width: 899px), (pointer: coarse) {
+    .layer {
+        min-height: 0;
+    }
+
+    html {
+        scroll-snap-type: none;
+    }
 }
 
 /* Alternating the background color of even layers creates a clear visual separation when they stack over each other */
@@ -31,39 +43,50 @@
     background-color: var(--bg-gray);
 }
 
-/* The scrollable content container allows internal scrolling for layers that hold more projects than the screen can fit */
+/* Content width; no inner scrolling */
 .scrollable-content {
     width: 100%;
-    max-width: 1000px;
-    height: 100%;
+    max-width: 1200px;
+    height: auto;
     min-height: 0;
-    overflow-y: auto;
+    overflow: visible;
     padding-right: 15px;
     padding-bottom: 24px;
 }
 
-/* Custom retro scrollbar styling applied specifically for Webkit browsers to match the heavy industrial aesthetic */
-.scrollable-content::-webkit-scrollbar {
-    width: 16px;
-}
-
-.scrollable-content::-webkit-scrollbar-track {
-    background: var(--bg-dark-gray);
-    border-left: 2px solid var(--brutal-black);
-}
-
-.scrollable-content::-webkit-scrollbar-thumb {
-    background: var(--cmd-orange);
-    border: 2px solid var(--brutal-black);
-    box-shadow: inset 2px 2px 0px rgba(255,255,255,0.3);
-}
-
-.scrollable-content::-webkit-scrollbar-thumb:hover {
-    background: #ff7043;
-}
-
 .content {
     text-align: center;
-    max-width: 800px;
+    max-width: 1200px;
+    width: 100%;
 }
 
+.site-footer {
+    padding: 32px 20px calc(24px + env(safe-area-inset-bottom));
+    text-align: center;
+    background: var(--brutal-black);
+    color: var(--bg-gray);
+    border-top: var(--retro-border);
+}
+
+.site-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 20px;
+    margin-bottom: 12px;
+}
+
+.site-footer__links a {
+    color: var(--cmd-orange);
+    text-decoration: none;
+    font-size: var(--label-min);
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.site-footer__copy {
+    font-size: var(--label-min);
+    margin-bottom: 0;
+    color: var(--bg-dark-gray);
+}

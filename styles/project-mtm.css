@@ -6,7 +6,7 @@
     --safety: #f0a020;
     --safety-soft: #ffc857;
     --steel: #8fa8c4;
-    --ink-muted: #b4bcc6;
+    --ink-muted: #c8d0da;
     --parchment: #e8ecf0;
 
     --pp-top-nav-retro-btn-0: var(--plant-deep);
@@ -169,6 +169,7 @@ body.about-page.mtm-page {
     background: transparent;
     font: inherit;
     color: var(--parchment);
+    text-decoration: none;
     cursor: pointer;
     overflow: hidden;
 }

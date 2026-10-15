@@ -31,12 +31,18 @@
 
 .hobby-item {
     flex-shrink: 0;
-    width: 120px; /* RADDOPPIATA LA GRANDEZZA */
-    height: 120px;
-    background-color: var(--brutal-black); 
-    border: 4px solid var(--brutal-black); /* Bordo più spesso per bilanciare */
-    cursor: crosshair; 
+    width: 120px;
+    min-height: 48px;
+    background-color: var(--brutal-black);
+    border: 4px solid var(--brutal-black);
+    cursor: crosshair;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 8px;
+    height: auto;
     transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
                 border-color 0.2s, 
                 box-shadow 0.2s;
@@ -44,7 +50,7 @@
 
 .hobby-item img {
     width: 100%;
-    height: 100%;
+    height: 120px;
     object-fit: cover;
     image-rendering: pixelated; 
     image-rendering: crisp-edges;
@@ -52,8 +58,18 @@
     display: block;
 }
 
+.hobby-item__label {
+    font-size: var(--label-min);
+    line-height: 1.2;
+    padding: 0 4px;
+    text-align: center;
+    color: var(--bg-gray);
+    max-width: 140px;
+    overflow-wrap: anywhere;
+}
+
 .hobby-item:hover {
-    transform: scale(1.2); /* Zoom leggermente ridotto (visto che partiamo da più grandi) */
+    transform: scale(1.2);
     border-color: var(--cmd-orange);
     box-shadow: 10px 10px 0px rgba(0,0,0,0.5); /* Ombra più definita */
     z-index: 10;
@@ -108,4 +124,22 @@
 
 .hobby-caption-name {
     color: var(--cmd-orange);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hobbies-marquee-container {
+        overflow: visible;
+    }
+
+    .hobbies-marquee-track {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        padding-right: 0;
+        gap: 20px;
+    }
+
+    .hobby-item--clone {
+        display: none !important;
+    }
 }

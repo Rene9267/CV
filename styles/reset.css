@@ -9,6 +9,5 @@ body {
     font-family: 'Courier New', Courier, monospace;
     background-color: var(--bg-gray);
     color: var(--brutal-black);
-    overflow-x: hidden;
+    overflow-x: clip;
 }
-

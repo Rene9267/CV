@@ -1,7 +1,7 @@
 /* The projects grid uses CSS Grid with auto-fit to automatically stack cards on mobile and place them side by side on desktop */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: 30px;
     margin-top: 2rem;
     width: 100%;
@@ -28,7 +28,8 @@
 
 .card-visual {
     width: 100%;
-    height: 180px;
+    aspect-ratio: 16 / 9;
+    height: auto;
     border-bottom: var(--retro-border);
     background-color: #000;
     display: flex;
@@ -50,6 +51,36 @@
     color: var(--cmd-orange);
     font-size: 0.8rem;
     font-weight: bold;
+}
+
+.mh-cover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.75rem;
+    background-color: #141008;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.mh-cover__title {
+    font-size: clamp(0.75rem, 3.5vw, 1.1rem);
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #f5d76e;
+    text-shadow: 0 0 12px rgba(245, 215, 110, 0.25);
+}
+
+.mh-cover__sub {
+    font-size: clamp(0.75rem, 2vw, 0.75rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2a9d8f;
 }
 
 /* Terminal-style miniatures for project cards without screenshots */
@@ -77,7 +108,7 @@
 
 .card-screen__title {
     align-self: center;
-    font-size: clamp(0.5rem, 2vw, 0.7rem);
+    font-size: clamp(0.625rem, 2vw, 0.7rem);
     color: #b6b6b3;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -123,7 +154,7 @@
 
 .card-screen--showcase .card-screen__name {
     margin: 0;
-    font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+    font-size: clamp(0.625rem, 2.5vw, 0.85rem);
     font-weight: bold;
     color: #b6b6b3;
     letter-spacing: 0.05em;
@@ -131,7 +162,7 @@
 
 .card-screen__badge {
     margin: 0;
-    font-size: clamp(0.5rem, 2vw, 0.65rem);
+    font-size: clamp(0.625rem, 2vw, 0.65rem);
     color: var(--cmd-orange);
     font-weight: bold;
     letter-spacing: 0.15em;
@@ -142,7 +173,7 @@
     align-self: flex-start;
     margin-top: 2px;
     padding: 4px 10px;
-    font-size: clamp(0.45rem, 1.8vw, 0.6rem);
+    font-size: clamp(0.625rem, 1.8vw, 0.6rem);
     font-weight: bold;
     color: var(--brutal-black);
     background-color: var(--bg-gray);
@@ -205,7 +236,7 @@
 }
 
 .card-screen__tag {
-    font-size: clamp(0.45rem, 1.6vw, 0.55rem);
+    font-size: clamp(0.625rem, 1.6vw, 0.55rem);
     font-weight: bold;
     padding: 2px 6px;
     color: #161616;
@@ -226,7 +257,7 @@
 }
 
 .card-screen__arch-label {
-    font-size: clamp(0.45rem, 1.6vw, 0.6rem);
+    font-size: clamp(0.625rem, 1.6vw, 0.6rem);
     color: #b6b6b3;
     white-space: nowrap;
     overflow: hidden;
@@ -253,12 +284,12 @@
 
 .card-info h3 {
     margin: 10px 0;
-    font-size: 1.4rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     text-transform: uppercase;
 }
 
 .card-info p {
-    font-size: 0.95rem;
+    font-size: max(1rem, 0.95rem);
     text-align: left;
     margin-bottom: 1.5rem;
     min-height: 50px;
@@ -269,10 +300,10 @@
 }
 
 .tag {
-    font-size: 0.7rem;
+    font-size: var(--label-min);
     background-color: var(--brutal-black);
     color: var(--bg-gray);
-    padding: 2px 8px;
+    padding: 4px 8px;
     margin-right: 5px;
     font-weight: bold;
 }

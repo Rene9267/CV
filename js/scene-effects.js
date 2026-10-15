@@ -1,5 +1,22 @@
 /** Spawns ember particles, screenshot zoom, and floating terminal glyphs. */
 
+function lowFx() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+    const coarse = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
+    const weakDevice = (navigator.hardwareConcurrency || 8) <= 4
+        || Boolean(navigator.connection?.saveData);
+    return coarse && weakDevice;
+}
+
+function pauseFxOnHidden() {
+    document.addEventListener('visibilitychange', () => {
+        const state = document.hidden ? 'paused' : 'running';
+        document.querySelectorAll('.ember, .term-glyph, .eruption-streak').forEach((el) => {
+            el.style.animationPlayState = state;
+        });
+    });
+}
+
 function spawnEruptionStreaks(field) {
     const fieldRect = field.getBoundingClientRect();
     const cover = document.querySelector('.hero-cover');
@@ -46,19 +63,28 @@ function spawnEruptionStreaks(field) {
     }
 }
 
+function emberCountForViewport() {
+    if (lowFx()) return 0;
+    const narrow = window.matchMedia('(max-width: 767px)').matches;
+    const base = Math.min(48, Math.floor(window.innerWidth / 26));
+    return narrow ? Math.min(12, base) : Math.min(15, base);
+}
+
 function initSceneEffects() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    pauseFxOnHidden();
 
     document.querySelectorAll('.ember-field').forEach((emberField) => {
-        if (reduceMotion || emberField.childElementCount) return;
-        emberField.style.zIndex = '5';
+        emberField.style.zIndex = '0';
+        if (reduceMotion || lowFx() || emberField.childElementCount) return;
+
         if (emberField.dataset.motion === 'eruption') {
             spawnEruptionStreaks(emberField);
             return;
         }
         const falling = emberField.dataset.motion === 'fall';
         const motion = falling ? 'particleFall' : 'emberRise';
-        const emberCount = Math.min(48, Math.floor(window.innerWidth / 26));
+        const emberCount = emberCountForViewport();
         for (let i = 0; i < emberCount; i++) {
             const ember = document.createElement('span');
             ember.className = 'ember';
@@ -74,7 +100,7 @@ function initSceneEffects() {
             ember.style.background = falling
                 ? fallColors[i % fallColors.length]
                 : 'radial-gradient(circle, #fff 0%, var(--particle, #ffb25a) 46%, transparent 74%)';
-            ember.style.boxShadow = falling ? 'none' : '0 0 12px 3px var(--particle, #ffb25a)';
+            ember.style.boxShadow = 'none';
             if (falling) ember.style.top = '-16px';
             else ember.style.bottom = '-16px';
             ember.style.setProperty('--drift', `${drift}px`);
@@ -84,7 +110,6 @@ function initSceneEffects() {
         }
     });
 
-    // Clone sopra nav e testo, 80% più grande della miniatura.
     const galleryImages = document.querySelectorAll('.screenshot-img');
     if (galleryImages.length) {
         const ZOOM_TARGET = 1.8;
@@ -232,11 +257,12 @@ function initSceneEffects() {
         });
     }
 
-    // --- Sfondo terminale: glifi galleggianti ---
     const codeField = document.querySelector('.term-code-field');
-    if (codeField && !reduceMotion) {
+    if (codeField && !reduceMotion && !lowFx()) {
+        const narrow = window.matchMedia('(max-width: 767px)').matches;
+        const glyphTotal = narrow ? 6 : 26;
         const glyphs = ['>', '_', '$', '#', 'PS C:\\>', 'C:\\>', 'IE:', '&', '*', '%', '~', '=>', 'echo', 'cd ..'];
-        for (let i = 0; i < 26; i++) {
+        for (let i = 0; i < glyphTotal; i++) {
             const glyph = document.createElement('span');
             glyph.className = 'term-glyph';
             if (i % 4 === 0) glyph.classList.add('t-green');
@@ -244,7 +270,11 @@ function initSceneEffects() {
             glyph.textContent = glyphs[i % glyphs.length];
             const size = 0.6 + Math.random() * 0.8;
             glyph.style.fontSize = `${size}rem`;
-            glyph.style.left = `${Math.random() * 100}%`;
+            let leftPct = Math.random() * 100;
+            if (narrow) {
+                leftPct = i % 2 === 0 ? Math.random() * 12 : 88 + Math.random() * 12;
+            }
+            glyph.style.left = `${leftPct}%`;
             glyph.style.top = `${Math.random() * 100}%`;
             glyph.style.setProperty('--drift-x', `${(Math.random() * 2 - 1) * 120}px`);
             glyph.style.setProperty('--drift-y', `${(Math.random() * 2 - 1) * 90}px`);

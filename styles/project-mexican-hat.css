@@ -7,7 +7,7 @@
     --gold: #e8b923;
     --gold-soft: #f5d76e;
     --chili: #c1121f;
-    --ink-muted: #b8a898;
+    --ink-muted: #d4c8b8;
     --parchment: #ebe4d8;
 
     --pp-top-nav-retro-btn-0: var(--fiesta-deep);
@@ -23,7 +23,7 @@
     --pp-section-title-0: var(--gold-soft);
     --pp-section-title-1: var(--chili);
     --pp-project-description-p-0: var(--ink-muted);
-    --pp-highlight-box-0: rgba(42, 157, 143, 0.1);
+    --pp-highlight-box-0: rgba(20, 12, 6, 0.88);
     --pp-highlight-box-1: var(--teal-glow);
     --pp-highlight-box-2: rgba(232, 185, 35, 0.12);
     --pp-highlight-box-3: rgba(232, 185, 35, 0.12);
@@ -42,6 +42,51 @@ body.about-page.mexican-hat-page {
     background-color: var(--fiesta-deep);
     color: var(--ink-muted);
     --particle: #e0a020;
+    --mh-text-veil: rgba(20, 12, 6, 0.88);
+}
+
+.mexican-hat-page .project-hero {
+    background-color: var(--mh-text-veil);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    border-radius: 2px;
+}
+
+.mexican-hat-page .project-description {
+    background-color: var(--mh-text-veil);
+    padding: 1.25rem 1.5rem;
+    border-radius: 2px;
+}
+
+.mexican-hat-page .container-about > p {
+    background-color: var(--mh-text-veil);
+    padding: 1rem 1.5rem;
+    border-radius: 2px;
+}
+
+.mexican-hat-page h2.section-title {
+    background-color: var(--mh-text-veil);
+    padding: 12px 15px;
+    display: block;
+}
+
+.tag--wip {
+    display: inline-block;
+    font-size: var(--label-min);
+    font-weight: bold;
+    padding: 8px 14px;
+    border: 2px solid var(--gold-soft);
+    color: var(--gold-soft);
+    background: rgba(0, 0, 0, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.mexican-hat-page .contrib-list {
+    background-color: var(--mh-text-veil);
+    padding: 1rem 1.5rem 1rem 2.5rem;
+    border-radius: 2px;
+    margin-top: 0.5rem;
 }
 
 .section-divider {
@@ -64,35 +109,12 @@ body.about-page.mexican-hat-page {
     padding: 0 12px;
 }
 
-.hero-cover-placeholder {
+.project-hero .mh-cover {
     width: min(100%, 640px);
     aspect-ratio: 16 / 9;
     margin-bottom: 1.5rem;
-    border: 2px dashed var(--teal-dim);
-    background: linear-gradient(145deg, rgba(42, 157, 143, 0.12), rgba(232, 185, 35, 0.08));
+    border: 2px solid var(--teal-dim);
     box-shadow: 0 0 28px rgba(232, 185, 35, 0.1), 6px 6px 0 rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1.5rem;
-}
-
-.hero-cover-placeholder span {
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--teal-glow);
-    font-weight: bold;
-}
-
-.hero-cover-placeholder p {
-    font-size: 0.85rem;
-    color: var(--ink-muted);
-    margin: 0;
-    max-width: 28rem;
-    line-height: 1.5;
 }
 
 .project-hero h1 {
@@ -128,7 +150,7 @@ body.about-page.mexican-hat-page {
     margin: 0;
     padding: 20px 24px;
     border: 1px solid var(--teal-dim);
-    background-color: rgba(36, 26, 12, 0.75);
+    background-color: var(--mh-text-veil, rgba(20, 12, 6, 0.88));
     box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
 }
 
@@ -150,7 +172,7 @@ body.about-page.mexican-hat-page {
 }
 
 .notes-box {
-    background-color: rgba(36, 26, 12, 0.65);
+    background-color: var(--mh-text-veil, rgba(20, 12, 6, 0.88));
     border: 1px solid var(--teal-dim);
     padding: 25px;
     margin: 20px 0;
@@ -163,7 +185,7 @@ body.about-page.mexican-hat-page {
     color: var(--ink-muted);
     border: 1px dashed var(--teal-dim);
     padding: 1.25rem 1.5rem;
-    background-color: rgba(20, 16, 8, 0.5);
+    background-color: var(--mh-text-veil, rgba(20, 12, 6, 0.88));
 }
 
 .project-actions .retro-btn:hover {

@@ -118,13 +118,38 @@ function initSectionIndex() {
             document.body.appendChild(backdrop);
         }
 
+        const focusableInDrawer = () => Array.from(
+            indexNav.querySelectorAll('a[href], button:not([disabled])')
+        );
+
         const setDrawerOpen = (open) => {
             document.body.classList.toggle('nav-drawer-open', open);
             indexNav.classList.toggle('is-open', open);
             menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (open) {
+                const first = focusableInDrawer()[0];
+                if (first) first.focus();
+            } else {
+                menuBtn.focus();
+            }
         };
 
         closeNavDrawer = () => setDrawerOpen(false);
+
+        indexNav.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab' || !indexNav.classList.contains('is-open')) return;
+            const items = focusableInDrawer();
+            if (!items.length) return;
+            const first = items[0];
+            const last = items[items.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
 
         menuBtn.addEventListener('click', () => {
             const willOpen = !indexNav.classList.contains('is-open');

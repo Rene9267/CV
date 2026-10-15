@@ -6,7 +6,7 @@
     --mist: #6b8fa3;
     --mist-soft: #9ec4d4;
     --foam: #d8e8f0;
-    --ink-muted: #a8b8c4;
+    --ink-muted: #c0d0dc;
     --caligo-accent: #3d7a9e;
     --caligo-blood: #d10f18;
     --caligo-ash: #f4f0e6;
@@ -183,6 +183,7 @@ body.about-page.blucaligo-page {
     background: transparent;
     font: inherit;
     color: var(--foam);
+    text-decoration: none;
     cursor: pointer;
     overflow: hidden;
 }
@@ -249,8 +250,74 @@ body.about-page.blucaligo-page {
     overflow: hidden;
     pointer-events: none;
     background:
-        linear-gradient(180deg, rgba(10, 18, 24, 0.78), rgba(10, 18, 24, 0.92)),
-        url('../assets/blucaligo-trailer-thumb.jpg') center / cover no-repeat;
+        radial-gradient(ellipse at 50% 0%, rgba(61, 122, 158, 0.12), transparent 50%),
+        linear-gradient(180deg, var(--sea-deep) 0%, var(--sea-mid) 55%, var(--sea-deep) 100%);
+}
+
+.caligo-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0) 32%, rgba(0, 0, 0, 0.62) 100%);
+}
+
+.caligo-mist {
+    position: absolute;
+    width: min(48vmax, 760px);
+    height: min(48vmax, 760px);
+    border-radius: 50%;
+    filter: blur(32px);
+    animation: caligoMistDrift 44s ease-in-out infinite alternate;
+}
+
+.caligo-mist--1 {
+    top: min(-10vmax, -100px);
+    left: min(-6vmax, -60px);
+    background: radial-gradient(circle,
+        rgba(158, 196, 212, 0.14) 0%,
+        rgba(107, 143, 163, 0.06) 45%,
+        rgba(10, 18, 24, 0) 70%);
+}
+
+.caligo-mist--2 {
+    bottom: min(-12vmax, -120px);
+    right: min(-8vmax, -80px);
+    animation-delay: -22s;
+    animation-duration: 56s;
+    background: radial-gradient(circle,
+        rgba(216, 232, 240, 0.1) 0%,
+        rgba(107, 143, 163, 0.05) 48%,
+        rgba(10, 18, 24, 0) 72%);
+}
+
+.caligo-glow {
+    position: absolute;
+    width: min(42vmax, 640px);
+    height: min(28vmax, 420px);
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(209, 15, 24, 0.07) 0%, transparent 68%);
+    filter: blur(36px);
+    animation: caligoGlowPulse 14s ease-in-out infinite alternate;
+}
+
+@keyframes caligoMistDrift {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.55; }
+    50% { transform: translate(5vmax, 3vmax) scale(1.12); opacity: 0.85; }
+    100% { transform: translate(-3vmax, 5vmax) scale(0.96); opacity: 0.6; }
+}
+
+@keyframes caligoGlowPulse {
+    0% { opacity: 0.45; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0.8; transform: translateX(-50%) scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .caligo-mist,
+    .caligo-glow {
+        animation: none;
+    }
 }
 
 .blucaligo-page .ember-field .ember.eruption-streak {

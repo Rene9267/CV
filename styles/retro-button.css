@@ -20,3 +20,39 @@
     box-shadow: 4px 4px 0px var(--brutal-black);
 }
 
+.btn-cv {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    background-color: var(--cmd-orange);
+    color: #fff;
+    border: var(--retro-border);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    margin-top: 12px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.btn-cv:hover {
+    background-color: var(--brutal-black);
+    color: var(--cmd-orange);
+}
+
+@media (min-width: 600px) {
+    .btn-cv {
+        width: auto;
+    }
+}
+
+.btn-cv--small {
+    font-size: 0.9rem;
+    padding: 10px 18px;
+    margin-top: 0;
+    max-width: none;
+}
+

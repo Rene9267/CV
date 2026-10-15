@@ -2,7 +2,7 @@
 .container-about {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 100px 20px;
+    padding: calc(var(--fixed-bar-h) + 24px + env(safe-area-inset-top)) 20px 100px;
 }
 
 .top-nav {
@@ -10,6 +10,28 @@
     top: 20px;
     left: 20px;
     z-index: 100;
+    padding-top: env(safe-area-inset-top);
+}
+
+@media (max-width: 899px) {
+    .top-nav {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: calc(var(--fixed-bar-h) + env(safe-area-inset-top));
+        padding: env(safe-area-inset-top) 12px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        background: var(--bg-gray);
+        border-bottom: var(--retro-border);
+        box-shadow: 4px 4px 0 var(--brutal-black);
+    }
+
+    body.about-page .top-nav {
+        background: var(--bg-gray);
+    }
 }
 
 .nav-menu-btn {
@@ -38,19 +60,8 @@ body.nav-drawer-open .nav-drawer-backdrop {
 }
 
 /* Pannello indice su viewport stretti (pagine progetto) */
+/* TODO mobile-first: drawer breakpoint vs desktop sidebar */
 @media (max-width: 1399px) {
-    .top-nav {
-        left: 0;
-        right: 0;
-        top: 10px;
-        padding: 0 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 10px;
-        pointer-events: none;
-    }
-
     .top-nav .retro-btn,
     .top-nav .nav-menu-btn {
         pointer-events: auto;
@@ -60,6 +71,24 @@ body.nav-drawer-open .nav-drawer-backdrop {
         display: inline-block;
         flex-shrink: 0;
     }
+}
+
+@media (max-width: 1399px) and (min-width: 900px) {
+    .top-nav {
+        left: 0;
+        right: 0;
+        top: 10px;
+        padding: 0 10px;
+        padding-top: env(safe-area-inset-top);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        pointer-events: none;
+    }
+}
+
+@media (max-width: 1399px) {
 
     body .index-nav {
         display: block;
@@ -75,7 +104,8 @@ body.nav-drawer-open .nav-drawer-backdrop {
         z-index: 120;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        padding-top: 72px;
+        padding-top: calc(var(--fixed-bar-h) + env(safe-area-inset-top) + 8px);
+        padding-bottom: env(safe-area-inset-bottom);
     }
 
     body .index-nav.is-open {
@@ -123,13 +153,28 @@ body.nav-drawer-open .nav-drawer-backdrop {
     margin-top: 14px;
 }
 
+@media (min-width: 720px) {
+    .about-header .contact-links {
+        flex-wrap: nowrap;
+    }
+}
+
+.about-header .contact-links .btn-cv {
+    width: auto;
+    max-width: none;
+    margin-top: 0;
+    padding: 10px 14px;
+    font-size: var(--label-min);
+    min-height: 48px;
+}
+
 .contact-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
-    font-size: 0.72rem;
-    padding: 8px 12px;
+    font-size: var(--label-min);
+    padding: 10px 14px;
     text-align: center;
     word-break: break-word;
     max-width: 100%;
@@ -292,9 +337,9 @@ button.retro-btn.contact-link {
 
 #intro .contact-links {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 12px 14px;
-    width: min(440px, 100%);
+    width: min(520px, 100%);
     margin: 0 auto 18px;
     justify-content: center;
 }
@@ -305,10 +350,10 @@ button.retro-btn.contact-link {
 
 #intro .contact-link {
     min-width: 0;
-    min-height: 42px;
+    min-height: 48px;
     box-sizing: border-box;
-    font-size: 0.78rem;
-    padding: 8px 12px;
+    font-size: var(--label-min);
+    padding: 10px 14px;
     line-height: 1.2;
     white-space: nowrap;
     box-shadow: 5px 5px 0 var(--brutal-black);
@@ -324,5 +369,13 @@ button.retro-btn.contact-link {
 
 .about-section {
     margin-bottom: 60px;
+}
+
+.contact-link--cv .contact-link__icon {
+    color: var(--brutal-black);
+}
+
+.retro-btn.contact-link--cv:hover .contact-link__icon {
+    color: #fff;
 }
 
