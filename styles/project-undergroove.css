@@ -221,9 +221,9 @@ body.about-page.undergroove-page {
 .root-strand {
     position: absolute;
     bottom: 0;
-    width: 8vw;
+    width: min(8vw, 96px);
     min-width: 60px;
-    height: 45vh;
+    height: min(45vh, 480px);
     opacity: 0.2;
     border-radius: 80% 20% 0 0;
     background: linear-gradient(180deg, var(--root-brown), var(--root-deep));
@@ -231,14 +231,14 @@ body.about-page.undergroove-page {
 }
 
 .root-strand--1 { left: 5%; transform: rotate(-8deg); }
-.root-strand--2 { left: 18%; height: 38vh; transform: rotate(4deg); opacity: 0.15; }
-.root-strand--3 { right: 12%; height: 52vh; transform: rotate(6deg); }
-.root-strand--4 { right: 3%; height: 35vh; transform: rotate(-5deg); opacity: 0.12; }
+.root-strand--2 { left: 18%; height: min(38vh, 400px); transform: rotate(4deg); opacity: 0.15; }
+.root-strand--3 { right: 12%; height: min(52vh, 560px); transform: rotate(6deg); }
+.root-strand--4 { right: 3%; height: min(35vh, 380px); transform: rotate(-5deg); opacity: 0.12; }
 
 .underground-glow {
     position: absolute;
-    width: 50vmax;
-    height: 30vmax;
+    width: min(50vmax, 800px);
+    height: min(30vmax, 480px);
     border-radius: 50%;
     background: radial-gradient(circle, rgba(61, 214, 192, 0.08) 0%, transparent 70%);
     filter: blur(40px);

@@ -277,16 +277,4 @@
     font-weight: bold;
 }
 
-.card-btn {
-    display: inline-block;
-    color: var(--cmd-orange);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-
-.card-btn:hover {
-    text-decoration: underline;
-}
 

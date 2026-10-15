@@ -19,7 +19,7 @@
     flex-direction: row;
     justify-content: center;
     gap: 22px;
-    margin-top: 48px;
+    margin-top: 22px;
 }
 
 .projects-hint .chevron-group {
@@ -55,7 +55,7 @@
 }
 
 #intro p {
-    margin-bottom: 30px;
+    margin-bottom: 16px;
 }
 
 .btn-intro {

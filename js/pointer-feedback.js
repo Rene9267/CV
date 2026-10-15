@@ -1,7 +1,7 @@
 /** Hover and click sounds, plus the in-site page transition overlay. */
 function initPointerFeedback() {
     // We select all the interactive UI elements present on the page storing them in variables for easy iteration
-    const retroButtons = document.querySelectorAll('.retro-btn, .card-btn');
+    const retroButtons = document.querySelectorAll('.retro-btn');
     const projectCards = document.querySelectorAll('.project-card');
     const profilePhoto = document.querySelector('.profile-pixel-art');
     const certThumbnails = document.querySelectorAll('.cert-thumbnail');

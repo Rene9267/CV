@@ -186,6 +186,30 @@ h2.section-title-code {
     margin: 20px 0;
 }
 
+.screenshot-img {
+    cursor: zoom-in;
+}
+
+/* Clone anchored to the thumbnail so a 1.2 scale stays a small lift, above nav and text. */
+.screenshot-zoom-layer {
+    display: none;
+    position: fixed;
+    z-index: 8000;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.screenshot-zoom-layer.is-open {
+    display: block;
+}
+
+.screenshot-zoom-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .credits-list li {
     font-size: 0.95rem;
     line-height: 1.7;

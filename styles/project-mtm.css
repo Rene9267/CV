@@ -40,7 +40,6 @@
 body.about-page.mtm-page {
     background-color: var(--plant-deep);
     color: var(--ink-muted);
-    --particle: #f4f0e4;
 }
 
 .section-divider {
@@ -233,35 +232,6 @@ body.about-page.mtm-page {
     background:
         linear-gradient(180deg, rgba(18, 22, 28, 0.72), rgba(18, 22, 28, 0.88)),
         url('../assets/mtm-vr-hero.jpg') center / cover no-repeat;
-}
-
-.mtm-page .ember-field .flour-puff {
-    background: radial-gradient(
-        ellipse at 40% 42%,
-        rgba(255, 252, 246, 0.95) 0%,
-        rgba(242, 234, 216, 0.55) 28%,
-        rgba(228, 218, 198, 0.16) 58%,
-        rgba(214, 204, 186, 0) 78%
-    );
-    box-shadow: none;
-}
-
-@keyframes flourDrift {
-    0% {
-        transform: translate3d(0, 8vh, 0) scale(0.82);
-        opacity: 0;
-    }
-    22% {
-        opacity: var(--puff-opacity, 0.22);
-    }
-    55% {
-        transform: translate3d(calc(var(--drift) * 0.55), calc(var(--rise) * -0.5), 0) scale(1.04);
-        opacity: var(--puff-opacity, 0.22);
-    }
-    100% {
-        transform: translate3d(var(--drift), calc(var(--rise) * -1), 0) scale(1.16);
-        opacity: 0;
-    }
 }
 
 .index-nav {

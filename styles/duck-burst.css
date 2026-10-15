@@ -1,0 +1,57 @@
+/* Pixel duck burst (profile easter egg) */
+
+.duck-burst-particle {
+    position: fixed;
+    z-index: 10000;
+    pointer-events: none;
+    animation: duckBurstFly var(--duration, 2.2s) ease-out forwards;
+    will-change: transform, opacity;
+}
+
+.duck-burst__sprite {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+@keyframes duckBurstFly {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(calc(var(--tx, 0) * 0.7), calc(var(--ty, 0) * 0.7)) rotate(calc(var(--spin, 0deg) * 0.7));
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--spin, 0deg));
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .duck-burst-particle {
+        animation-name: duckBurstFade;
+    }
+
+    @keyframes duckBurstFade {
+        0% {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        20% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        80% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(1);
+        }
+    }
+}

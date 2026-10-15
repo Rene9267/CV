@@ -46,39 +46,12 @@ function spawnEruptionStreaks(field) {
     }
 }
 
-function spawnFlourPuffs(field) {
-    const count = Math.min(9, Math.max(6, Math.floor(window.innerWidth / 180)));
-    for (let i = 0; i < count; i++) {
-        const puff = document.createElement('span');
-        puff.className = 'ember flour-puff';
-        const size = 100 + Math.random() * 120;
-        const radius = () => `${34 + Math.random() * 32}%`;
-        puff.style.position = 'absolute';
-        puff.style.left = `${Math.random() * 100}%`;
-        puff.style.bottom = '-12vh';
-        puff.style.width = `${size}px`;
-        puff.style.height = `${size * (0.55 + Math.random() * 0.35)}px`;
-        puff.style.borderRadius = `${radius()} ${radius()} ${radius()} ${radius()} / ${radius()} ${radius()} ${radius()} ${radius()}`;
-        puff.style.pointerEvents = 'none';
-        puff.style.filter = `blur(${14 + Math.random() * 12}px)`;
-        puff.style.setProperty('--drift', `${(Math.random() * 2 - 1) * 26}vw`);
-        puff.style.setProperty('--rise', `${50 + Math.random() * 55}vh`);
-        puff.style.setProperty('--puff-opacity', (0.5 + Math.random() * 0.18).toFixed(2));
-        puff.style.animation = `flourDrift ${16 + Math.random() * 14}s ease-in-out ${-Math.random() * 22}s infinite`;
-        field.appendChild(puff);
-    }
-}
-
 function initSceneEffects() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     document.querySelectorAll('.ember-field').forEach((emberField) => {
         if (reduceMotion || emberField.childElementCount) return;
         emberField.style.zIndex = '5';
-        if (emberField.dataset.motion === 'flour') {
-            spawnFlourPuffs(emberField);
-            return;
-        }
         if (emberField.dataset.motion === 'eruption') {
             spawnEruptionStreaks(emberField);
             return;
@@ -111,47 +84,142 @@ function initSceneEffects() {
         }
     });
 
-    // --- Zoom con lerp per le gallerie screenshot ---
+    // Clone sopra nav e testo, 80% più grande della miniatura.
     const galleryImages = document.querySelectorAll('.screenshot-img');
-    if (galleryImages.length && !reduceMotion) {
-        const ZOOM_TARGET = 1.5;
-        const ZOOM_LERP = 0.12;
+    if (galleryImages.length) {
+        const ZOOM_TARGET = 1.8;
+        const ZOOM_LERP = 0.14;
+        const CLOSE_MS = 130;
 
-        galleryImages.forEach(img => {
-            let scale = 1;
-            let target = 1;
-            let originX = 50;
-            let originY = 50;
-            let toX = 50;
-            let toY = 50;
-            let rafId = null;
+        const layer = document.createElement('div');
+        layer.className = 'screenshot-zoom-layer';
+        const zoomImg = document.createElement('img');
+        zoomImg.className = 'screenshot-zoom-img';
+        zoomImg.alt = '';
+        layer.appendChild(zoomImg);
+        document.body.appendChild(layer);
 
-            const ease = () => {
-                scale += (target - scale) * ZOOM_LERP;
-                originX += (toX - originX) * ZOOM_LERP;
-                originY += (toY - originY) * ZOOM_LERP;
-                img.style.transformOrigin = `${originX}% ${originY}%`;
-                img.style.transform = `scale(${scale})`;
-                if (Math.abs(target - scale) > 0.0008 ||
-                    Math.abs(toX - originX) > 0.05 ||
-                    Math.abs(toY - originY) > 0.05) {
+        let scale = 1;
+        let target = 1;
+        let originX = 50;
+        let originY = 50;
+        let toX = 50;
+        let toY = 50;
+        let rafId = null;
+        let active = null;
+        let lerp = ZOOM_LERP;
+        let closing = false;
+        let closeFromScale = 1;
+        let closeFromX = 50;
+        let closeFromY = 50;
+        let closeStart = 0;
+
+        const paint = () => {
+            zoomImg.style.transformOrigin = `${originX}% ${originY}%`;
+            zoomImg.style.transform = `scale(${scale})`;
+        };
+
+        const settle = () => {
+            scale = target;
+            originX = toX;
+            originY = toY;
+            paint();
+            rafId = null;
+            if (!active) layer.classList.remove('is-open');
+        };
+
+        const ease = () => {
+            if (closing) {
+                const t = Math.min(1, (performance.now() - closeStart) / CLOSE_MS);
+                const k = 1 - (1 - t) * (1 - t);
+                scale = closeFromScale + (1 - closeFromScale) * k;
+                originX = closeFromX + (50 - closeFromX) * k;
+                originY = closeFromY + (50 - closeFromY) * k;
+                paint();
+                if (t < 1) {
                     rafId = requestAnimationFrame(ease);
                 } else {
-                    rafId = null;
+                    closing = false;
+                    settle();
                 }
-            };
-
-            const kick = () => {
-                if (rafId) cancelAnimationFrame(rafId);
+                return;
+            }
+            scale += (target - scale) * lerp;
+            originX += (toX - originX) * lerp;
+            originY += (toY - originY) * lerp;
+            paint();
+            if (Math.abs(target - scale) > 0.0008 ||
+                Math.abs(toX - originX) > 0.05 ||
+                Math.abs(toY - originY) > 0.05) {
                 rafId = requestAnimationFrame(ease);
-            };
+            } else {
+                settle();
+            }
+        };
 
-            img.addEventListener('mouseenter', () => {
-                target = ZOOM_TARGET;
-                kick();
-            });
+        const kick = () => {
+            if (reduceMotion) {
+                scale = target;
+                originX = toX;
+                originY = toY;
+                paint();
+                return;
+            }
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(ease);
+        };
+
+        const place = (img) => {
+            const rect = img.getBoundingClientRect();
+            layer.style.left = `${rect.left}px`;
+            layer.style.top = `${rect.top}px`;
+            layer.style.width = `${rect.width}px`;
+            layer.style.height = `${rect.height}px`;
+        };
+
+        const open = (img) => {
+            active = img;
+            const fit = getComputedStyle(img);
+            zoomImg.src = img.currentSrc || img.src;
+            zoomImg.style.objectFit = fit.objectFit;
+            place(img);
+            layer.classList.add('is-open');
+            closing = false;
+            lerp = ZOOM_LERP;
+            target = ZOOM_TARGET;
+            kick();
+        };
+
+        const close = () => {
+            active = null;
+            target = 1;
+            toX = 50;
+            toY = 50;
+            if (reduceMotion) {
+                closing = false;
+                scale = 1;
+                originX = 50;
+                originY = 50;
+                paint();
+                layer.classList.remove('is-open');
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = null;
+                return;
+            }
+            closing = true;
+            closeFromScale = scale;
+            closeFromX = originX;
+            closeFromY = originY;
+            closeStart = performance.now();
+            kick();
+        };
+
+        galleryImages.forEach(img => {
+            img.addEventListener('mouseenter', () => open(img));
 
             img.addEventListener('mousemove', (e) => {
+                if (active !== img) return;
+                place(img);
                 const rect = img.getBoundingClientRect();
                 toX = ((e.clientX - rect.left) / rect.width) * 100;
                 toY = ((e.clientY - rect.top) / rect.height) * 100;
@@ -159,10 +227,7 @@ function initSceneEffects() {
             });
 
             img.addEventListener('mouseleave', () => {
-                target = 1;
-                toX = 50;
-                toY = 50;
-                kick();
+                if (active === img) close();
             });
         });
     }

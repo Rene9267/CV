@@ -191,8 +191,8 @@ body.about-page {
 .theater-curtain {
     position: absolute;
     top: 0;
-    height: 22vh;
-    width: 15vw;
+    height: min(22vh, 240px);
+    width: min(15vw, 220px);
     min-width: 130px;
     opacity: 0.35;
 }
@@ -223,8 +223,8 @@ body.about-page {
 
 .theater-smoke {
     position: absolute;
-    width: 45vmax;
-    height: 45vmax;
+    width: min(45vmax, 720px);
+    height: min(45vmax, 720px);
     border-radius: 50%;
     background: radial-gradient(circle,
         rgba(196,184,168,0.12) 0%,
@@ -235,13 +235,13 @@ body.about-page {
 }
 
 .theater-smoke--1 {
-    top: -12vmax;
-    left: -8vmax;
+    top: min(-12vmax, -120px);
+    left: min(-8vmax, -80px);
 }
 
 .theater-smoke--2 {
-    bottom: -14vmax;
-    right: -8vmax;
+    bottom: min(-14vmax, -140px);
+    right: min(-8vmax, -80px);
     animation-delay: -20s;
     animation-duration: 52s;
 }

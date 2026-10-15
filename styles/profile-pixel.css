@@ -9,6 +9,9 @@
 .profile-pixel-art {
     width: 250px; 
     height: 250px;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    user-select: none;
     object-fit: cover;
     padding: 0;
     image-rendering: pixelated;
@@ -32,5 +35,17 @@
     position: relative;
     padding-top: 18px;
     gap: 10px;
+}
+
+@media (max-height: 820px) {
+    #intro .profile-pixel-art {
+        width: 180px;
+        height: 180px;
+        box-shadow: 10px 10px 0px var(--brutal-black);
+    }
+
+    #intro .profile-pixel-art:hover {
+        box-shadow: 16px 16px 0px var(--brutal-black);
+    }
 }
 

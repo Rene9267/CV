@@ -44,24 +44,17 @@
     }
 
     #intro .contact-links {
-        position: static;
         width: 100%;
         max-width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px 14px;
-        justify-content: stretch;
+        gap: 12px 10px;
+        margin-bottom: 22px;
     }
 
     #intro .contact-link {
-        width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
-        padding: 6px 8px;
+        min-height: 40px;
+        padding: 8px 8px;
         font-size: 0.62rem;
-        line-height: 1.25;
         white-space: normal;
-        overflow-wrap: anywhere;
         box-shadow: 4px 4px 0 var(--brutal-black);
     }
 
@@ -227,10 +220,6 @@
         padding: 1px 4px;
     }
 
-    .card-btn {
-        font-size: 0.7rem;
-    }
-
     /* --- ABOUT PAGE --- */
     .container-about {
         padding: 70px 14px 40px 14px;
@@ -354,6 +343,24 @@
     .hobby-item:hover {
         transform: scale(1.15);
         box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+    }
+
+    .hobby-caption-panel {
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 20px;
+        padding: 0 8px;
+    }
+
+    .hobby-caption-media {
+        width: 112px;
+        height: 112px;
+    }
+
+    .hobby-caption-typed {
+        width: 100%;
+        max-width: none;
+        min-height: 72px;
     }
 
     /* --- SCROLL SNAP OFF (JS handles transitions) --- */

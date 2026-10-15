@@ -48,13 +48,11 @@ function showMailCopiedPopup(button) {
     if (existing) existing.remove();
 
     const popup = document.createElement('span');
-    popup.className = 'contact-mail-popup';
+    const side = Math.random() < 0.5 ? 'left' : 'right';
+    popup.className = `contact-mail-popup contact-mail-popup--${side}`;
     popup.setAttribute('role', 'status');
     popup.textContent = 'Mail copiata';
     button.appendChild(popup);
-
-    void popup.offsetWidth;
-    popup.classList.add('contact-mail-popup--show');
     popup.addEventListener('animationend', () => popup.remove(), { once: true });
 }
 
@@ -115,6 +113,7 @@ const startPortfolio = () => {
 
     initCertificateModal();
     initSkillTypewriter();
+    if (typeof initHobbyCaption === 'function') initHobbyCaption();
     initSceneEffects();
     initSectionIndex();
     initYoutubeEmbeds();

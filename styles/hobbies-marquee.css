@@ -65,3 +65,47 @@
     100% { transform: translateX(-50%); } 
 }
 
+.hobby-caption-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 28px;
+    max-width: 100%;
+    text-align: left;
+}
+
+.hobby-caption-media {
+    flex-shrink: 0;
+    width: 160px;
+    height: 160px;
+    border: 4px solid var(--brutal-black);
+    background-color: var(--brutal-black);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.hobby-caption-media.hidden {
+    display: none;
+}
+
+.hobby-caption-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-color: var(--bg-gray);
+    display: block;
+}
+
+.hobby-caption-typed {
+    flex: 1;
+    min-width: 0;
+    max-width: 640px;
+    min-height: 88px;
+    margin-top: 0;
+}
+
+.hobby-caption-name {
+    color: var(--cmd-orange);
+}
