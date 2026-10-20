@@ -33,6 +33,20 @@
     transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
+.page-transition-overlay.is-held {
+    pointer-events: all;
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
+}
+
+.page-transition-overlay.leave {
+    pointer-events: none;
+    opacity: 1;
+    transform: translateY(100%);
+    transition: transform 0.22s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
 .transition-text {
     font-family: 'Courier New', Courier, monospace;
     color: var(--cmd-orange);
@@ -59,7 +73,9 @@
     animation: transitionProgress 0.5s ease-out forwards;
 }
 
-.page-transition-overlay.exit .transition-bar::after {
+.page-transition-overlay.exit .transition-bar::after,
+.page-transition-overlay.is-held .transition-bar::after,
+.page-transition-overlay.leave .transition-bar::after {
     width: 100%;
     animation: none;
 }

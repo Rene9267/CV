@@ -3,27 +3,240 @@
 .profile-icon-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 15px; 
+    margin-bottom: 160px;
+}
+
+.profile-avatar {
+    --shadow-offset: 15px;
+    --shadow-offset-hover: 23px;
+    --tab-reveal: 48px;
+    --tab-icon: 28px;
+    position: relative;
+    width: fit-content;
+    margin-inline: auto;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.profile-avatar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--brutal-black);
+    transform: translate(var(--shadow-offset), var(--shadow-offset));
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 0.2s;
+}
+
+.profile-avatar:has(.profile-pixel-art:hover)::before {
+    transform: translate(var(--shadow-offset-hover), var(--shadow-offset-hover));
+}
+
+.profile-avatar:has(.profile-pixel-art:hover) {
+    transform: translate(-8px, -8px);
 }
 
 .profile-pixel-art {
-    width: 250px; 
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 250px;
     height: 250px;
     cursor: pointer;
     -webkit-user-drag: none;
     user-select: none;
     object-fit: cover;
     padding: 0;
-    background-color: #ffffff; 
+    background-color: #ffffff;
     border: var(--retro-border);
-    box-shadow: 15px 15px 0px var(--brutal-black); 
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    box-shadow: none;
+    transition: border-color 0.2s;
 }
 
 .profile-pixel-art:hover {
-    transform: translate(-8px, -8px); 
-    box-shadow: 23px 23px 0px var(--brutal-black); 
-    border-color: var(--cmd-orange); 
+    border-color: var(--cmd-orange);
+}
+
+/* --- Avatar social tabs (peek from behind the black shadow) --- */
+
+.avatar-tabs {
+    position: absolute;
+    top: var(--shadow-offset);
+    bottom: calc(-1 * var(--shadow-offset));
+    left: 100%;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    pointer-events: none;
+    transition: transform 0.2s;
+}
+
+.profile-avatar:has(.profile-pixel-art:hover) .avatar-tabs {
+    transform: translate(
+        calc(var(--shadow-offset-hover) - var(--shadow-offset)),
+        calc(var(--shadow-offset-hover) - var(--shadow-offset))
+    );
+}
+
+.avatar-tab {
+    pointer-events: auto;
+    display: block;
+    width: calc(var(--shadow-offset) + var(--tab-reveal));
+    height: 52px;
+    overflow: hidden;
+    border: var(--retro-border);
+    box-sizing: border-box;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.avatar-tab__inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    padding-right: 8px;
+    box-sizing: border-box;
+}
+
+.avatar-tab__icon {
+    width: var(--tab-icon);
+    height: var(--tab-icon);
+    flex-shrink: 0;
+}
+
+.avatar-tab--x {
+    background-color: var(--brutal-black);
+}
+
+.avatar-tab--github {
+    background-color: #24292f;
+}
+
+.avatar-tab--linkedin {
+    background-color: #0a66c2;
+}
+
+.avatar-tab--email {
+    background-color: var(--cmd-orange);
+}
+
+.avatar-tab:hover,
+.avatar-tab:focus-visible {
+    transform: translateX(8px);
+    border-color: var(--cmd-orange);
+}
+
+.avatar-tab:focus {
+    outline: none;
+}
+
+.avatar-tab:focus-visible {
+    outline: 3px solid var(--cmd-orange);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .avatar-tab,
+    .avatar-tabs,
+    .profile-avatar,
+    .profile-avatar::before,
+    .profile-pixel-art {
+        transition: none;
+    }
+}
+
+@media (hover: none), (max-width: 768px) {
+    .avatar-tabs {
+        pointer-events: auto;
+    }
+
+    .avatar-tab {
+        min-width: 48px;
+        min-height: 48px;
+        transition: none;
+    }
+
+    .avatar-tab:hover,
+    .avatar-tab:focus-visible {
+        transform: none;
+    }
+}
+
+/* Narrow viewport: row below avatar if tabs would clip */
+@media (max-width: 360px) {
+    .profile-avatar {
+        display: block;
+        margin-bottom: 60px;
+    }
+
+    .avatar-tabs {
+        position: absolute;
+        top: calc(100% + 12px);
+        bottom: auto;
+        left: 50%;
+        z-index: 2;
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+        width: max-content;
+        height: auto;
+        margin-top: 0;
+        transform: translateX(-50%);
+    }
+
+    .profile-avatar:has(.profile-pixel-art:hover) .avatar-tabs {
+        top: calc(100% + 12px);
+        bottom: auto;
+        transform: translateX(-50%);
+    }
+
+    .avatar-tab {
+        width: auto;
+        height: auto;
+        min-width: 48px;
+        min-height: 48px;
+        border: none;
+        background: transparent;
+        overflow: visible;
+    }
+
+    .avatar-tab__inner {
+        width: auto;
+        transform: none;
+        color: var(--brutal-black);
+    }
+
+    .avatar-tab--x .avatar-tab__inner {
+        color: var(--brutal-black);
+    }
+
+    .avatar-tab--github .avatar-tab__inner {
+        color: #24292f;
+    }
+
+    .avatar-tab--linkedin .avatar-tab__inner {
+        color: #0a66c2;
+    }
+
+    .avatar-tab--email .avatar-tab__inner {
+        color: var(--cmd-orange);
+    }
+
+    .avatar-tab__icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .avatar-tab:hover,
+    .avatar-tab:focus-visible {
+        border: var(--retro-border);
+        border-color: var(--cmd-orange);
+    }
 }
 
 #intro {
@@ -36,14 +249,46 @@
 }
 
 @media (max-height: 820px) {
+    #intro .profile-avatar {
+        --shadow-offset: 10px;
+        --shadow-offset-hover: 16px;
+        --tab-reveal: 44px;
+        --tab-icon: 26px;
+    }
+
     #intro .profile-pixel-art {
         width: 180px;
         height: 180px;
-        box-shadow: 10px 10px 0px var(--brutal-black);
     }
 
-    #intro .profile-pixel-art:hover {
-        box-shadow: 16px 16px 0px var(--brutal-black);
+    #intro .profile-avatar:has(.profile-pixel-art:hover) {
+        transform: translate(-6px, -6px);
+    }
+
+    #intro .avatar-tab {
+        height: 40px;
     }
 }
 
+@media (max-width: 768px) {
+    .profile-avatar {
+        --shadow-offset: 8px;
+        --shadow-offset-hover: 12px;
+        --tab-reveal: 44px;
+        --tab-icon: 26px;
+    }
+
+    .profile-pixel-art {
+        width: 150px;
+        height: 150px;
+    }
+
+    .profile-avatar:has(.profile-pixel-art:hover) {
+        transform: translate(-4px, -4px);
+    }
+
+    .avatar-tab {
+        height: 34px;
+        min-height: 0;
+    }
+}

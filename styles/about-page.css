@@ -335,34 +335,6 @@ button.retro-btn.contact-link {
     margin-bottom: 0.9rem;
 }
 
-#intro .contact-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px 14px;
-    width: min(520px, 100%);
-    margin: 0 auto 18px;
-    justify-content: center;
-}
-
-#intro .contact-link--gmail {
-    grid-column: 1 / -1;
-}
-
-#intro .contact-link {
-    min-width: 0;
-    min-height: 48px;
-    box-sizing: border-box;
-    font-size: var(--label-min);
-    padding: 10px 14px;
-    line-height: 1.2;
-    white-space: nowrap;
-    box-shadow: 5px 5px 0 var(--brutal-black);
-}
-
-#intro .contact-link:hover {
-    box-shadow: 2px 2px 0 var(--brutal-black);
-}
-
 #intro .content {
     width: min(800px, 100%);
 }

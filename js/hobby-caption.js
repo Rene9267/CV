@@ -12,12 +12,19 @@ function initHobbyCaption() {
     const HOBBY_COPY = {
         'hobby-9.png': {
             title: 'Gundam kits',
-            description: 'Gunpla on the desk. Mechs, one runner at a time.',
+            description: [
+                'Cosa può esistere di più affascinante dei robottoni giganti con spade laser, cannoni Vulcan e reattori più instabili delle mie prime bozze di linked list in C++? La risposta è assolutamente niente!',
+                'Ed ecco qui che entrano in campo i Gundam, dall\'anime ai kit fino al gioco di carte. Questo franchise mi ha ammaliato da sempre, portandomi ad amare il genere dei mecha.',
+                'L\'unico lato negativo? La pila di model kit che mi giudica dall\'angolo buio della stanza, in attesa di essere montata.',
+            ],
             alt: 'Gundam model kits',
         },
         'hobby-7.png': {
             title: 'Energy drinks',
-            description: 'The green can. Fuel for late sessions.',
+            description: [
+                'La dipendenza che mi accompagna ormai dai tempi del liceo. Ormai gli energy drink non sono semplicemente un mezzo per restare sveglio o per avere un boost, sono diventati uno strumento di condivisione, una pratica sociale!',
+                'Alcune delle amicizie più strette sono nate tramite la Monster e anche i rapporti aziendali sono diventati più stretti grazie alla giornata Monster (quel giorno della settimana in cui tutti devono bere un energy drink).',
+            ],
             alt: 'Energy drinks',
         },
         'hobby-10.png': {
@@ -30,17 +37,26 @@ function initHobbyCaption() {
         },
         'hobby-8.png': {
             title: 'Hiking',
-            description: 'Pack, stick, and a trail off the screen.',
+            description: [
+                'Ogni fissato con l\'informatica ha bisogno di staccare ogni tanto dalla routine del PC per evitare di bruciarsi completamente le retine. Bene, la mia scelta personale è una fantastica scampagnata, più complessa è, più a contatto con la natura mi fa sentire!',
+                'Sono sempre pronto ad una nuova avventura. Basta una giornata non troppo burrascosa e sono pronto a partire!',
+            ],
             alt: 'Hiking',
         },
         'hobby-2.png': {
             title: 'Video games',
-            description: 'Controller in hand. Playing as much as making.',
+            description: [
+                'I videogiochi sono tutt\'oggi una piccola parte di me, quello sfogo che ti aiuta a staccare la testa quando la giornata diventa troppo pesante, quella storia che non ascolti soltanto, ma la vivi, quella sfida che ti sprona a migliorare per superare un ostacolo.',
+                'I videogiochi sono stati per me il primo gesto di intesa con mio padre, che da quando ero piccino mi teneva sulle gambe mentre giocava a titoli come Oni o il primo Halo. Ho ancora con me quei CD e sono un tesoro prezioso.',
+            ],
             alt: 'Video games',
         },
         'hobby-1.png': {
             title: 'Motorcycles',
-            description: 'Two wheels and an open road.',
+            description: [
+                'Uno degli ultimi traguardi che sono riuscito a chiudere. Sono sempre stato un amante delle due ruote, dalle bici fino al sogno della motocross.',
+                'La patente l\'ho presa al secondo tentativo, dopo una comica bocciatura all\'esame, e ora posso finalmente godermi la strada.',
+            ],
             alt: 'Motorcycles',
         },
     };

@@ -65,7 +65,9 @@ body.about-page.blucaligo-page {
 }
 
 .project-hero .hero-cover {
+    display: block;
     width: min(100%, 640px);
+    height: auto;
     margin-bottom: 1.5rem;
     border: 2px solid var(--sea-line);
     border-bottom-color: var(--caligo-blood);
@@ -249,101 +251,19 @@ body.about-page.blucaligo-page {
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
-    background:
-        radial-gradient(ellipse at 50% 0%, rgba(61, 122, 158, 0.12), transparent 50%),
-        linear-gradient(180deg, var(--sea-deep) 0%, var(--sea-mid) 55%, var(--sea-deep) 100%);
+    background-color: var(--sea-deep);
+    background-image:
+        linear-gradient(180deg, rgba(10, 18, 24, 0.42), rgba(10, 18, 24, 0.62)),
+        url('../assets/blucaligo-frame-6.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .caligo-vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0) 32%, rgba(0, 0, 0, 0.62) 100%);
-}
-
-.caligo-mist {
-    position: absolute;
-    width: min(48vmax, 760px);
-    height: min(48vmax, 760px);
-    border-radius: 50%;
-    filter: blur(32px);
-    animation: caligoMistDrift 44s ease-in-out infinite alternate;
-}
-
-.caligo-mist--1 {
-    top: min(-10vmax, -100px);
-    left: min(-6vmax, -60px);
-    background: radial-gradient(circle,
-        rgba(158, 196, 212, 0.14) 0%,
-        rgba(107, 143, 163, 0.06) 45%,
-        rgba(10, 18, 24, 0) 70%);
-}
-
-.caligo-mist--2 {
-    bottom: min(-12vmax, -120px);
-    right: min(-8vmax, -80px);
-    animation-delay: -22s;
-    animation-duration: 56s;
-    background: radial-gradient(circle,
-        rgba(216, 232, 240, 0.1) 0%,
-        rgba(107, 143, 163, 0.05) 48%,
-        rgba(10, 18, 24, 0) 72%);
-}
-
-.caligo-glow {
-    position: absolute;
-    width: min(42vmax, 640px);
-    height: min(28vmax, 420px);
-    top: 18%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(209, 15, 24, 0.07) 0%, transparent 68%);
-    filter: blur(36px);
-    animation: caligoGlowPulse 14s ease-in-out infinite alternate;
-}
-
-@keyframes caligoMistDrift {
-    0% { transform: translate(0, 0) scale(1); opacity: 0.55; }
-    50% { transform: translate(5vmax, 3vmax) scale(1.12); opacity: 0.85; }
-    100% { transform: translate(-3vmax, 5vmax) scale(0.96); opacity: 0.6; }
-}
-
-@keyframes caligoGlowPulse {
-    0% { opacity: 0.45; transform: translateX(-50%) scale(1); }
-    100% { opacity: 0.8; transform: translateX(-50%) scale(1.06); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .caligo-mist,
-    .caligo-glow {
-        animation: none;
-    }
-}
-
-.blucaligo-page .ember-field .ember.eruption-streak {
-    bottom: auto;
-    border-radius: 0;
-    clip-path: polygon(50% 100%, 0 0, 100% 0);
-    opacity: 0;
-    box-shadow: none;
-    filter: drop-shadow(0 0 6px rgba(255, 110, 32, 0.8));
-    mix-blend-mode: screen;
-    animation-name: eruptionFall;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-@keyframes eruptionFall {
-    0% {
-        transform: translate3d(0, 0, 0) rotate(var(--tilt, 0deg));
-        opacity: 0;
-    }
-    8% { opacity: 1; }
-    62% { opacity: 0.9; }
-    100% {
-        transform: translate3d(var(--tx, 0px), var(--ty, 100vh), 0) rotate(var(--tilt, 0deg));
-        opacity: 0;
-    }
+    background: radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.45) 100%);
 }
 
 .index-nav {

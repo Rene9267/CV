@@ -11,56 +11,10 @@ function lowFx() {
 function pauseFxOnHidden() {
     document.addEventListener('visibilitychange', () => {
         const state = document.hidden ? 'paused' : 'running';
-        document.querySelectorAll('.ember, .term-glyph, .eruption-streak').forEach((el) => {
+        document.querySelectorAll('.ember, .term-glyph').forEach((el) => {
             el.style.animationPlayState = state;
         });
     });
-}
-
-function spawnEruptionStreaks(field) {
-    const fieldRect = field.getBoundingClientRect();
-    const cover = document.querySelector('.hero-cover');
-    const coverRect = cover ? cover.getBoundingClientRect() : null;
-    const originX = coverRect
-        ? coverRect.left + coverRect.width / 2 - fieldRect.left
-        : fieldRect.width / 2;
-    const originY = -Math.max(220, fieldRect.height * 0.28);
-    const rays = Math.min(16, Math.max(11, Math.floor(fieldRect.width / 90)));
-    const waves = 2;
-    const maxAngle = 26 * Math.PI / 180;
-    const heats = [
-        'linear-gradient(to bottom, transparent 0%, rgba(255, 72, 16, 0.08) 16%, #ff4e12 46%, #ffc14a 76%, #fff6dc 100%)',
-        'linear-gradient(to bottom, transparent 0%, rgba(255, 220, 140, 0.12) 10%, #ffd15c 42%, #fff4c8 74%, #fff 100%)',
-        'linear-gradient(to bottom, transparent 0%, rgba(160, 12, 18, 0.06) 18%, #9d1218 50%, #e23a22 78%, #ffb199 100%)',
-    ];
-    for (let i = 0; i < rays * waves; i++) {
-        const ray = i % rays;
-        const wave = Math.floor(i / rays);
-        const t = rays === 1 ? 0.5 : ray / (rays - 1);
-        const angle = -maxAngle + t * maxAngle * 2;
-        const dist = fieldRect.height - originY + 140;
-        const dx = Math.sin(angle) * dist;
-        const dy = Math.cos(angle) * dist;
-        const tilt = Math.atan2(dx, dy) * (180 / Math.PI) + 180;
-        const width = wave === 0 ? 10 : 14;
-        const height = wave === 0 ? 86 : 58;
-        const duration = Math.min(1.7, Math.max(1.05, dist / 980));
-        const streak = document.createElement('span');
-        streak.className = 'ember eruption-streak';
-        streak.style.left = `${originX}px`;
-        streak.style.top = `${originY}px`;
-        streak.style.width = `${width}px`;
-        streak.style.height = `${height}px`;
-        streak.style.marginLeft = `${-width / 2}px`;
-        streak.style.marginTop = `${-height / 2}px`;
-        streak.style.background = heats[ray % heats.length];
-        streak.style.setProperty('--tx', `${dx.toFixed(1)}px`);
-        streak.style.setProperty('--ty', `${dy.toFixed(1)}px`);
-        streak.style.setProperty('--tilt', `${tilt.toFixed(2)}deg`);
-        streak.style.animationDuration = `${duration.toFixed(2)}s`;
-        streak.style.animationDelay = `${(-(t * duration) - wave * duration * 0.5).toFixed(2)}s`;
-        field.appendChild(streak);
-    }
 }
 
 function emberCountForViewport() {
@@ -68,6 +22,187 @@ function emberCountForViewport() {
     const narrow = window.matchMedia('(max-width: 767px)').matches;
     const base = Math.min(48, Math.floor(window.innerWidth / 26));
     return narrow ? Math.min(12, base) : Math.min(15, base);
+}
+
+function initScreenshotZoom(reduceMotion) {
+    const galleryImages = document.querySelectorAll('.screenshot-img');
+    if (!galleryImages.length) return;
+
+    const ZOOM_TARGET = 1.8;
+    const ZOOM_LERP = 0.14;
+    const CLOSE_MS = 130;
+    const live = new Map();
+    let active = null;
+    let stack = 8000;
+
+    const paint = (zoom) => {
+        zoom.imgEl.style.transformOrigin = `${zoom.originX}% ${zoom.originY}%`;
+        zoom.imgEl.style.transform = `scale(${zoom.scale})`;
+    };
+
+    const place = (zoom) => {
+        const rect = zoom.source.getBoundingClientRect();
+        zoom.layer.style.left = `${rect.left}px`;
+        zoom.layer.style.top = `${rect.top}px`;
+        zoom.layer.style.width = `${rect.width}px`;
+        zoom.layer.style.height = `${rect.height}px`;
+    };
+
+    const drop = (zoom) => {
+        if (zoom.rafId) cancelAnimationFrame(zoom.rafId);
+        zoom.rafId = null;
+        zoom.removed = true;
+        zoom.layer.remove();
+        if (live.get(zoom.source) === zoom) live.delete(zoom.source);
+        if (active === zoom) active = null;
+    };
+
+    const ease = (zoom) => {
+        if (zoom.removed) return;
+        if (zoom.closing) {
+            const t = Math.min(1, (performance.now() - zoom.closeStart) / CLOSE_MS);
+            const k = 1 - (1 - t) * (1 - t);
+            zoom.scale = zoom.closeFromScale + (1 - zoom.closeFromScale) * k;
+            zoom.originX = zoom.closeFromX + (50 - zoom.closeFromX) * k;
+            zoom.originY = zoom.closeFromY + (50 - zoom.closeFromY) * k;
+            paint(zoom);
+            if (t < 1) {
+                zoom.rafId = requestAnimationFrame(() => ease(zoom));
+            } else {
+                drop(zoom);
+            }
+            return;
+        }
+        zoom.scale += (zoom.target - zoom.scale) * zoom.lerp;
+        zoom.originX += (zoom.toX - zoom.originX) * zoom.lerp;
+        zoom.originY += (zoom.toY - zoom.originY) * zoom.lerp;
+        paint(zoom);
+        if (Math.abs(zoom.target - zoom.scale) > 0.0008 ||
+            Math.abs(zoom.toX - zoom.originX) > 0.05 ||
+            Math.abs(zoom.toY - zoom.originY) > 0.05) {
+            zoom.rafId = requestAnimationFrame(() => ease(zoom));
+        } else {
+            zoom.scale = zoom.target;
+            zoom.originX = zoom.toX;
+            zoom.originY = zoom.toY;
+            paint(zoom);
+            zoom.rafId = null;
+        }
+    };
+
+    const kick = (zoom) => {
+        if (zoom.removed) return;
+        if (reduceMotion) {
+            zoom.scale = zoom.target;
+            zoom.originX = zoom.toX;
+            zoom.originY = zoom.toY;
+            paint(zoom);
+            if (zoom.closing) drop(zoom);
+            return;
+        }
+        if (zoom.rafId) cancelAnimationFrame(zoom.rafId);
+        zoom.rafId = requestAnimationFrame(() => ease(zoom));
+    };
+
+    const raise = (zoom) => {
+        stack += 1;
+        zoom.layer.style.zIndex = String(stack);
+    };
+
+    const createZoom = (source) => {
+        const layer = document.createElement('div');
+        layer.className = 'screenshot-zoom-layer is-open';
+        const imgEl = document.createElement('img');
+        imgEl.className = 'screenshot-zoom-img';
+        imgEl.alt = '';
+        const fit = getComputedStyle(source);
+        imgEl.src = source.currentSrc || source.src;
+        imgEl.style.objectFit = fit.objectFit;
+        layer.appendChild(imgEl);
+        document.body.appendChild(layer);
+        const zoom = {
+            source,
+            layer,
+            imgEl,
+            scale: 1,
+            target: ZOOM_TARGET,
+            originX: 50,
+            originY: 50,
+            toX: 50,
+            toY: 50,
+            rafId: null,
+            lerp: ZOOM_LERP,
+            closing: false,
+            removed: false,
+            closeFromScale: 1,
+            closeFromX: 50,
+            closeFromY: 50,
+            closeStart: 0,
+        };
+        place(zoom);
+        paint(zoom);
+        raise(zoom);
+        return zoom;
+    };
+
+    const closeZoom = (zoom) => {
+        if (!zoom || zoom.closing || zoom.removed) return;
+        zoom.closing = true;
+        zoom.target = 1;
+        zoom.toX = 50;
+        zoom.toY = 50;
+        if (reduceMotion) {
+            zoom.scale = 1;
+            drop(zoom);
+            return;
+        }
+        zoom.closeFromScale = zoom.scale;
+        zoom.closeFromX = zoom.originX;
+        zoom.closeFromY = zoom.originY;
+        zoom.closeStart = performance.now();
+        kick(zoom);
+    };
+
+    const open = (source) => {
+        const existing = live.get(source);
+        if (existing && !existing.removed) {
+            if (active && active !== existing) closeZoom(active);
+            existing.closing = false;
+            existing.target = ZOOM_TARGET;
+            existing.lerp = ZOOM_LERP;
+            active = existing;
+            raise(existing);
+            kick(existing);
+            return;
+        }
+        if (active) closeZoom(active);
+        const zoom = createZoom(source);
+        live.set(source, zoom);
+        active = zoom;
+        kick(zoom);
+    };
+
+    const close = (source) => {
+        if (!active || active.source !== source) return;
+        const zoom = active;
+        active = null;
+        closeZoom(zoom);
+    };
+
+    galleryImages.forEach((img) => {
+        img.addEventListener('mouseenter', () => open(img));
+
+        img.addEventListener('mousemove', (e) => {
+            if (!active || active.source !== img || active.closing) return;
+            place(active);
+            const rect = img.getBoundingClientRect();
+            active.toX = ((e.clientX - rect.left) / rect.width) * 100;
+            active.toY = ((e.clientY - rect.top) / rect.height) * 100;
+            kick(active);
+        });
+
+        img.addEventListener('mouseleave', () => close(img));
+    });
 }
 
 function initSceneEffects() {
@@ -78,10 +213,6 @@ function initSceneEffects() {
         emberField.style.zIndex = '0';
         if (reduceMotion || lowFx() || emberField.childElementCount) return;
 
-        if (emberField.dataset.motion === 'eruption') {
-            spawnEruptionStreaks(emberField);
-            return;
-        }
         const falling = emberField.dataset.motion === 'fall';
         const motion = falling ? 'particleFall' : 'emberRise';
         const emberCount = emberCountForViewport();
@@ -110,152 +241,7 @@ function initSceneEffects() {
         }
     });
 
-    const galleryImages = document.querySelectorAll('.screenshot-img');
-    if (galleryImages.length) {
-        const ZOOM_TARGET = 1.8;
-        const ZOOM_LERP = 0.14;
-        const CLOSE_MS = 130;
-
-        const layer = document.createElement('div');
-        layer.className = 'screenshot-zoom-layer';
-        const zoomImg = document.createElement('img');
-        zoomImg.className = 'screenshot-zoom-img';
-        zoomImg.alt = '';
-        layer.appendChild(zoomImg);
-        document.body.appendChild(layer);
-
-        let scale = 1;
-        let target = 1;
-        let originX = 50;
-        let originY = 50;
-        let toX = 50;
-        let toY = 50;
-        let rafId = null;
-        let active = null;
-        let lerp = ZOOM_LERP;
-        let closing = false;
-        let closeFromScale = 1;
-        let closeFromX = 50;
-        let closeFromY = 50;
-        let closeStart = 0;
-
-        const paint = () => {
-            zoomImg.style.transformOrigin = `${originX}% ${originY}%`;
-            zoomImg.style.transform = `scale(${scale})`;
-        };
-
-        const settle = () => {
-            scale = target;
-            originX = toX;
-            originY = toY;
-            paint();
-            rafId = null;
-            if (!active) layer.classList.remove('is-open');
-        };
-
-        const ease = () => {
-            if (closing) {
-                const t = Math.min(1, (performance.now() - closeStart) / CLOSE_MS);
-                const k = 1 - (1 - t) * (1 - t);
-                scale = closeFromScale + (1 - closeFromScale) * k;
-                originX = closeFromX + (50 - closeFromX) * k;
-                originY = closeFromY + (50 - closeFromY) * k;
-                paint();
-                if (t < 1) {
-                    rafId = requestAnimationFrame(ease);
-                } else {
-                    closing = false;
-                    settle();
-                }
-                return;
-            }
-            scale += (target - scale) * lerp;
-            originX += (toX - originX) * lerp;
-            originY += (toY - originY) * lerp;
-            paint();
-            if (Math.abs(target - scale) > 0.0008 ||
-                Math.abs(toX - originX) > 0.05 ||
-                Math.abs(toY - originY) > 0.05) {
-                rafId = requestAnimationFrame(ease);
-            } else {
-                settle();
-            }
-        };
-
-        const kick = () => {
-            if (reduceMotion) {
-                scale = target;
-                originX = toX;
-                originY = toY;
-                paint();
-                return;
-            }
-            if (rafId) cancelAnimationFrame(rafId);
-            rafId = requestAnimationFrame(ease);
-        };
-
-        const place = (img) => {
-            const rect = img.getBoundingClientRect();
-            layer.style.left = `${rect.left}px`;
-            layer.style.top = `${rect.top}px`;
-            layer.style.width = `${rect.width}px`;
-            layer.style.height = `${rect.height}px`;
-        };
-
-        const open = (img) => {
-            active = img;
-            const fit = getComputedStyle(img);
-            zoomImg.src = img.currentSrc || img.src;
-            zoomImg.style.objectFit = fit.objectFit;
-            place(img);
-            layer.classList.add('is-open');
-            closing = false;
-            lerp = ZOOM_LERP;
-            target = ZOOM_TARGET;
-            kick();
-        };
-
-        const close = () => {
-            active = null;
-            target = 1;
-            toX = 50;
-            toY = 50;
-            if (reduceMotion) {
-                closing = false;
-                scale = 1;
-                originX = 50;
-                originY = 50;
-                paint();
-                layer.classList.remove('is-open');
-                if (rafId) cancelAnimationFrame(rafId);
-                rafId = null;
-                return;
-            }
-            closing = true;
-            closeFromScale = scale;
-            closeFromX = originX;
-            closeFromY = originY;
-            closeStart = performance.now();
-            kick();
-        };
-
-        galleryImages.forEach(img => {
-            img.addEventListener('mouseenter', () => open(img));
-
-            img.addEventListener('mousemove', (e) => {
-                if (active !== img) return;
-                place(img);
-                const rect = img.getBoundingClientRect();
-                toX = ((e.clientX - rect.left) / rect.width) * 100;
-                toY = ((e.clientY - rect.top) / rect.height) * 100;
-                kick();
-            });
-
-            img.addEventListener('mouseleave', () => {
-                if (active === img) close();
-            });
-        });
-    }
+    initScreenshotZoom(reduceMotion);
 
     const codeField = document.querySelector('.term-code-field');
     if (codeField && !reduceMotion && !lowFx()) {

@@ -39,24 +39,6 @@
         max-width: 100%;
     }
 
-    #intro .contact-links {
-        width: 100%;
-        max-width: 100%;
-        gap: 12px 10px;
-        margin-bottom: 22px;
-    }
-
-    .profile-pixel-art {
-        width: 150px;
-        height: 150px;
-        box-shadow: 8px 8px 0px var(--brutal-black);
-    }
-
-    .profile-pixel-art:hover {
-        transform: translate(-4px, -4px);
-        box-shadow: 12px 12px 0px var(--brutal-black);
-    }
-
     .btn-scroll-wrapper {
         flex-direction: column;
         gap: 10px;

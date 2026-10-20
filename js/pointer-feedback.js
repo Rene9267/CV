@@ -9,13 +9,12 @@ function initPointerFeedback() {
     const hobbyItems = document.querySelectorAll('.hobby-item'); // Selezione elementi hobbies
 
     // --- Retro Page Transition ---
-    const overlay = document.createElement('div');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    overlay.className = 'page-transition-overlay';
-    overlay.innerHTML = '<span class="transition-text">Loading...</span><div class="transition-bar"></div>';
-    overlay.hidden = true;
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(overlay);
+    let overlay = document.querySelector('.page-transition-overlay');
+    if (!overlay) {
+        overlay = createPageTransitionOverlay();
+        document.body.appendChild(overlay);
+    }
 
     function retroNavigate(href) {
         if (reduceMotion) {
@@ -24,9 +23,14 @@ function initPointerFeedback() {
         }
         overlay.hidden = false;
         overlay.setAttribute('aria-hidden', 'false');
-        overlay.classList.remove('exit');
+        overlay.classList.remove('exit', 'is-held', 'leave');
         overlay.classList.add('active');
-        setTimeout(() => { window.location.href = href; }, 500);
+        setTimeout(() => {
+            try {
+                sessionStorage.setItem(PAGE_ENTER_KEY, '1');
+            } catch (_) { /* sessionStorage unavailable */ }
+            window.location.href = href;
+        }, 500);
     }
 
     // We iterate over standard buttons assigning distinct audio feedback for hovering and clicking actions
