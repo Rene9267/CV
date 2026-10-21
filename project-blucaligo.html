@@ -31,7 +31,7 @@
 
         <div class="project-hero">
             <img src="assets/blucaligo-cover.jpg" alt="Blu Caligo — first trailer" class="hero-cover" width="2560" height="1440">
-            <p class="subtitle">Eostrix Studio — Collaborazione gen 2023 – mar 2024</p>
+            <p class="subtitle">Eostrix Studio — nov 2022 – apr 2024</p>
             <h1 class="caligo-title"><img src="assets/blucaligo-wordmark.png" alt="Blu Caligo" width="500" height="498"></h1>
             <div class="meta-tags">
                 <span class="tag">COLLABORAZIONE</span>
@@ -39,28 +39,59 @@
                 <span class="tag tag-blood">HORROR</span>
                 <span class="tag">SURVIVAL</span>
             </div>
-            <p class="byline">Antonio Troiano — Unreal Gameplay Programmer</p>
+            <p class="byline">Antonio Troiano — Gameplay e AI Programmer</p>
         </div>
 
         <h2 class="section-title" id="introduzione">/Introduzione</h2>
         <div class="project-description">
             <p>
-                <strong>Blu Caligo</strong> è il primo titolo indie di
-                <a href="https://www.youtube.com/@eostrixstudio" target="_blank" rel="noopener noreferrer" style="color: var(--mist-soft);">Eostrix Studio</a>:
-                horror adventure in prima persona su un’isola mediterranea, ancora in sviluppo e annunciato su Steam come
-                <em>To be announced</em>. In questa scheda racconto solo la mia collaborazione al team, non lo stato attuale del gioco.
+                <strong>Blu Caligo</strong> è un horror survival in prima persona su un’isola del Mediterraneo,
+                il primo titolo indie di
+                <a href="https://www.youtube.com/@eostrixstudio" target="_blank" rel="noopener noreferrer" style="color: var(--mist-soft);">Eostrix Studio</a>.
+                Nel team facevo il gameplay e l’AI su Unreal Engine, scrivendo in Blueprint.
             </p>
             <div class="highlight-box">
                 <p>
-                    Tra <strong>gennaio 2023 e marzo 2024</strong> ho lavorato come gameplay programmer su Unreal Engine,
-                    in una collaborazione <strong>non retribuita</strong> conclusa prima degli incarichi pagati successivi.
-                    Partendo da zero come gruppo, il team ha costruito le basi di un mondo survival in prima persona;
-                    i due video pubblici sono l’unica fonte visiva usata qui.
+                    Da <strong>novembre 2022 ad aprile 2024</strong> ho lavorato sull’AI di conigli e nemici,
+                    sulle armi, sul fischietto e sulla torcia, e sui sistemi di sopravvivenza del giocatore.
                 </p>
             </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title" id="cosa-ho-fatto">/Cosa_Ho_Fatto</h2>
+        <div class="project-description">
             <p>
-                Lo studio risulta ancora presente su YouTube e Steam; la mia partecipazione al progetto è terminata nel 2024.
-                Non pubblico build, codice o materiali di lavorazione interni.
+                <strong>I conigli.</strong> A novembre 2022 ho rifatto da zero l’AI della fauna, partendo dai conigli.
+                In un Behavior Tree ho messo movimento e rotazione fluida, e ho gestito i momenti in cui un coniglio
+                usciva dal NavMesh. Al comportamento ho collegato VFX e UI, e i conigli si spaventavano quando passava
+                una freccia. Ho preparato anche BP_Base_AI, la base comune dell’AI.
+            </p>
+            <p>
+                <strong>I nemici.</strong> La cartella AI/Enemy è l’area che ho toccato di più. Ho costruito la struttura
+                base dei nemici, con la percezione uditiva e una state machine con gli stati Normal, Look Around,
+                Detect, Reaction, Attack e Death. Su Blackboard e Behavior Tree ho messo l’inseguimento, la reazione ai
+                colpi e il combo break, con calcio e schivata. Quando gli attaccanti erano tre o più, i nemici
+                accerchiavano e pattugliavano. Ho aggiunto i nemici mascherati e uno spawner che assegnava skin casuali.
+                Sui colpi ho messo sangue e suoni, e alla morte gestivo la mesh del nemico. A ottobre 2023 ho riscritto
+                la Enemy State Machine, e dopo ho continuato a rifattorizzarla.
+            </p>
+            <p>
+                <strong>Le armi.</strong> Ho lavorato alle frecce, con penetrazione e outline, all’arco, all’ascia
+                e ai socket a cui le armi si agganciano. Il danno arrivava al giocatore, e l’HUD lo mostrava.
+            </p>
+            <p>
+                <strong>Fischietto e torcia.</strong> Ho aggiunto il fischietto e la torcia, la lanterna del
+                giocatore. Li ho legati al controller con il mapping dei tasti, e ho portato sul controller anche
+                l’interazione da menu.
+            </p>
+            <p>
+                <strong>La sopravvivenza.</strong> Da novembre 2023 ad aprile 2024 ho lavorato sui sistemi di
+                sopravvivenza del giocatore. Ho fatto le barre di salute e di sete, la fame con lo starve, il
+                componente di nutrizione, la stamina e il componente dell’energia. Per il sonno ho scritto le
+                meccaniche e lo Sleep behaviour. Le fasi del giorno passavano da DayPhase. Ho aggiunto il salvataggio
+                del player, e l’HUD mostrava lo stato.
             </p>
         </div>
 
@@ -78,15 +109,15 @@
         <div class="tech-grid">
             <div class="tech-card">
                 <h3>Unreal Engine</h3>
-                <p>Gameplay, prototipi e integrazione in un progetto indie a lungo termine.</p>
+                <p>Nel progetto del team ho usato Behavior Tree, Blackboard, NavMesh e le state machine dei nemici.</p>
             </div>
             <div class="tech-card">
-                <h3>C++ / Blueprint</h3>
-                <p>Meccaniche di gioco e iterazione sulle feature di gameplay del team.</p>
+                <h3>Blueprint</h3>
+                <p>Ho scritto il gameplay in Blueprint: AI, armi, fischietto, torcia e sistemi di sopravvivenza.</p>
             </div>
             <div class="tech-card">
                 <h3>PC</h3>
-                <p>Piattaforma di riferimento per lo sviluppo del titolo.</p>
+                <p>Lo sviluppo era su PC, con il controller mappato per le azioni e per il menu.</p>
             </div>
         </div>
 
@@ -94,9 +125,9 @@
 
         <h2 class="section-title" id="crediti">/Crediti</h2>
         <ul class="credits-list">
-            <li><strong>Studio</strong> — Eostrix Studio (titolo in sviluppo)</li>
-            <li><strong>Gameplay programming</strong> — Antonio Troiano (collaborazione 01/2023 – 03/2024)</li>
-            <li><strong>Design, narrativa, audio</strong> — team Eostrix (ruoli pubblici dello studio)</li>
+            <li><strong>Studio</strong> — Eostrix Studio</li>
+            <li><strong>Gameplay e AI</strong> — Antonio Troiano (nov 2022 – apr 2024)</li>
+            <li><strong>Design, narrativa, audio</strong> — team Eostrix Studio</li>
         </ul>
 
         <hr class="section-divider">
@@ -104,14 +135,9 @@
         <h2 class="section-title" id="note">/Mie_Note_Sul_Progetto</h2>
         <div class="notes-box">
             <p>
-                È stata la mia esperienza più lunga su <span class="highlight">Unreal in team</span> prima del passaggio
-                verso Unity XR in ambito professionale: meno sprint da jam, più mesi sullo stesso mondo e sulle
-                meccaniche di base. Non attribuo in questa pagina feature specifiche della scheda Steam (crafting, fischi,
-                anomalie notturne): sono parte del prodotto dello studio, non del mio portfolio tecnico dettagliato.
-            </p>
-            <p>
-                Il gioco non è uscito nel periodo in cui ho collaborato e, al momento della pubblicazione di questo sito,
-                resta annunciato ma non rilasciato.
+                Blu Caligo è l’esperienza più lunga che ho fatto in un team su <span class="highlight">Unreal</span>,
+                prima di passare a Unity XR. Ci sono rimasto da novembre 2022 ad aprile 2024, tra l’AI dei conigli
+                e dei nemici e i sistemi di sopravvivenza del giocatore.
             </p>
             <p style="text-align: right; color: var(--mist); margin-bottom: 0;">
                 — Antonio Troiano
@@ -122,9 +148,9 @@
 
         <h2 class="section-title" id="frame">/Frame_Dei_Trailer</h2>
         <p style="font-size: 0.88rem; opacity: 0.8; margin-bottom: 0.5rem;">
-            Tre fotogrammi del first trailer e tre di
-            <a href="https://www.youtube.com/watch?v=tpQvmNdNIvc" target="_blank" rel="noopener noreferrer" style="color: var(--mist-soft);">Who are they?</a>.
-            Solo l’immagine del video, senza interfaccia YouTube.
+            Dal first trailer e da
+            <a href="https://www.youtube.com/watch?v=tpQvmNdNIvc" target="_blank" rel="noopener noreferrer" style="color: var(--mist-soft);">Who are they?</a>,
+            tre fotogrammi ciascuno.
         </p>
         <div class="screenshot-grid">
             <div>
