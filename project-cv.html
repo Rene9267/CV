@@ -44,16 +44,17 @@
                 <span class="tag">AI ASSISTITO</span>
                 <span class="tag">FRONTEND</span>
             </div>
-            <p class="byline">by <strong>Antonio Troiano</strong> — Autore & Code</p>
+            <p class="byline">by <strong>Antonio Troiano</strong> — autore e codice</p>
         </div>
 
         <!-- 1. INTRODUZIONE -->
         <h2 class="section-title">/Introduzione</h2>
         <div class="project-description">
             <p>
-                Portfolio statico in HTML, CSS e JavaScript vanilla, senza framework. L'ho progettato e sviluppato con
-                un flusso di lavoro basato su agenti AI: io definisco architettura, requisiti e criteri di accettazione,
-                l'agente implementa, io verifico e correggo.
+                Portfolio statico in HTML, CSS e JavaScript vanilla, senza framework.
+                L'ho progettato e sviluppato con gli agenti AI.
+                Io definisco architettura, requisiti e cosa considero finito.
+                L'agente implementa. Io verifico e correggo.
             </p>
         </div>
 
@@ -64,23 +65,23 @@
         <div class="tech-grid">
             <div class="tech-card">
                 <h3>HTML5</h3>
-                <p>Struttura semantica delle pagine: hero, sezioni progetto e contenuti navigabili.</p>
+                <p>Struttura semantica: hero, sezioni progetto, contenuti navigabili.</p>
             </div>
             <div class="tech-card">
                 <h3>CSS modulare</h3>
-                <p>Design tokens, layout responsive mobile-first e fogli di stile per pagina.</p>
+                <p>Design tokens. Layout responsive, mobile-first. Un foglio di stile per pagina.</p>
             </div>
             <div class="tech-card">
                 <h3>JavaScript vanilla</h3>
-                <p>Effetti di scena, Web Audio API per i suoni 8-bit e micro-interazioni UI.</p>
+                <p>Effetti di scena, suoni 8-bit con la Web Audio API, piccole interazioni sull'interfaccia.</p>
             </div>
             <div class="tech-card">
                 <h3>GitHub Pages</h3>
-                <p>Hosting del sito statico: deploy diretto dal repository, senza build step.</p>
+                <p>Hosting del sito statico. Deploy dal repository, senza build.</p>
             </div>
             <div class="tech-card">
                 <h3>Cursor / OpenCode</h3>
-                <p>Strumenti AI per pianificare, implementare e iterare sul codice con revisione umana.</p>
+                <p>Per pianificare, implementare e iterare sul codice. La revisione la faccio io.</p>
             </div>
         </div>
 
@@ -89,10 +90,10 @@
         <!-- 3. FLOW OPERATIVO -->
         <h2 class="section-title">/Flow_Operativo</h2>
         <ol class="flow-steps">
-            <li>Definizione dei requisiti (architettura, file coinvolti, criteri di accettazione).</li>
-            <li>Piano generato dall'agente e revisionato prima di toccare il codice.</li>
-            <li>Implementazione per piccoli step, con diff rivisto a ogni incremento.</li>
-            <li>Test su desktop e Android, con correzioni fino al comportamento atteso.</li>
+            <li>Definisco i requisiti: architettura, file coinvolti, cosa considero finito.</li>
+            <li>L'agente scrive il piano. Lo revisiono prima di toccare il codice.</li>
+            <li>Implemento a piccoli step. A ogni step rileggo il diff.</li>
+            <li>Test su desktop e Android. Correggo finché non fa quello che mi aspetto.</li>
         </ol>
 
         <div class="terminal-window">
@@ -101,24 +102,19 @@
                 <span class="t-title">PowerShell — opencode: flow_di_sviluppo</span>
             </div>
             <div class="terminal-body">
-                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">opencode</span></p>
-                <p class="t-line"><span class="t-out"># l'agente parte dalla memoria del progetto e valuta la task</span></p>
-                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">read</span> progetto_generale.md, stato_attuale.txt, registro_decisionale.md</p>
-                <p class="t-line"><span class="t-out"># struttura mappata: index.html / style.css / script.js</span></p>
-                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">analizza</span> le sezioni della pagina progetto</p>
-                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">implementa</span> modifica proposta → applicata al codice sorgente</p>
-                <p class="t-line"><span class="t-out"># verifica: reload nel browser, controlli incrociati su stile e interazioni</span></p>
-                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">verifica</span> → stato: tutto ok</p>
-                <p class="t-line"><span class="t-out"># ogni passo aggiorna lo stato: il registro tiene traccia delle decisioni prese</span></p>
-                <p class="t-line"><span class="t-prompt">PS C:\Dev\Projects\Web\CV&gt;</span> <span class="t-cmd">commit</span> "feat: scroll hint sotto la CTA"</p>
+                <p class="t-line"><span class="t-prompt">PS C:\WorkSpace\Projects\Personal\CV&gt;</span> <span class="t-cmd">opencode</span></p>
+                <p class="t-line"><span class="t-out"># parte dalla memoria del progetto e valuta la task</span></p>
+                <p class="t-line"><span class="t-prompt">PS C:\WorkSpace\Projects\Personal\CV&gt;</span> <span class="t-cmd">read</span> progetto_generale.md, stato_attuale.txt, registro_decisionale.md</p>
+                <p class="t-line"><span class="t-out"># struttura: index.html / style.css / script.js</span></p>
+                <p class="t-line"><span class="t-prompt">PS C:\WorkSpace\Projects\Personal\CV&gt;</span> <span class="t-cmd">analizza</span> le sezioni della pagina progetto</p>
+                <p class="t-line"><span class="t-prompt">PS C:\WorkSpace\Projects\Personal\CV&gt;</span> <span class="t-cmd">implementa</span> modifica proposta → applicata al codice sorgente</p>
+                <p class="t-line"><span class="t-out"># reload nel browser. Stile e interazioni controllati.</span></p>
+                <p class="t-line"><span class="t-prompt">PS C:\WorkSpace\Projects\Personal\CV&gt;</span> <span class="t-cmd">verifica</span> → stato: tutto ok</p>
+                <p class="t-line"><span class="t-out"># ogni passo aggiorna lo stato. Il registro segna le decisioni.</span></p>
+                <p class="t-line"><span class="t-prompt">PS C:\WorkSpace\Projects\Personal\CV&gt;</span> <span class="t-cmd">commit</span> "feat: scroll hint sotto la CTA"</p>
             </div>
         </div>
-        <p class="code-caption">// nessuna libreria, nessun build step: html statico pronto per qualsiasi hosting.</p>
-
-        <p class="flow-delivery">
-            Rispetto a uno sviluppo tradizionale con lo stesso scope, la consegna del portfolio ha richiesto circa
-            <strong>[X giorni]</strong>.
-        </p>
+        <p class="code-caption">// niente librerie, niente build. HTML statico, va su qualsiasi hosting.</p>
 
         <hr class="section-divider">
 
@@ -126,18 +122,19 @@
         <h2 class="section-title">/Note</h2>
         <div class="notes-box">
             <p>
-                Sul fronte dello stile la scelta è ricaduta su un <span class="highlight">look retrò ma piacevole agli occhi</span>.
-                Un bianco candido, per chi passa ore davanti a un editor, è un'eresia. Via la carta: posto a grigi caldi,
-                nero quasi assoluto e un arancio da CRT acceso.
+                Per lo stile ho scelto un <span class="highlight">look retrò ma piacevole agli occhi</span>.
+                Il bianco pieno, dopo ore sull'editor, stanca.
+                Grigi caldi, nero quasi pieno, arancio da terminale.
             </p>
             <p>
-                Il risultato è una palette che riprende l'estetica dei terminali senza sacrificare la leggibilità,
-                con suffusioni di colore usate con parsimonia per guidare l'occhio tra le sezioni.
+                La palette è quella di un terminale, e si legge.
+                Il colore lo uso poco: serve a spostare l'occhio da una sezione all'altra.
             </p>
             <p>
-                Il background XR spiega perché il metodo conta: senza anni di pratica sul front-end, affidarmi solo
-                alla memoria a breve termine dell'agente non bastava. Documentazione su disco + verifica manuale nel
-                browser sono diventati il mio <span class="highlight">controllo qualità</span> su ogni incremento.
+                Vengo da XR. Sul front-end non ho anni di pratica.
+                La memoria a breve dell'agente, da sola, non bastava.
+                Per questo tengo la documentazione su disco e verifico a mano nel browser.
+                È il mio <span class="highlight">controllo qualità</span> su ogni passo.
             </p>
             <p style="text-align:right; color:var(--term-orange); margin-bottom:0;">
                 — Antonio Troiano
@@ -148,21 +145,17 @@
 
         <h2 class="section-title">/Screenshot</h2>
         <p style="font-size: 0.85rem; color: var(--term-muted); margin-bottom: 1rem;">
-            Home del portfolio su viewport desktop e mobile.
+            Home del portfolio, desktop e mobile.
         </p>
         <div class="screenshot-grid">
             <div class="screenshot-cell">
                 <img src="assets/cv/home-desktop.png" alt="Home del portfolio — vista desktop" class="screenshot-img"
-                    width="1280" height="720"
-                    onerror="this.hidden=true; this.parentElement.querySelector('.screenshot-pending').hidden=false;">
-                <div class="screenshot-pending" hidden>Screenshot in arrivo</div>
+                    width="1280" height="720">
                 <p class="screenshot-caption">Desktop</p>
             </div>
             <div class="screenshot-cell">
                 <img src="assets/cv/home-mobile.png" alt="Home del portfolio — vista mobile" class="screenshot-img"
-                    width="390" height="844"
-                    onerror="this.hidden=true; this.parentElement.querySelector('.screenshot-pending').hidden=false;">
-                <div class="screenshot-pending" hidden>Screenshot in arrivo</div>
+                    width="390" height="844">
                 <p class="screenshot-caption">Mobile</p>
             </div>
         </div>
@@ -171,16 +164,16 @@
 
         <h2 class="section-title">/Frame</h2>
         <p style="font-size: 0.85rem; color: var(--term-muted); margin-bottom: 1rem;">
-            Output del ciclo di sviluppo: ogni frame è una fetta verificata in browser prima del commit.
+            Frame del ciclo di sviluppo. Ognuno l'ho verificato nel browser prima del commit.
         </p>
         <div class="screenshot-grid">
             <div>
                 <img src="assets/cv-showcase-home.jpg" alt="Home del portfolio — hero e layer sticky" class="screenshot-img" width="1280" height="720">
-                <p class="screenshot-caption">Home · layer sticky e intro interattiva (sessione UX front page)</p>
+                <p class="screenshot-caption">Home. Layer sticky e intro interattiva, dalla sessione UX della front page.</p>
             </div>
             <div>
                 <img src="assets/cv-showcase-project-page.jpg" alt="Pagina progetto MTM — layout case study" class="screenshot-img" width="1280" height="720">
-                <p class="screenshot-caption">Pagina progetto · template case study replicato su più schede</p>
+                <p class="screenshot-caption">Pagina progetto. Template case study, replicato su più schede.</p>
             </div>
         </div>
 
